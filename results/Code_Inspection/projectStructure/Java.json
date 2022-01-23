@@ -1,8 +1,16 @@
 {
   "modules": [
     {
-      "name": "project",
-      "languageLevel": 17
+      "name": "java_thesis",
+      "languageLevel": 11
+    },
+    {
+      "name": "java_thesis.test",
+      "languageLevel": 11
+    },
+    {
+      "name": "java_thesis.main",
+      "languageLevel": 11
     }
   ]
 }

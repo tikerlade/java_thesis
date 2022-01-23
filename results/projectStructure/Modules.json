@@ -1,7 +1,7 @@
 {
   "modules": [
     {
-      "name": "project",
+      "name": "java_thesis",
       "contentEntries": [
         {
           "path": "file://$PROJECT_DIR$",
@@ -10,6 +10,85 @@
       ],
       "orderEntries": [
         {
+          "name": "jbr-11",
+          "type": "SDK"
+        },
+        {
+          "name": "<Module source>",
+          "type": "Own sources"
+        }
+      ]
+    },
+    {
+      "name": "java_thesis.test",
+      "contentEntries": [
+        {
+          "path": "file://$PROJECT_DIR$/src/test",
+          "sourceFolders": [
+            {
+              "path": "file://$PROJECT_DIR$/src/test/java",
+              "type": "TestSource",
+              "packagePrefix": ""
+            }
+          ]
+        }
+      ],
+      "orderEntries": [
+        {
+          "name": "jbr-11",
+          "type": "SDK"
+        },
+        {
+          "name": "<Module source>",
+          "type": "Own sources"
+        },
+        {
+          "name": "java_thesis.main",
+          "type": "Module"
+        },
+        {
+          "name": "Gradle: org.junit.jupiter:junit-jupiter-api:5.8.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.junit.platform:junit-platform-commons:1.8.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.opentest4j:opentest4j:1.2.0",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.apiguardian:apiguardian-api:1.1.2",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.junit.jupiter:junit-jupiter-engine:5.8.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.junit.platform:junit-platform-engine:1.8.1",
+          "type": "Library"
+        }
+      ]
+    },
+    {
+      "name": "java_thesis.main",
+      "contentEntries": [
+        {
+          "path": "file://$PROJECT_DIR$/src/main",
+          "sourceFolders": [
+            {
+              "path": "file://$PROJECT_DIR$/src/main/java",
+              "type": "Source",
+              "packagePrefix": ""
+            }
+          ]
+        }
+      ],
+      "orderEntries": [
+        {
+          "name": "jbr-11",
           "type": "SDK"
         },
         {
