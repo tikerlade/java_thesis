@@ -1,0 +1,16 @@
+{
+  "total": 0,
+  "tools inspection": {
+    "Code Inspection": 0
+  },
+  "attributes": {
+    "vcs": {
+      "sarifIdea": {
+        "repositoryUri": "https://github.com/tikerlade/java_thesis",
+        "revisionId": "d6d922d62bfe49f22e4f439a5230ccca9f982de6",
+        "branch": "master"
+      }
+    },
+    "deviceId": "200820300000000-5a74-eb1a-2281-7aa16b621fab"
+  }
+}
