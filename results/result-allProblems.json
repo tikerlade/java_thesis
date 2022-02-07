@@ -8,16 +8,16 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/CnfFormula.java",
+      "path": "src/main/java/Literal.java",
       "language": "JAVA",
-      "line": 20,
+      "line": 17,
       "offset": 66,
       "length": 9,
       "code": {
-        "startLine": 18,
+        "startLine": 15,
         "length": 9,
         "offset": 109,
-        "surroundingCode": "    String variableRegex = \"[a-zA-Z0-9]+\";\n\n    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{\n            put(BooleanOperation.NEGATION, '-');\n            put(BooleanOperation.AND, '&');"
+        "surroundingCode": "    String variableRegex = \"[a-zA-Z0-9]+\";\n\n    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{\n        put(BooleanOperation.NEGATION, '-');\n        put(BooleanOperation.AND, '&');"
       }
     }
   ],
@@ -25,5 +25,33 @@
     "module": "java_thesis.main",
     "inspectionName": "DoubleBraceInitialization"
   },
-  "hash": "88dedeb5eff95eca127cbbb18f416f2a2cd7067022ef9d7a73b893f0e4dd3948"
+  "hash": "9dad70762424a9d113b2e869db7c11d174737b1fb1ea30ef7c535493f057dbcd"
+},{
+  "tool": "Code Inspection",
+  "category": "Initialization",
+  "type": "Double brace initialization",
+  "severity": "High",
+  "comment": "Double brace initialization",
+  "detailsInfo": "Reports [Double Brace Initialization](https://www.c2.com/cgi/wiki?DoubleBraceInitialization).\n\nDouble brace initialization may cause memory leaks when used in a non-static context because it creates an anonymous class\nthat will reference the surrounding object.\n\nCompared to regular initialization, double brace initialization provides worse performance since it requires loading an\nadditional class.\n\nIt may also cause failure of `equals()` comparisons if the `equals()` method doesn't accept subclasses as\nparameters.\n\nIn addition, before Java 9, double brace initialization couldn't be combined with the diamond operator since it was incompatible\nwith anonymous classes.\n\n**Example:**\n\n\n      List<Integer> list = new ArrayList<>() {{\n        add(1);\n        add(2);\n      }};\n\nAfter the quick-fix is applied:\n\n\n      List<Integer> list = new ArrayList<>();\n      list.add(1);\n      list.add(2);\n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/CnfFormula.java",
+      "language": "JAVA",
+      "line": 17,
+      "offset": 66,
+      "length": 9,
+      "code": {
+        "startLine": 15,
+        "length": 9,
+        "offset": 91,
+        "surroundingCode": "    String inputFormula;\n\n    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{\n        put(BooleanOperation.NEGATION, '-');\n        put(BooleanOperation.AND, '&');"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "DoubleBraceInitialization"
+  },
+  "hash": "3fc101593e0a89dcf5e215e692b257e4c767e55d25102a2a1eb3413cbe3aec24"
 }]}

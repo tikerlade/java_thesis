@@ -1,0 +1,129 @@
+{"version":"3","listProblem":[{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Incompatible types. Found: 'null', required: 'java.util.List<java.util.List<java.lang.String>>'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/CnfFormula.java",
+      "language": "JAVA",
+      "line": 90,
+      "offset": 8,
+      "length": 4,
+      "code": {
+        "startLine": 88,
+        "length": 4,
+        "offset": 53,
+        "surroundingCode": "    @Override\n    public String toString() {\n        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "5070341031671432880"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Failed to resolve argument",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/CnfFormula.java",
+      "language": "JAVA",
+      "line": 90,
+      "offset": 46,
+      "length": 7,
+      "code": {
+        "startLine": 88,
+        "length": 7,
+        "offset": 91,
+        "surroundingCode": "    @Override\n    public String toString() {\n        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "383359949779215443"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve method 'toList' in 'Stream'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/CnfFormula.java",
+      "language": "JAVA",
+      "line": 91,
+      "offset": 65,
+      "length": 6,
+      "code": {
+        "startLine": 89,
+        "length": 6,
+        "offset": 164,
+        "surroundingCode": "    public String toString() {\n        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "714226780510662205"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve method 'toList' in 'Stream'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/CnfFormula.java",
+      "language": "JAVA",
+      "line": 92,
+      "offset": 10,
+      "length": 6,
+      "code": {
+        "startLine": 90,
+        "length": 6,
+        "offset": 152,
+        "surroundingCode": "        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();\n\n        List<String> clausesAsString = literalsAsString.stream().map("
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "8846023443717991292"
+}]}
