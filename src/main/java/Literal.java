@@ -1,23 +1,56 @@
+import exceptions.InputException;
+
+import java.util.HashMap;
+import java.util.regex.Pattern;
+
 /**
  * Literal is one part of formula in CNF: either variable or it's negation.
  */
 public class Literal {
     String name;
     Integer index;
-    Boolean negation;
+    Boolean negation = false;
 
-    /**
-     * Literal is one part of formula in CNF: either variable or it's negation.
-     * @param name characters used in formula to represent variable
-     * @param index place in formula where literal is located
-     */
-    public Literal(String name, Integer index) {
-        this.name = name;
-        this.index = index;
+    // TODO regex - variable name cannot start with 0-9
+    String variableRegex = "[a-zA-Z0-9]+";
+
+    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{
+        put(BooleanOperation.NEGATION, '-');
+        put(BooleanOperation.AND, '&');
+        put(BooleanOperation.OR, '|');
+    }};
+
+    public Literal (String literalString) throws Exception {
+        // Remove leading and ending spaces
+        literalString = literalString.strip();
+
+        // Empty strings are not valid
+        if (literalString.length() < 1) {
+            // TODO exception texts to store in one place.
+            throw new InputException("Literal must consist at least of one character.");
+        }
+
+        // Check negation usage
+        if (literalString.charAt(0) == allowedOperations.get(BooleanOperation.NEGATION)) {
+            negation = true;
+            literalString = literalString.substring(1);
+        }
+
+        // From now and until the end - only allowed chars can be used
+        if (!Pattern.matches(variableRegex, literalString)) {
+            for (Character ch : literalString.toCharArray()) {
+                if (!Pattern.matches(variableRegex, ch.toString())) {
+                    throw new InputException(String.format("Not allowed character: '%s' was used.", ch));
+                }
+            }
+        }
+
+        name = literalString;
     }
 
-    public Literal() {
-
+    public Literal (String literalString, Integer index) throws Exception {
+        this(literalString);
+        this.index = index;
     }
 
     public void setName(String name) {
