@@ -14,11 +14,11 @@
       "type": "method",
       "path": "src/main/java/CnfFormula.java",
       "language": "JAVA",
-      "line": 90,
+      "line": 91,
       "offset": 8,
       "length": 4,
       "code": {
-        "startLine": 88,
+        "startLine": 89,
         "length": 4,
         "offset": 53,
         "surroundingCode": "    @Override\n    public String toString() {\n        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();"
@@ -29,7 +29,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "5070341031671432880"
+  "hash": "4934321351004765901"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -46,11 +46,11 @@
       "type": "method",
       "path": "src/main/java/CnfFormula.java",
       "language": "JAVA",
-      "line": 90,
+      "line": 91,
       "offset": 46,
       "length": 7,
       "code": {
-        "startLine": 88,
+        "startLine": 89,
         "length": 7,
         "offset": 91,
         "surroundingCode": "    @Override\n    public String toString() {\n        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();"
@@ -61,39 +61,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "383359949779215443"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java annotator",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Cannot resolve method 'toList' in 'Stream'",
-  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/CnfFormula.java",
-      "language": "JAVA",
-      "line": 91,
-      "offset": 65,
-      "length": 6,
-      "code": {
-        "startLine": 89,
-        "length": 6,
-        "offset": 164,
-        "surroundingCode": "    public String toString() {\n        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "JavaAnnotator"
-  },
-  "hash": "714226780510662205"
+  "hash": "-8784912223568234759"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -111,10 +79,42 @@
       "path": "src/main/java/CnfFormula.java",
       "language": "JAVA",
       "line": 92,
-      "offset": 10,
+      "offset": 65,
       "length": 6,
       "code": {
         "startLine": 90,
+        "length": 6,
+        "offset": 164,
+        "surroundingCode": "    public String toString() {\n        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "-2690650874223044260"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve method 'toList' in 'Stream'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/CnfFormula.java",
+      "language": "JAVA",
+      "line": 93,
+      "offset": 10,
+      "length": 6,
+      "code": {
+        "startLine": 91,
         "length": 6,
         "offset": 152,
         "surroundingCode": "        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();\n\n        List<String> clausesAsString = literalsAsString.stream().map("
@@ -125,5 +125,5 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "8846023443717991292"
+  "hash": "-1763416614952462903"
 }]}

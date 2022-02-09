@@ -1,0 +1,63 @@
+{"version":"3","listProblem":[{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of System.out or System.err",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/Main.java",
+      "language": "JAVA",
+      "line": 3,
+      "offset": 8,
+      "length": 10,
+      "code": {
+        "startLine": 1,
+        "length": 10,
+        "offset": 90,
+        "surroundingCode": "public class Main {\n    public static void main(String[] args) throws Exception {\n        System.out.println(\"This project will complete reductions of search problems.\");\n\n        CnfFormula formula = new CnfFormula(\"(a | b | c) * a\");"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "-7230245130737437372"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of System.out or System.err",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/Main.java",
+      "language": "JAVA",
+      "line": 6,
+      "offset": 8,
+      "length": 10,
+      "code": {
+        "startLine": 4,
+        "length": 10,
+        "offset": 73,
+        "surroundingCode": "\n        CnfFormula formula = new CnfFormula(\"(a | b | c) * a\");\n        System.out.println(formula);\n    }\n}"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "-3256115371750102106"
+}]}
