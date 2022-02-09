@@ -1,0 +1,77 @@
+import exceptions.InputException;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class TestCnfFormula {
+
+    @Test
+    public void testSimple() {
+        String[] testFormulas = {"(-a)", "(-abc)", " (abc ) ", "(-abc | abc  |  d)", "(a | -b | c ) & (a  |c)&(a) "};
+        String[][][] actualNames = {{{"a"}}, {{"abc"}}, {{"abc"}}, {{"abc", "abc", "d"}}, {{"a", "b", "c"}, {"a", "c"}, {"a"}}};
+        Boolean[][][] actualNegations = {{{true}}, {{true}}, {{false}}, {{true, false, false}}, {{false, true, false}, {false, false}, {false}}};
+        Integer[][][] actualIndexes = {{{0}}, {{0}}, {{0}}, {{0, 1, 2}}, {{0, 1, 2}, {3, 4}, {5}}};
+
+        try {
+            for (int i = 0; i < testFormulas.length; i++) {
+                CnfFormula testFormula = new CnfFormula(testFormulas[i]);
+
+                    for (int j = 0; j < testFormula.clauses.size(); j++) {
+                        ArrayList<Literal> clause = testFormula.clauses.get(j);
+
+                        for (int k = 0; k < clause.size(); k++) {
+                            Literal literal = clause.get(k);
+
+                            assertEquals(literal.getName(), actualNames[i][j][k]);
+                            assertEquals(literal.getNegation(), actualNegations[i][j][k]);
+                            assertEquals(literal.getIndex(), actualIndexes[i][j][k]);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void testErrors() {
+        // TODO match messages for exceptions
+        // TODO fix last exception to return correct answer - allowed characters introduction
+        String[] testFormulas = {"()", "a", "(a | b", "(a | b | c) & a", "(a | b | c) * a"};
+        String[] actualExceptionMessages = {
+                "Literal must consist at least of one character.",
+                "Clauses must be covered in parentheses.",
+                "Literal must consist at least of one character.",
+                "Clauses must be covered in parentheses.",
+                "Not allowed character: ')' was used."
+        };
+
+        try {
+            for (int i = 0; i < testFormulas.length; i++) {
+                int finalI = i;
+                InputException exception = assertThrows(InputException.class, () -> new CnfFormula(testFormulas[finalI]));
+                assertEquals(actualExceptionMessages[i], exception.getMessage());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void testToString() {
+        String[] testFormulas = {"(-a)", "(-abc)", " (abc ) ", "(-abc | abc  |  d)", "(a | -b |   c) & (a|c)&(a) "};
+        String[] actualStrings = {"(-a)", "(-abc)", "(abc)", "(-abc | abc | d)", "(a | -b | c) & (a | c) & (a)"};
+
+        try {
+            for (int i = 0; i < testFormulas.length; i++) {
+                CnfFormula formula = new CnfFormula(testFormulas[i]);
+
+                assertEquals(actualStrings[i], formula.toString());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}

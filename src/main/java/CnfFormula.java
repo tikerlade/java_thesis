@@ -58,6 +58,7 @@ public class CnfFormula {
         clauseString = clauseString.strip();
 
         // In valid clause must be at least two parenthesis
+        // TODO check that last and first characters are parenthesis
         if (clauseString.length() < 2) {
             throw new InputException("Clauses must be covered in parentheses.");
         }
