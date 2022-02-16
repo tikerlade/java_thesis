@@ -8,13 +8,13 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/Literal.java",
+      "path": "src/main/java/problems/Literal.java",
       "language": "JAVA",
-      "line": 17,
+      "line": 20,
       "offset": 66,
       "length": 9,
       "code": {
-        "startLine": 15,
+        "startLine": 18,
         "length": 9,
         "offset": 109,
         "surroundingCode": "    String variableRegex = \"[a-zA-Z0-9]+\";\n\n    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{\n        put(BooleanOperation.NEGATION, '-');\n        put(BooleanOperation.AND, '&');"
@@ -25,7 +25,7 @@
     "module": "java_thesis.main",
     "inspectionName": "DoubleBraceInitialization"
   },
-  "hash": "9dad70762424a9d113b2e869db7c11d174737b1fb1ea30ef7c535493f057dbcd"
+  "hash": "6722f3e5d3e0fce9290289cced753edb7cdc17e0432c1885fffa6f9938ecb41e"
 },{
   "tool": "Code Inspection",
   "category": "Initialization",
@@ -36,16 +36,16 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/CnfFormula.java",
+      "path": "src/main/java/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 17,
+      "line": 20,
       "offset": 66,
       "length": 9,
       "code": {
-        "startLine": 15,
+        "startLine": 18,
         "length": 9,
-        "offset": 91,
-        "surroundingCode": "    String inputFormula;\n\n    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{\n        put(BooleanOperation.NEGATION, '-');\n        put(BooleanOperation.AND, '&');"
+        "offset": 122,
+        "surroundingCode": "    ArrayList<Literal> allLiterals = new ArrayList<>();\n\n    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{\n        put(BooleanOperation.NEGATION, '-');\n        put(BooleanOperation.AND, '&');"
       }
     }
   ],
@@ -53,5 +53,61 @@
     "module": "java_thesis.main",
     "inspectionName": "DoubleBraceInitialization"
   },
-  "hash": "3fc101593e0a89dcf5e215e692b257e4c767e55d25102a2a1eb3413cbe3aec24"
+  "hash": "fc36cc810c46f75914b34fb1c50f7b46809a5b1e8668a6efa82fa041962196da"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of obsolete collection type",
+  "severity": "High",
+  "comment": "Obsolete collection type `Stack` used",
+  "detailsInfo": "Reports usages of `java.util.Vector`, `java.util.Hashtable` and `java.util.Stack`.\n\nUsages of these classes can often be replaced with usages of\n`java.util.ArrayList`, `java.util.HashMap` and `java.util.ArrayDeque` respectively.\nWhile still supported,\nthe former classes were made obsolete by the JDK1.2 collection classes, and should probably\nnot be used in new development.\n\n\nUse the **Ignore obsolete collection types where they are required** option to ignore any cases where the obsolete collections are used\nas method arguments or assigned to a variable that requires the obsolete type.\nEnabling this option may consume significant processor resources.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/reductions/CnfTo3CnfReduction.java",
+      "language": "JAVA",
+      "line": 23,
+      "offset": 13,
+      "length": 14,
+      "code": {
+        "startLine": 21,
+        "length": 14,
+        "offset": 146,
+        "surroundingCode": "        for (ArrayList<Literal> clause : cnfFormula.clauses) {\n            // Here we will store copies of literals of current clause\n            Stack<Literal> clauseStack = new Stack<>();\n\n            // Put copies of literals"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "ObsoleteCollection"
+  },
+  "hash": "4238e0b8bf953f0fd9097c6aa16bbb5d79645d2ef1ed7f070596ce64fea48936"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of obsolete collection type",
+  "severity": "High",
+  "comment": "Obsolete collection type `Stack<>` used",
+  "detailsInfo": "Reports usages of `java.util.Vector`, `java.util.Hashtable` and `java.util.Stack`.\n\nUsages of these classes can often be replaced with usages of\n`java.util.ArrayList`, `java.util.HashMap` and `java.util.ArrayDeque` respectively.\nWhile still supported,\nthe former classes were made obsolete by the JDK1.2 collection classes, and should probably\nnot be used in new development.\n\n\nUse the **Ignore obsolete collection types where they are required** option to ignore any cases where the obsolete collections are used\nas method arguments or assigned to a variable that requires the obsolete type.\nEnabling this option may consume significant processor resources.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/reductions/CnfTo3CnfReduction.java",
+      "language": "JAVA",
+      "line": 23,
+      "offset": 46,
+      "length": 7,
+      "code": {
+        "startLine": 21,
+        "length": 7,
+        "offset": 179,
+        "surroundingCode": "        for (ArrayList<Literal> clause : cnfFormula.clauses) {\n            // Here we will store copies of literals of current clause\n            Stack<Literal> clauseStack = new Stack<>();\n\n            // Put copies of literals"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "ObsoleteCollection"
+  },
+  "hash": "cf8d1b2b6c38514c1a416f496f3be427fb4a48cfc82a20f13c93ac8276f9eaaf"
 }]}
