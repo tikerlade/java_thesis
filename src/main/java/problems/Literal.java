@@ -1,15 +1,18 @@
+package problems;
+
 import exceptions.InputException;
 
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
 /**
- * Literal is one part of formula in CNF: either variable or it's negation.
+ * problems.Literal is one part of formula in CNF: either variable or it's negation.
  */
-public class Literal {
+public class Literal implements Cloneable{
     String name;
     Integer index;
     Boolean negation = false;
+    Boolean value = null;
 
     // TODO regex - variable name cannot start with 0-9
     String variableRegex = "[a-zA-Z0-9]+";
@@ -27,7 +30,7 @@ public class Literal {
         // Empty strings are not valid
         if (literalString.length() < 1) {
             // TODO exception texts to store in one place.
-            throw new InputException("Literal must consist at least of one character.");
+            throw new InputException("problems.Literal must consist at least of one character.");
         }
 
         // Check negation usage
@@ -51,6 +54,19 @@ public class Literal {
     public Literal (String literalString, Integer index) throws Exception {
         this(literalString);
         this.index = index;
+    }
+
+    public Boolean getValue() {
+        // TODO think about exception: Value has not been set
+        if (this.value != null) {
+            return this.value;
+        }
+
+        return false;
+    }
+
+    public void setValue(Boolean value) {
+        this.value = value;
     }
 
     public void setName(String name) {
@@ -86,5 +102,16 @@ public class Literal {
         }
 
         return representation;
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public static String getOppositeLiteralName(String literalName) {
+        if (literalName.startsWith("-")) {
+            return literalName.substring(1);
+        }
+        return '-' + literalName;
     }
 }

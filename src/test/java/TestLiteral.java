@@ -1,5 +1,6 @@
 import exceptions.InputException;
 import org.junit.jupiter.api.Test;
+import problems.Literal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -47,8 +48,8 @@ public class TestLiteral {
         String[] actualExceptionMessages = {
                 "Not allowed character: ' ' was used.",
                 "Not allowed character: '&' was used.",
-                "Literal must consist at least of one character.",
-                "Literal must consist at least of one character."
+                "problems.Literal must consist at least of one character.",
+                "problems.Literal must consist at least of one character."
         };
 
         try {

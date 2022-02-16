@@ -1,6 +1,12 @@
+package problems;
+
 import java.util.ArrayList;
 
 public class Cnf3Formula extends CnfFormula{
+
+    public Cnf3Formula() {
+        super();
+    }
 
     public Cnf3Formula(String formulaString) throws Exception {
         // Parse formula from given string

@@ -1,5 +1,7 @@
 import exceptions.InputException;
 import org.junit.jupiter.api.Test;
+import problems.CnfFormula;
+import problems.Literal;
 
 import java.util.ArrayList;
 
@@ -41,9 +43,9 @@ public class TestCnfFormula {
         // TODO fix last exception to return correct answer - allowed characters introduction
         String[] testFormulas = {"()", "a", "(a | b", "(a | b | c) & a", "(a | b | c) * a"};
         String[] actualExceptionMessages = {
-                "Literal must consist at least of one character.",
+                "problems.Literal must consist at least of one character.",
                 "Clauses must be covered in parentheses.",
-                "Literal must consist at least of one character.",
+                "problems.Literal must consist at least of one character.",
                 "Clauses must be covered in parentheses.",
                 "Not allowed character: ')' was used."
         };
