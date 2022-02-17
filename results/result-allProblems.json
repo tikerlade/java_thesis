@@ -10,11 +10,11 @@
       "type": "file",
       "path": "src/main/java/problems/Literal.java",
       "language": "JAVA",
-      "line": 20,
+      "line": 21,
       "offset": 66,
       "length": 9,
       "code": {
-        "startLine": 18,
+        "startLine": 19,
         "length": 9,
         "offset": 109,
         "surroundingCode": "    String variableRegex = \"[a-zA-Z0-9]+\";\n\n    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{\n        put(BooleanOperation.NEGATION, '-');\n        put(BooleanOperation.AND, '&');"
@@ -25,7 +25,7 @@
     "module": "java_thesis.main",
     "inspectionName": "DoubleBraceInitialization"
   },
-  "hash": "6722f3e5d3e0fce9290289cced753edb7cdc17e0432c1885fffa6f9938ecb41e"
+  "hash": "559942aeafd8ec6b1b2b4b64e02fe028513d15681e33ccf91b6c0ed2634b9c68"
 },{
   "tool": "Code Inspection",
   "category": "Initialization",
@@ -38,14 +38,14 @@
       "type": "file",
       "path": "src/main/java/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 20,
+      "line": 19,
       "offset": 66,
       "length": 9,
       "code": {
-        "startLine": 18,
+        "startLine": 17,
         "length": 9,
-        "offset": 122,
-        "surroundingCode": "    ArrayList<Literal> allLiterals = new ArrayList<>();\n\n    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{\n        put(BooleanOperation.NEGATION, '-');\n        put(BooleanOperation.AND, '&');"
+        "offset": 268,
+        "surroundingCode": "    HashMap<String, ArrayList<Literal>> varToLiterals = new HashMap<>(); // here we'll store all literals which have the same variable name\n    public ArrayList<Literal> allLiterals = new ArrayList<>();\n    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{\n        put(BooleanOperation.NEGATION, '-');\n        put(BooleanOperation.AND, '&');"
       }
     }
   ],
@@ -53,7 +53,7 @@
     "module": "java_thesis.main",
     "inspectionName": "DoubleBraceInitialization"
   },
-  "hash": "fc36cc810c46f75914b34fb1c50f7b46809a5b1e8668a6efa82fa041962196da"
+  "hash": "c1f663e6686b2b5e2425c11719eeca4072299500b03a7220589728c261a9f61c"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
