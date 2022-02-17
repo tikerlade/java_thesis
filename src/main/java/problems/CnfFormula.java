@@ -15,13 +15,14 @@ public class CnfFormula {
     public ArrayList<ArrayList<Literal>> clauses;
     String inputFormula;
     HashMap<String, ArrayList<Literal>> varToLiterals = new HashMap<>(); // here we'll store all literals which have the same variable name
-    ArrayList<Literal> allLiterals = new ArrayList<>();
-
+    public ArrayList<Literal> allLiterals = new ArrayList<>();
     HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{
         put(BooleanOperation.NEGATION, '-');
         put(BooleanOperation.AND, '&');
         put(BooleanOperation.OR, '|');
     }};
+
+    boolean satSetFound = false;
 
     public CnfFormula() {
         this.inputFormula = "";
@@ -86,18 +87,7 @@ public class CnfFormula {
                 buffer.setLength(0);
 
                 // Save information as metainfo
-                ArrayList<Literal> literals;
-
-                if (varToLiterals.containsKey(newLiteral.toString())) {
-                    literals = varToLiterals.get(newLiteral.toString());
-                    literals.add(newLiteral);
-                } else {
-                    literals = new ArrayList<>();
-                    literals.add(newLiteral);
-                    varToLiterals.put(newLiteral.toString(), literals);
-                }
-
-                this.allLiterals.add(newLiteral);
+                addNewLiteral(newLiteral);
             }
         }
 
@@ -105,22 +95,32 @@ public class CnfFormula {
         Literal lastLiteral = new Literal(buffer.toString(), literalCounter++);
         listOfLiterals.add(lastLiteral);
 
-        // TODO wrap into function
         // Save information as metainfo
-        ArrayList<Literal> literals;
-
-        if (varToLiterals.containsKey(lastLiteral.toString())) {
-            literals = varToLiterals.get(lastLiteral.toString());
-            literals.add(lastLiteral);
-        } else {
-            literals = new ArrayList<>();
-            literals.add(lastLiteral);
-            varToLiterals.put(lastLiteral.toString(), literals);
-        }
-
-        this.allLiterals.add(lastLiteral);
+        addNewLiteral(lastLiteral);
 
         return listOfLiterals;
+    }
+
+    private void addNewLiteral(Literal literal) {
+        ArrayList<Literal> literals;
+
+        if (varToLiterals.containsKey(literal.toString())) {
+            literals = varToLiterals.get(literal.toString());
+            literals.add(literal);
+        } else {
+            literals = new ArrayList<>();
+            literals.add(literal);
+            varToLiterals.put(literal.toString(), literals);
+        }
+
+        this.allLiterals.add(literal);
+    }
+
+    public void addNewClause(ArrayList<Literal> clause) {
+        for (Literal literal : clause) {
+            addNewLiteral(literal);
+        }
+        this.clauses.add(clause);
     }
 
     @Override
@@ -160,12 +160,16 @@ public class CnfFormula {
         return values;
     }
 
+    /**
+     * Finds values for literals which will satisfy formula.
+     */
     public void solve() {
-        // TODO complete this function to solve problems on users input
         int varNum = this.varToLiterals.values().stream().map(ArrayList::size).reduce(0, Integer::sum);
         Boolean[][] literalsValue = getLiteralsValueMatrix(varNum);
+        int rowIdx = 0;
 
-        for (Boolean[] row : literalsValue) {
+        while (!this.satSetFound & (rowIdx < literalsValue.length)) {
+            Boolean[] row = literalsValue[rowIdx++];
             boolean skipCurrentRow = false;
 
             // Set values
@@ -208,8 +212,8 @@ public class CnfFormula {
             }
 
             // Check satisfiability
-            if (isSatisfyingSet()) {
-                System.out.println("Satisfying set found.");
+            if (isSatisfied()) {
+                this.satSetFound = true;
             }
         }
     }
@@ -218,8 +222,8 @@ public class CnfFormula {
      * Given boolean values for each of variables - want to know is it satisfying set.
      * @return is formula currently satisfyable or not
      */
-    public boolean isSatisfyingSet() {
-        boolean isSatisfyed = true;
+    public boolean isSatisfied() {
+        boolean isSatisfied = true;
 
         for (ArrayList<Literal> clause : this.clauses) {
             boolean localSatisfyed = false;
@@ -228,10 +232,28 @@ public class CnfFormula {
                 localSatisfyed = localSatisfyed | literal.getValue();
             }
 
-            isSatisfyed = isSatisfyed & localSatisfyed;
+            isSatisfied = isSatisfied & localSatisfyed;
         }
 
-        return isSatisfyed;
+        return isSatisfied;
+    }
+
+    public HashMap<String, Boolean> getSatisfyingSet() throws Exception {
+        if (!this.satSetFound) {
+            solve();
+
+            if (!isSatisfied()) {
+                throw new Exception("Satisfying set was not found!");
+            }
+        }
+
+        HashMap<String, Boolean> varToValue = new HashMap<>();
+
+        for (Literal literal: this.allLiterals) {
+            varToValue.put(literal.toString(), literal.value);
+        }
+
+        return varToValue;
     }
 }
 

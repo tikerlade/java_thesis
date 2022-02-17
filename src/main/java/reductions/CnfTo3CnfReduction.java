@@ -29,7 +29,7 @@ public class CnfTo3CnfReduction {
 
             if (clause.size() < 4) {
                 ArrayList<Literal> newClause = new ArrayList<>(clause);
-                cnf3Formula.clauses.add(newClause);
+                cnf3Formula.addNewClause(newClause);
             } else {
                 // Split into new groups
                 // TODO check that names of variables are not used
@@ -37,6 +37,7 @@ public class CnfTo3CnfReduction {
                     // Get two elements from current big clause
                     ArrayList<Literal> newClause = new ArrayList<>(Arrays.asList(clauseStack.pop(), clauseStack.pop()));
                     Literal extraLiteral = new Literal("x" + newLiteralCounter);
+                    extraLiteral.setIsDummy(true);
 
                     // Add extra literal to our two literals in clause
                     newClause.add(extraLiteral);
@@ -45,28 +46,50 @@ public class CnfTo3CnfReduction {
                     // Update extra variable to put it in next clause
                     Literal copyExtraLiteral = (Literal) extraLiteral.clone();
                     copyExtraLiteral.setNegation(true);
+                    copyExtraLiteral.setIsDummy(true);
                     clauseStack.push(copyExtraLiteral);
 
                     // Add current clause to
-                    cnf3Formula.clauses.add(newClause);
+                    cnf3Formula.addNewClause(newClause);
                 }
 
                 // Put final 3 values into clauses of 3CNF
                 ArrayList<Literal> lastClause = new ArrayList<>(clauseStack);
                 Collections.reverse(lastClause);
-                cnf3Formula.clauses.add(lastClause);
+                cnf3Formula.addNewClause(lastClause);
             }
         }
 
         return cnf3Formula;
     }
 
+    public HashMap<String, Boolean> forwardAndBackward(CnfFormula formula) throws Exception {
+        Cnf3Formula cnf3Formula = forward(formula);
+        cnf3Formula.solve();
+        return backward(formula, cnf3Formula);
+    }
+
 
     /**
      * Given solution to 3CNF problem -> convert this into CNF problem solution
      * Backward method.
+     * @return values for variables of formula
      */
-    public void backward(Cnf3Formula cnf3Formula) {
-        // TODO complete backward algorithm
+    public HashMap<String, Boolean> backward(CnfFormula formula, Cnf3Formula cnf3Formula) throws Exception {
+        int firstIdx = 0;
+        int secondIdx = 0;
+
+        while (firstIdx < formula.allLiterals.size()) {
+            Literal first = formula.allLiterals.get(firstIdx++);
+            Literal second = cnf3Formula.allLiterals.get(secondIdx++);
+
+            while (!Objects.equals(first.toString(), second.toString())) {
+                second = cnf3Formula.allLiterals.get(secondIdx++);
+            }
+
+            first.setValue(second.getValue());
+        }
+
+        return formula.getSatisfyingSet();
     }
 }

@@ -13,6 +13,7 @@ public class Literal implements Cloneable{
     Integer index;
     Boolean negation = false;
     Boolean value = null;
+    Boolean isDummy = false;
 
     // TODO regex - variable name cannot start with 0-9
     String variableRegex = "[a-zA-Z0-9]+";
@@ -81,6 +82,8 @@ public class Literal implements Cloneable{
         this.negation = negation;
     }
 
+    public void setIsDummy(Boolean isDummy) { this.isDummy = isDummy;}
+
     public String getName() {
         return name;
     }
@@ -92,6 +95,9 @@ public class Literal implements Cloneable{
     public Boolean getNegation() {
         return negation;
     }
+
+    public Boolean getIsDummy() {return this.isDummy;}
+
 
     @Override
     public String toString() {
