@@ -1,6 +1,6 @@
-package problems;
+package ru.spbstu.icst.problems;
 
-import exceptions.InputException;
+import ru.spbstu.icst.exceptions.InputException;
 
 import java.util.HashMap;
 import java.util.regex.Pattern;

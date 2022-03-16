@@ -1,6 +1,6 @@
-package problems;
+package ru.spbstu.icst.problems;
 
-import exceptions.InputException;
+import ru.spbstu.icst.exceptions.InputException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +10,10 @@ import java.util.List;
  * Formulas in CNF are used in both SAT problem and 3-SAT problem.
  * CNF - Conjunctive Normal Form
  */
-public class CnfFormula {
+public class CnfFormula implements Problem {
+    // Metainformation
+    public static String shortname = "SAT";
+
     Integer literalCounter = 0;
     public ArrayList<ArrayList<Literal>> clauses;
     String inputFormula;

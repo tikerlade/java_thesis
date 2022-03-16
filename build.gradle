@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+//    id 'application'
+//    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
 group 'ru.spbstu.icst'
@@ -17,3 +19,11 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+//// Here we specify what we actually want from javafx plugin
+//javafx {
+//    modules = [ 'javafx.controls', 'javafx.fxml' ]
+//    version = '17.0.1'
+//}
+//
+//mainClassName = 'ru.spbstu.icst.Main'

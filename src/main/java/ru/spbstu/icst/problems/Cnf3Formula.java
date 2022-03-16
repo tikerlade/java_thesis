@@ -1,8 +1,9 @@
-package problems;
+package ru.spbstu.icst.problems;
 
 import java.util.ArrayList;
 
 public class Cnf3Formula extends CnfFormula{
+    public static String shortname = "3SAT";
 
     public Cnf3Formula() {
         super();

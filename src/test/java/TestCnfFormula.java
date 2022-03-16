@@ -1,7 +1,7 @@
-import exceptions.InputException;
+import ru.spbstu.icst.exceptions.InputException;
 import org.junit.jupiter.api.Test;
-import problems.CnfFormula;
-import problems.Literal;
+import ru.spbstu.icst.problems.CnfFormula;
+import ru.spbstu.icst.problems.Literal;
 
 import java.util.ArrayList;
 

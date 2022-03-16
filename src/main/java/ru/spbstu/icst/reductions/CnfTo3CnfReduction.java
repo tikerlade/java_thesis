@@ -1,12 +1,15 @@
-package reductions;
+package ru.spbstu.icst.reductions;
 
-import problems.Cnf3Formula;
-import problems.CnfFormula;
-import problems.Literal;
+import ru.spbstu.icst.problems.Cnf3Formula;
+import ru.spbstu.icst.problems.CnfFormula;
+import ru.spbstu.icst.problems.Literal;
 
 import java.util.*;
 
-public class CnfTo3CnfReduction {
+public class CnfTo3CnfReduction implements Reduction{
+
+    private CnfFormula cnfFormula;
+    private Cnf3Formula cnf3Formula;
 
     /**
      * Given formula in CNF reduce it to 3CNF formula.
@@ -69,6 +72,9 @@ public class CnfTo3CnfReduction {
         return backward(formula, cnf3Formula);
     }
 
+    public void start() {
+
+    }
 
     /**
      * Given solution to 3CNF problem -> convert this into CNF problem solution
@@ -91,5 +97,10 @@ public class CnfTo3CnfReduction {
         }
 
         return formula.getSatisfyingSet();
+    }
+
+    @Override
+    public String toString() {
+        return cnfFormula.shortname + " -> " + cnf3Formula.shortname;
     }
 }
