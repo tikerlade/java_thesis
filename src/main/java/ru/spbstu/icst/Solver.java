@@ -2,6 +2,7 @@ package ru.spbstu.icst;
 
 import ru.spbstu.icst.exceptions.InputException;
 import ru.spbstu.icst.reductions.CnfTo3CnfReduction;
+import ru.spbstu.icst.reductions.IsToVc;
 import ru.spbstu.icst.reductions.Reduction;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public class Solver {
     private List<Reduction> reductions;
 
     public Solver() {
-        reductions = List.of(new CnfTo3CnfReduction());
+        reductions = List.of(new CnfTo3CnfReduction(), new IsToVc());
     }
 
     public void start() throws InputException {
@@ -22,12 +23,12 @@ public class Solver {
         // Print all reductions we have
         for (int i = 0; i < reductions.size(); i++) {
             Reduction reduction = reductions.get(i);
-            System.out.println((i+1) + ". " + reduction.toString());
+            System.out.println(i + ". " + reduction.toString());
         }
 
         // Read user data
         Scanner scanner = new Scanner(System.in);
-        int userChoice = scanner.nextInt() - 1;
+        int userChoice = scanner.nextInt();
 
         // Check validaty of number just read
         if (userChoice < 0 || userChoice > reductions.size()) {

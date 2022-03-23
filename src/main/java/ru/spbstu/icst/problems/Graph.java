@@ -71,4 +71,8 @@ public class Graph {
             v.addAdjacent(u);
         }
     }
+
+    public int getVertexCount() {
+        return vertexCount;
+    }
 }
