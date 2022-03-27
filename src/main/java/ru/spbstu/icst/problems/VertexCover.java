@@ -2,22 +2,24 @@ package ru.spbstu.icst.problems;
 
 import java.util.Scanner;
 
-public class VertexCover implements Problem {
-    // Metainformation
-    public static String shortname = "VC";
-
+public class VertexCover extends Problem {
     private int coverSize;
     private Graph graph;
 
     Scanner scanner = new Scanner(System.in);
 
     public VertexCover() {
-        // Get information about size of cover we'll try to find
-        coverSize = scanner.nextInt();
+        this.shortname = "VC";
+        this.fullname = "Vertex cover problem";
+        this.graph = new Graph();
 
-        // Initialize graph
-        graph = new Graph();
-        graph.readGraph();
+        // TODO implement as part of other method
+//        // Get information about size of cover we'll try to find
+//        coverSize = scanner.nextInt();
+//
+//        // Initialize graph
+//        graph = new Graph();
+//        graph.readGraph();
     }
 
     public VertexCover(int coverSize, Graph graph) {

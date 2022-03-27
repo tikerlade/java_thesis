@@ -10,9 +10,7 @@ import java.util.List;
  * Formulas in CNF are used in both SAT problem and 3-SAT problem.
  * CNF - Conjunctive Normal Form
  */
-public class CnfFormula implements Problem {
-    // Metainformation
-    public static String shortname = "SAT";
+public class CnfFormula extends Problem {
 
     Integer literalCounter = 0;
     public ArrayList<ArrayList<Literal>> clauses;
@@ -28,6 +26,9 @@ public class CnfFormula implements Problem {
     boolean satSetFound = false;
 
     public CnfFormula() {
+        this.shortname = "SAT";
+        this.fullname = "Satisfiability problem";
+
         this.inputFormula = "";
         this.clauses = new ArrayList<>();
     }

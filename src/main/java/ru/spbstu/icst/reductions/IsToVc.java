@@ -2,10 +2,15 @@ package ru.spbstu.icst.reductions;
 
 import ru.spbstu.icst.problems.*;
 
-public class IsToVc implements Reduction{
+public class IsToVc extends Reduction {
 
     private IndependentSet independentSet;
     private VertexCover vertexCover;
+
+    public IsToVc() {
+        this.problemA = new IndependentSet();
+        this.problemB = new VertexCover();
+    }
 
     @Override
     public void start() {
@@ -23,8 +28,8 @@ public class IsToVc implements Reduction{
 
     public void backward(IndependentSet independentSet, VertexCover vertexCover) {}
 
-    @Override
-    public String toString() {
-        return independentSet.shortname + " -> " + vertexCover.shortname;
-    }
+//    @Override
+//    public String toString() {
+//        return independentSet.shortname + " -> " + vertexCover.shortname;
+//    }
 }

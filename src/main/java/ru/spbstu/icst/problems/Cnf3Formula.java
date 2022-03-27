@@ -3,10 +3,12 @@ package ru.spbstu.icst.problems;
 import java.util.ArrayList;
 
 public class Cnf3Formula extends CnfFormula{
-    public static String shortname = "3SAT";
 
     public Cnf3Formula() {
         super();
+
+        this.shortname = "3SAT";
+        this.fullname = "3-Satifiability problem";
     }
 
     public Cnf3Formula(String formulaString) throws Exception {

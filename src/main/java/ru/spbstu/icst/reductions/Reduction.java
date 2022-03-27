@@ -1,5 +1,20 @@
 package ru.spbstu.icst.reductions;
 
-public interface Reduction {
-    void start();
+import ru.spbstu.icst.problems.Problem;
+
+public abstract class Reduction {
+    Problem problemA;
+    Problem problemB;
+
+    public void start() {}
+
+    public void forward() {}
+
+    public void backward() {}
+
+    public void forwardAndBackward() {}
+
+    public String toString() {
+        return this.problemA.shortname + " -> " + this.problemB.shortname;
+    }
 }
