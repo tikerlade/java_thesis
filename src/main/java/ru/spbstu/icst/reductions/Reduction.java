@@ -15,6 +15,6 @@ public abstract class Reduction {
     public void forwardAndBackward() {}
 
     public String toString() {
-        return this.problemA.shortname + " -> " + this.problemB.shortname;
+        return this.problemA.getShortname() + " -> " + this.problemB.getShortname();
     }
 }

@@ -11,6 +11,8 @@ import java.util.List;
  * CNF - Conjunctive Normal Form
  */
 public class CnfFormula extends Problem {
+    private final static String shortname = "SAT";
+    private final static String fullname = "Satisfiability problem";
 
     Integer literalCounter = 0;
     public ArrayList<ArrayList<Literal>> clauses;
@@ -26,9 +28,6 @@ public class CnfFormula extends Problem {
     boolean satSetFound = false;
 
     public CnfFormula() {
-        this.shortname = "SAT";
-        this.fullname = "Satisfiability problem";
-
         this.inputFormula = "";
         this.clauses = new ArrayList<>();
     }
@@ -258,6 +257,10 @@ public class CnfFormula extends Problem {
         }
 
         return varToValue;
+    }
+
+    public String getShortname() {
+        return CnfFormula.shortname;
     }
 }
 
