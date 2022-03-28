@@ -1,5 +1,7 @@
 package ru.spbstu.icst.problems;
 
+import org.jgrapht.alg.vertexcover.RecursiveExactVCImpl;
+
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -9,6 +11,7 @@ public class VertexCover extends Problem {
 
     private int coverSize;
     private Graph graph;
+    private RecursiveExactVCImpl vertexCoverFinder;
 
     public HashSet<Integer> vertexCover;
 

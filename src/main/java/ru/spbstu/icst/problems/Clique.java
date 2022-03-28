@@ -1,5 +1,7 @@
 package ru.spbstu.icst.problems;
 
+import org.jgrapht.alg.clique.BronKerboschCliqueFinder;
+
 import java.util.Scanner;
 
 public class Clique extends Problem {
@@ -9,6 +11,7 @@ public class Clique extends Problem {
     private Scanner scanner = new Scanner(System.in);
 
     private Graph graph;
+    private BronKerboschCliqueFinder cliqueFinder;
     private int numVertices;
 
     public Clique() {
