@@ -5,6 +5,8 @@ public abstract class Problem {
     public String fullname;
     public String description;
 
+    public boolean solutionFound;
+
     public abstract String getShortname();
 
     public abstract void readData() throws Exception;

@@ -1,13 +1,16 @@
 package ru.spbstu.icst.problems;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class IndependentSet extends Problem {
     private final static String shortname = "IS";
-    private final static String fullname = "Independant set problem";
+    private final static String fullname = "Independent set problem";
 
     private int independentSetSize;
     private Graph graph;
+
+    public HashSet<Integer> independentSet;
 
     Scanner scanner = new Scanner(System.in);
 

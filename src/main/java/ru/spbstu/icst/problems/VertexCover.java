@@ -1,5 +1,6 @@
 package ru.spbstu.icst.problems;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class VertexCover extends Problem {
@@ -8,6 +9,8 @@ public class VertexCover extends Problem {
 
     private int coverSize;
     private Graph graph;
+
+    public HashSet<Integer> vertexCover;
 
     Scanner scanner = new Scanner(System.in);
 
@@ -37,5 +40,17 @@ public class VertexCover extends Problem {
     @Override
     public String getShortname() {
         return VertexCover.shortname;
+    }
+
+    public void setGraph(Graph graph) {
+        this.graph = graph;
+    }
+
+    public void setCoverSize(int coverSize) {
+        this.coverSize = coverSize;
+    }
+
+    public Graph getGraph() {
+        return graph;
     }
 }
