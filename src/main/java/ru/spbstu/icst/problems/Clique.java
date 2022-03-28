@@ -1,8 +1,12 @@
 package ru.spbstu.icst.problems;
 
+import java.util.Scanner;
+
 public class Clique extends Problem {
     public static final String shortname = "Clique";
     public static final String fullaname = "Clique problem";
+
+    private Scanner scanner = new Scanner(System.in);
 
     private Graph graph;
     private int numVertices;
@@ -19,5 +23,12 @@ public class Clique extends Problem {
     @Override
     public String getShortname() {
         return Clique.shortname;
+    }
+
+    @Override
+    public void readData() {
+        System.out.print("Number of required vertices in Clique: ");
+        this.numVertices = scanner.nextInt();
+        this.graph.readGraph();
     }
 }

@@ -13,14 +13,6 @@ public class IndependentSet extends Problem {
 
     public IndependentSet() {
         this.graph = new Graph();
-
-        // TODO implement this as part of other method
-//        // Get information about size of cover we'll try to find
-//        this.independentSetSize = scanner.nextInt();
-//
-//        // Initialize graph
-//        graph = new Graph();
-//        graph.readGraph();
     }
 
     public IndependentSet(int independentSetSize, Graph graph) {
@@ -36,8 +28,18 @@ public class IndependentSet extends Problem {
         return graph;
     }
 
-
+    @Override
     public String getShortname() {
         return IndependentSet.shortname;
+    }
+
+    @Override
+    public void readData() {
+        // Get information about size of cover we'll try to find
+        System.out.print("Number of nodes required in independent set: ");
+        this.independentSetSize = scanner.nextInt();
+
+        // Read graph part of input
+        this.graph.readGraph();
     }
 }

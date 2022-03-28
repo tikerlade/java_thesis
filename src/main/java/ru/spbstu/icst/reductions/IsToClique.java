@@ -6,8 +6,6 @@ import ru.spbstu.icst.problems.IndependentSet;
 public class IsToClique extends Reduction {
 
     public IsToClique() {
-        this.problemA = new IndependentSet();
-        this.problemB = new Clique();
+        super(new IndependentSet(), new Clique());
     }
-
 }

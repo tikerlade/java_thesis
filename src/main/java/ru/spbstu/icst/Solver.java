@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Solver {
-    private List<Reduction> reductions;
+    private final List<Reduction> reductions;
 
     public Solver() {
         reductions = List.of(new CnfTo3CnfReduction(), new IsToVc(), new IsToClique());
     }
 
-    public void start() throws InputException {
+    public void start() throws Exception {
         // Intro messages
         System.out.println("Hello, this program will complete reduction of your problem to other NPC problem with your data.");
         System.out.println("Please select, which one of the following reductions you would like to complete:");

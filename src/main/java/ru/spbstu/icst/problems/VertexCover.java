@@ -13,14 +13,6 @@ public class VertexCover extends Problem {
 
     public VertexCover() {
         this.graph = new Graph();
-
-        // TODO implement as part of other method
-//        // Get information about size of cover we'll try to find
-//        coverSize = scanner.nextInt();
-//
-//        // Initialize graph
-//        graph = new Graph();
-//        graph.readGraph();
     }
 
     public VertexCover(int coverSize, Graph graph) {
@@ -32,6 +24,17 @@ public class VertexCover extends Problem {
         return coverSize;
     }
 
+    @Override
+    public void readData() {
+        // Get information about size of cover we'll try to find
+        System.out.print("Number of nodes required in vertex cover: ");
+        this.coverSize = scanner.nextInt();
+
+        // Read graph part of input
+        this.graph.readGraph();
+    }
+
+    @Override
     public String getShortname() {
         return VertexCover.shortname;
     }

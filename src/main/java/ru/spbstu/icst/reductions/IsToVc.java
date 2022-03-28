@@ -8,13 +8,7 @@ public class IsToVc extends Reduction {
     private VertexCover vertexCover;
 
     public IsToVc() {
-        this.problemA = new IndependentSet();
-        this.problemB = new VertexCover();
-    }
-
-    @Override
-    public void start() {
-
+        super(new IndependentSet(), new VertexCover());
     }
 
     public void forward(IndependentSet independentSet) {

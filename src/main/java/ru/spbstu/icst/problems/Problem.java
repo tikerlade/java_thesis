@@ -6,4 +6,6 @@ public abstract class Problem {
     public String description;
 
     public abstract String getShortname();
+
+    public abstract void readData() throws Exception;
 }

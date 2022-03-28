@@ -5,6 +5,7 @@ import ru.spbstu.icst.exceptions.InputException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Formulas in CNF are used in both SAT problem and 3-SAT problem.
@@ -34,13 +35,16 @@ public class CnfFormula extends Problem {
 
     public CnfFormula (String formulaString) throws Exception {
         // Save users formula
+        this.clauses = this.parseCnfFormulaToClauses(formulaString);
         this.inputFormula = formulaString;
+    }
 
+    public ArrayList<ArrayList<Literal>> parseCnfFormulaToClauses(String inputFormula) throws Exception {
         ArrayList<ArrayList<Literal>> clauses = new ArrayList<>();
         StringBuilder buffer = new StringBuilder();
 
         // Collect literals by splitting clause at AND operations
-        for (Character ch: formulaString.toCharArray()) {
+        for (Character ch: inputFormula.toCharArray()) {
             // Not reached AND -> collect character to buffer
             if (ch != allowedOperations.get(BooleanOperation.AND)) {
                 buffer.append(ch);
@@ -59,7 +63,7 @@ public class CnfFormula extends Problem {
         clauses.add(lastClause);
 
         // Save clauses as parsed formula
-        this.clauses = clauses;
+        return clauses;
     }
 
     public ArrayList<Literal> getClauseFromString(String clauseString) throws Exception {
@@ -261,6 +265,19 @@ public class CnfFormula extends Problem {
 
     public String getShortname() {
         return CnfFormula.shortname;
+    }
+
+    @Override
+    public void readData() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+
+        // Get data from user
+        System.out.print("Input your formula in CNF: ");
+        String inputString = scanner.nextLine();
+
+        // Parse user data and store it
+        this.clauses = parseCnfFormulaToClauses(inputString);
+        this.inputFormula = inputString;
     }
 }
 

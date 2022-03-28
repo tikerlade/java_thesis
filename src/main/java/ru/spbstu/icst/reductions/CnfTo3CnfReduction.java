@@ -6,12 +6,8 @@ import java.util.*;
 
 public class CnfTo3CnfReduction extends Reduction{
 
-    private CnfFormula cnfFormula;
-    private Cnf3Formula cnf3Formula;
-
     public CnfTo3CnfReduction() {
-        this.problemA = new CnfFormula();
-        this.problemB = new Cnf3Formula();
+        super(new CnfFormula(), new Cnf3Formula());
     }
 
     /**
@@ -75,10 +71,6 @@ public class CnfTo3CnfReduction extends Reduction{
         return backward(formula, cnf3Formula);
     }
 
-    public void start() {
-
-    }
-
     /**
      * Given solution to 3CNF problem -> convert this into CNF problem solution
      * Backward method.
@@ -101,9 +93,4 @@ public class CnfTo3CnfReduction extends Reduction{
 
         return formula.getSatisfyingSet();
     }
-
-//    @Override
-//    public String toString() {
-//        return cnfFormula.shortname + " -> " + cnf3Formula.shortname;
-//    }
 }
