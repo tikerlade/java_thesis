@@ -1,5 +1,6 @@
 package ru.spbstu.icst.problems;
 
+import com.google.ortools.sat.CpModel;
 import ru.spbstu.icst.exceptions.InputException;
 
 import java.util.ArrayList;
@@ -27,10 +28,13 @@ public class CnfFormula extends Problem {
     }};
 
     boolean satSetFound = false;
+    private CpModel cpModel;
 
     public CnfFormula() {
         this.inputFormula = "";
         this.clauses = new ArrayList<>();
+
+        this.cpModel = new CpModel();
     }
 
     public CnfFormula (String formulaString) throws Exception {
