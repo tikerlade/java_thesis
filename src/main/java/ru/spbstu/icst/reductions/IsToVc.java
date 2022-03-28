@@ -27,9 +27,4 @@ public class IsToVc extends Reduction {
     }
 
     public void backward(IndependentSet independentSet, VertexCover vertexCover) {}
-
-//    @Override
-//    public String toString() {
-//        return independentSet.shortname + " -> " + vertexCover.shortname;
-//    }
 }

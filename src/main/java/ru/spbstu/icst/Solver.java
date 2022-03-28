@@ -2,6 +2,7 @@ package ru.spbstu.icst;
 
 import ru.spbstu.icst.exceptions.InputException;
 import ru.spbstu.icst.reductions.CnfTo3CnfReduction;
+import ru.spbstu.icst.reductions.IsToClique;
 import ru.spbstu.icst.reductions.IsToVc;
 import ru.spbstu.icst.reductions.Reduction;
 
@@ -12,7 +13,7 @@ public class Solver {
     private List<Reduction> reductions;
 
     public Solver() {
-        reductions = List.of(new CnfTo3CnfReduction(), new IsToVc());
+        reductions = List.of(new CnfTo3CnfReduction(), new IsToVc(), new IsToClique());
     }
 
     public void start() throws InputException {

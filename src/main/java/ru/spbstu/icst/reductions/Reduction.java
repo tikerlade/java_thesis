@@ -6,6 +6,7 @@ public abstract class Reduction {
     Problem problemA;
     Problem problemB;
 
+    // TODO read user data here
     public void start() {}
 
     public void forward() {}
