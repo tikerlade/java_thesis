@@ -29,9 +29,24 @@ public class Clique extends Problem {
     }
 
     @Override
-    public void readData() {
+    public void readInput() {
         System.out.print("Number of required vertices in Clique: ");
         this.numVertices = scanner.nextInt();
         this.graph.readGraph();
+    }
+
+    @Override
+    public void solve() {
+
+    }
+
+    @Override
+    public void printSolution() {
+
+    }
+
+    @Override
+    public void readSolution() {
+
     }
 }

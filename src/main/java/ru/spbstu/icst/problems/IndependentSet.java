@@ -37,12 +37,38 @@ public class IndependentSet extends Problem {
     }
 
     @Override
-    public void readData() {
+    public void readInput() {
         // Get information about size of cover we'll try to find
         System.out.print("Number of nodes required in independent set: ");
         this.independentSetSize = scanner.nextInt();
 
         // Read graph part of input
         this.graph.readGraph();
+    }
+
+    @Override
+    public void solve() {
+
+    }
+
+    @Override
+    public void printSolution() {
+        // TODO print NO_SOLUTION if there is no solution
+        System.out.println("Vertices which constructs independent set in your graph:");
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int node: independentSet) {
+            stringBuilder.append(node).append(" ");
+        }
+
+        // Delete last space
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+
+        System.out.println(stringBuilder);
+    }
+
+    @Override
+    public void readSolution() {
+
     }
 }

@@ -11,10 +11,57 @@ public abstract class Reduction {
         this.problemB = problemB;
     }
 
-    public void start() throws Exception {
+    public void start(ProgramMode programMode) throws Exception {
+        switch (programMode) {
+            case FORWARD_ONLY -> {
+                this.forwardOnly();
+                System.out.println(this.problemB);
+            }
+
+            case FORWARD_SOLVE -> {
+                this.forwardSolve();
+                this.problemB.printSolution();
+            }
+
+            case FORWARD_SOLVE_BACKWARD -> {
+                this.forwardSolveBackward();
+                this.problemA.printSolution();
+            }
+
+            case BACKWARD_ONLY -> {
+                this.backwardOnly();
+                this.problemA.printSolution();
+            }
+        }
+    }
+
+
+    // Wrapper function for forward reduction
+    public void forwardOnly() throws Exception {
         System.out.println("Now you can input data for your " + this.problemA.getShortname() +
                 " problem and you will get output for " + this.problemB.getShortname() + " problem.");
-        this.problemA.readData();
+        this.problemA.readInput();
+        this.forward();
+    }
+
+    public void forwardSolve() throws Exception {
+        this.forwardOnly();
+        this.problemB.solve();
+    }
+
+    public void forwardSolveBackward() throws Exception {
+        this.forwardSolve();
+        this.backward();
+    }
+
+    public void backwardOnly() throws Exception {
+        System.out.println("Input data for your " + this.problemB.getShortname() + " problem:");
+        this.problemB.readInput();
+
+        System.out.println("Input solution for your " + this.problemB.getShortname() + " problem:");
+        this.problemB.readSolution();
+
+        this.backward();
     }
 
     /**
@@ -35,10 +82,7 @@ public abstract class Reduction {
      * After this we'll solve problemB using known algorithms.
      * When solution for problemB will be found we will convert this solution into solution for problemA.
      */
-    public void forwardAndBackward() {
-        this.forward();
-        this.backward();
-    }
+    public void forwardAndBackward() throws Exception {}
 
     /**
      * Creates title of reduction using shortnames of problems which are reduced.

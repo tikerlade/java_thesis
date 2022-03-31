@@ -40,7 +40,7 @@ public class IsToVc extends Reduction {
         }
 
         // Remove nodes which exists in vertex cover of problemB
-        for (int nodeNum : vertexCover.vertexCover) {
+        for (Object nodeNum : vertexCover.vertexCover) {
             independentSet.independentSet.remove(nodeNum);
         }
 

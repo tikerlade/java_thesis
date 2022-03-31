@@ -1,28 +1,45 @@
 package ru.spbstu.icst.problems;
 
-import java.util.*;
+import org.jgrapht.alg.interfaces.VertexCoverAlgorithm;
+import org.jgrapht.alg.vertexcover.GreedyVCImpl;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
 
 // Nodes in graph numbered from 0 to vertexCount - 1
 public class Graph {
     // Meta information about graph
     private int vertexCount;
     private int edgesCount;
+
     private final boolean isDirected = false;
     Scanner scanner = new Scanner(System.in);
+
+    private org.jgrapht.Graph<Integer, DefaultEdge> metaGraph;
 
     // Store graph as adjacency list
     Node[] nodes;
 
-    public Graph() {}
+    public Graph() {
+        this.metaGraph = new SimpleGraph<>(DefaultEdge.class);
+    }
 
     public Graph(int vertexCount, int edgesCount, List<Map.Entry<Integer, Integer>> edges) {
+        // Initialize meatagraph
+        this();
+
         // Init meta information
         this.vertexCount = vertexCount;
         this.edgesCount = edgesCount;
 
         this.nodes = new Node[this.vertexCount];
         for (int i = 0; i < vertexCount; i++) {
-            nodes[i] = new Node();
+            this.nodes[i] = new Node();
+            this.metaGraph.addVertex(i);
         }
 
         // Put pairs of edges into adjacency list
@@ -44,6 +61,7 @@ public class Graph {
         this.nodes = new Node[this.vertexCount];
         for (int i = 0; i < this.vertexCount; i++) {
             this.nodes[i] = new Node();
+            this.metaGraph.addVertex(i);
         }
     }
 
@@ -55,13 +73,21 @@ public class Graph {
         for (int i = 0; i < this.edgesCount; i++) {
             int u = scanner.nextInt();
             int v = scanner.nextInt();
+
             this.addEdge(u, v);
         }
+    }
+
+    public VertexCoverAlgorithm.VertexCover<Integer> getVertexCover() {
+        GreedyVCImpl<Integer, DefaultEdge> vertexCoverFinder = new GreedyVCImpl<Integer, DefaultEdge>(this.metaGraph);
+        return vertexCoverFinder.getVertexCover();
     }
 
     public void addEdge(int uIndex, int vIndex) {
         Node u = this.nodes[uIndex];
         Node v = this.nodes[vIndex];
+
+        this.metaGraph.addEdge(uIndex, vIndex);
 
         // Add forward edge
         u.addAdjacent(v);
@@ -73,6 +99,11 @@ public class Graph {
     }
 
     public int getVertexCount() {
-        return vertexCount;
+        return this.metaGraph.vertexSet().size();
+    }
+    public int getEdgesCount() {return this.metaGraph.edgeSet().size();}
+
+    public Set<DefaultEdge> getEdges() {
+        return this.metaGraph.edgeSet();
     }
 }

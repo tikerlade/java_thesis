@@ -229,6 +229,16 @@ public class CnfFormula extends Problem {
         }
     }
 
+    @Override
+    public void printSolution() {
+
+    }
+
+    @Override
+    public void readSolution() {
+
+    }
+
     /**
      * Given boolean values for each of variables - want to know is it satisfying set.
      * @return is formula currently satisfyable or not
@@ -272,7 +282,7 @@ public class CnfFormula extends Problem {
     }
 
     @Override
-    public void readData() throws Exception {
+    public void readInput() throws Exception {
         Scanner scanner = new Scanner(System.in);
 
         // Get data from user
@@ -283,6 +293,8 @@ public class CnfFormula extends Problem {
         this.clauses = parseCnfFormulaToClauses(inputString);
         this.inputFormula = inputString;
     }
+
+
 }
 
 

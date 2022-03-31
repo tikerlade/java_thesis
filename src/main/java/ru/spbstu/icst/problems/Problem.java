@@ -7,7 +7,14 @@ public abstract class Problem {
 
     public boolean solutionFound;
 
+
     public abstract String getShortname();
 
-    public abstract void readData() throws Exception;
+    public abstract void readInput() throws Exception;
+
+    public abstract void solve();
+
+    public abstract void printSolution();
+
+    public abstract void readSolution();
 }
