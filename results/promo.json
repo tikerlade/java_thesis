@@ -1,0 +1,32 @@
+{"version":"3","listProblem":[{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of System.out or System.err",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/problems/Clique.java",
+      "language": "JAVA",
+      "line": 35,
+      "offset": 8,
+      "length": 10,
+      "code": {
+        "startLine": 33,
+        "length": 10,
+        "offset": 52,
+        "surroundingCode": "    @Override\n    public void readInput() {\n        System.out.print(\"Number of required vertices in Clique: \");\n        this.numVertices = scanner.nextInt();\n        this.graph.readGraph();"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "-4741797744837177455"
+}]}

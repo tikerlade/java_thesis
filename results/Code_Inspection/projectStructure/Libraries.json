@@ -1,6 +1,60 @@
 {
   "libraries": [
     {
+      "name": "Gradle: org.jgrapht:jgrapht-core:1.5.1",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.jgrapht/jgrapht-core/1.5.1/1b9abad9a3d052c6a5d7135cbe63916f5ed11bef/jgrapht-core-1.5.1.jar!/"
+      ]
+    },
+    {
+      "name": "Gradle: com.google.ortools:ortools-java:9.0.9048",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/com.google.ortools/ortools-java/9.0.9048/b621168c704b45a077aa89c61a14d0d64e56c091/ortools-java-9.0.9048.jar!/"
+      ]
+    },
+    {
+      "name": "Gradle: org.jheaps:jheaps:0.13",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.jheaps/jheaps/0.13/b30f6a9c1e99b2e102126060195469ef7fd7211b/jheaps-0.13.jar!/"
+      ]
+    },
+    {
+      "name": "Gradle: net.java.dev.jna:jna-platform:5.8.0",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna-platform/5.8.0/2f12f6d7f7652270d13624cef1b82d8cd9a5398e/jna-platform-5.8.0.jar!/"
+      ]
+    },
+    {
+      "name": "Gradle: com.google.protobuf:protobuf-java:3.15.8",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.15.8/a1d93a50b1630e5826f37332ffa9771775e8f556/protobuf-java-3.15.8.jar!/"
+      ]
+    },
+    {
+      "name": "Gradle: net.java.dev.jna:jna:5.8.0",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna/5.8.0/3551d8d827e54858214107541d3aff9c615cb615/jna-5.8.0.jar!/"
+      ]
+    },
+    {
+      "name": "Gradle: com.google.ortools:ortools-linux-x86-64:9.0.9048",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/com.google.ortools/ortools-linux-x86-64/9.0.9048/e9a4a5aec039a9017cbbef7f2e4dcb7e6efe0dd/ortools-linux-x86-64-9.0.9048.jar!/"
+      ]
+    },
+    {
+      "name": "Gradle: com.google.ortools:ortools-darwin-x86-64:9.0.9048",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/com.google.ortools/ortools-darwin-x86-64/9.0.9048/d6bc6a57142fc2b6fdeb0c5c07a65a1ed9aec17d/ortools-darwin-x86-64-9.0.9048.jar!/"
+      ]
+    },
+    {
+      "name": "Gradle: com.google.ortools:ortools-win32-x86-64:9.0.9048",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/com.google.ortools/ortools-win32-x86-64/9.0.9048/aca3d6445f72e853285cac8209617b116a6d3e8f/ortools-win32-x86-64-9.0.9048.jar!/"
+      ]
+    },
+    {
       "name": "Gradle: org.junit.jupiter:junit-jupiter-api:5.8.2",
       "roots": [
         "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.junit.jupiter/junit-jupiter-api/5.8.2/4c21029217adf07e4c0d0c5e192b6bf610c94bdc/junit-jupiter-api-5.8.2.jar!/"

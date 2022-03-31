@@ -12,13 +12,13 @@
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/problems/CnfFormula.java",
+      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 128,
+      "line": 177,
       "offset": 8,
       "length": 4,
       "code": {
-        "startLine": 126,
+        "startLine": 175,
         "length": 4,
         "offset": 53,
         "surroundingCode": "    @Override\n    public String toString() {\n        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();"
@@ -29,7 +29,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "7849246920706636579"
+  "hash": "-2288290059195896166"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -44,13 +44,13 @@
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/problems/CnfFormula.java",
+      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 128,
+      "line": 177,
       "offset": 46,
       "length": 7,
       "code": {
-        "startLine": 126,
+        "startLine": 175,
         "length": 7,
         "offset": 91,
         "surroundingCode": "    @Override\n    public String toString() {\n        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();"
@@ -61,7 +61,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "1859782811227395976"
+  "hash": "8429746832101220247"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -76,13 +76,13 @@
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/problems/CnfFormula.java",
+      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 129,
+      "line": 178,
       "offset": 65,
       "length": 6,
       "code": {
-        "startLine": 127,
+        "startLine": 176,
         "length": 6,
         "offset": 164,
         "surroundingCode": "    public String toString() {\n        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();\n"
@@ -93,7 +93,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "3065986998373059124"
+  "hash": "-8042964948287445674"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -108,13 +108,13 @@
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/problems/CnfFormula.java",
+      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 130,
+      "line": 179,
       "offset": 10,
       "length": 6,
       "code": {
-        "startLine": 128,
+        "startLine": 177,
         "length": 6,
         "offset": 152,
         "surroundingCode": "        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();\n\n        List<String> clausesAsString = literalsAsString.stream().map("
@@ -125,5 +125,37 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "2916452584001117026"
+  "hash": "284812003686411936"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Enhanced 'switch' blocks are not supported at language level '11'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/reductions/Reduction.java",
+      "language": "JAVA",
+      "line": 16,
+      "offset": 12,
+      "length": 4,
+      "code": {
+        "startLine": 14,
+        "length": 4,
+        "offset": 109,
+        "surroundingCode": "    public void start(ProgramMode programMode) throws Exception {\n        switch (programMode) {\n            case FORWARD_ONLY -> {\n                this.forwardOnly();\n                System.out.println(this.problemB);"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "-1558070799676508200"
 }]}

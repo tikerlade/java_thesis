@@ -1,59 +1,59 @@
 {"version":"3","listProblem":[{
   "tool": "Code Inspection",
-  "category": "Initialization",
-  "type": "Double brace initialization",
+  "category": "Resource management",
+  "type": "I/O resource opened but not safely closed",
   "severity": "High",
-  "comment": "Double brace initialization",
-  "detailsInfo": "Reports [Double Brace Initialization](https://www.c2.com/cgi/wiki?DoubleBraceInitialization).\n\nDouble brace initialization may cause memory leaks when used in a non-static context because it creates an anonymous class\nthat will reference the surrounding object.\n\nCompared to regular initialization, double brace initialization provides worse performance since it requires loading an\nadditional class.\n\nIt may also cause failure of `equals()` comparisons if the `equals()` method doesn't accept subclasses as\nparameters.\n\nIn addition, before Java 9, double brace initialization couldn't be combined with the diamond operator since it was incompatible\nwith anonymous classes.\n\n**Example:**\n\n\n      List<Integer> list = new ArrayList<>() {{\n        add(1);\n        add(2);\n      }};\n\nAfter the quick-fix is applied:\n\n\n      List<Integer> list = new ArrayList<>();\n      list.add(1);\n      list.add(2);\n",
+  "comment": "'Scanner' should be opened in front of a 'try' block and closed in the corresponding 'finally' block",
+  "detailsInfo": "Reports I/O resources that are not safely closed. I/O resources checked by this inspection include `java.io.InputStream`, `java.io.OutputStream`, `java.io.Reader`, `java.io.Writer`, `java.util.zip.ZipFile`, `java.io.Closeable` and `java.io.RandomAccessFile`.\n\n\nI/O resources wrapped by other I/O resources are not reported, as the wrapped resource will be closed by the wrapping resource.\n\n\nBy default, the inspection assumes that the resources can be closed by any method with\n'close' or 'cleanup' in its name.\n\n**Example:**\n\n\n      void save() throws IOException {\n        FileWriter writer = new FileWriter(\"filename.txt\"); //warning\n        writer.write(\"sample\");\n      }\n\n\nUse the following options to configure the inspection:\n\n* List I/O resource classes that do not need to be closed and should be ignored by this inspection.\n* Whether an I/O resource is allowed to be opened inside a `try`block. This style is less desirable because it is more verbose than opening a resource in front of a `try` block.\n* Whether the resource can be closed by any method call with the resource passed as argument.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/problems/Literal.java",
+      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 21,
-      "offset": 66,
-      "length": 9,
+      "line": 249,
+      "offset": 31,
+      "length": 7,
       "code": {
-        "startLine": 19,
-        "length": 9,
-        "offset": 109,
-        "surroundingCode": "    String variableRegex = \"[a-zA-Z0-9]+\";\n\n    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{\n        put(BooleanOperation.NEGATION, '-');\n        put(BooleanOperation.AND, '&');"
+        "startLine": 247,
+        "length": 7,
+        "offset": 91,
+        "surroundingCode": "    @Override\n    public void readInput() throws Exception {\n        Scanner scanner = new Scanner(System.in);\n\n        // Get data from user"
       }
     }
   ],
   "attributes": {
     "module": "java_thesis.main",
-    "inspectionName": "DoubleBraceInitialization"
+    "inspectionName": "IOResource"
   },
-  "hash": "559942aeafd8ec6b1b2b4b64e02fe028513d15681e33ccf91b6c0ed2634b9c68"
+  "hash": "c990653d084978a67cb9b1cf1b84ae79bb30e970673fc1de8dda6a4d381f59ff"
 },{
   "tool": "Code Inspection",
-  "category": "Initialization",
-  "type": "Double brace initialization",
+  "category": "Probable bugs",
+  "type": "Mismatched query and update of collection",
   "severity": "High",
-  "comment": "Double brace initialization",
-  "detailsInfo": "Reports [Double Brace Initialization](https://www.c2.com/cgi/wiki?DoubleBraceInitialization).\n\nDouble brace initialization may cause memory leaks when used in a non-static context because it creates an anonymous class\nthat will reference the surrounding object.\n\nCompared to regular initialization, double brace initialization provides worse performance since it requires loading an\nadditional class.\n\nIt may also cause failure of `equals()` comparisons if the `equals()` method doesn't accept subclasses as\nparameters.\n\nIn addition, before Java 9, double brace initialization couldn't be combined with the diamond operator since it was incompatible\nwith anonymous classes.\n\n**Example:**\n\n\n      List<Integer> list = new ArrayList<>() {{\n        add(1);\n        add(2);\n      }};\n\nAfter the quick-fix is applied:\n\n\n      List<Integer> list = new ArrayList<>();\n      list.add(1);\n      list.add(2);\n",
+  "comment": "Contents of collection `adjacent` are updated, but never queried",
+  "detailsInfo": "Reports collections whose contents are either queried and not updated, or updated and not queried.\n\n\nSuch inconsistent queries and updates are pointless and may indicate\neither dead code or a typo.\n\n\nUse the inspection settings to specify name patterns that correspond to update/query methods.\nQuery methods that return an element are automatically detected, and only\nthose that write data to an output parameter (for example, an `OutputStream`) need to be specified.\n\n\n**Example:**\n\nSuppose you have your custom `FixedStack` class with method `store()`:\n\n\n      public class FixedStack<T> extends Collection<T> {\n        public T store(T t) {\n          // implementation\n        }\n      }\n\nYou can add `store` to the update methods table in order to report mismatched queries like:\n\n\n      void test(int i) {\n        FixedStack<Integer> stack = new FixedStack<>();\n        stack.store(i);\n      }\n",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/problems/CnfFormula.java",
+      "path": "src/main/java/ru/spbstu/icst/problems/Node.java",
       "language": "JAVA",
-      "line": 19,
-      "offset": 66,
-      "length": 9,
+      "line": 12,
+      "offset": 24,
+      "length": 8,
       "code": {
-        "startLine": 17,
-        "length": 9,
-        "offset": 268,
-        "surroundingCode": "    HashMap<String, ArrayList<Literal>> varToLiterals = new HashMap<>(); // here we'll store all literals which have the same variable name\n    public ArrayList<Literal> allLiterals = new ArrayList<>();\n    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{\n        put(BooleanOperation.NEGATION, '-');\n        put(BooleanOperation.AND, '&');"
+        "startLine": 10,
+        "length": 8,
+        "offset": 50,
+        "surroundingCode": "    private String label;\n\n    private List<Node> adjacent;\n\n    public Node() {"
       }
     }
   ],
   "attributes": {
     "module": "java_thesis.main",
-    "inspectionName": "DoubleBraceInitialization"
+    "inspectionName": "MismatchedCollectionQueryUpdate"
   },
-  "hash": "c1f663e6686b2b5e2425c11719eeca4072299500b03a7220589728c261a9f61c"
+  "hash": "e68834cdc19fad09d695b7ab8478bf92b2dae1d52000f9781f8ffeac7d687ae0"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -64,13 +64,13 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/reductions/CnfTo3CnfReduction.java",
+      "path": "src/main/java/ru/spbstu/icst/reductions/CnfTo3CnfReduction.java",
       "language": "JAVA",
-      "line": 23,
+      "line": 25,
       "offset": 13,
       "length": 14,
       "code": {
-        "startLine": 21,
+        "startLine": 23,
         "length": 14,
         "offset": 146,
         "surroundingCode": "        for (ArrayList<Literal> clause : cnfFormula.clauses) {\n            // Here we will store copies of literals of current clause\n            Stack<Literal> clauseStack = new Stack<>();\n\n            // Put copies of literals"
@@ -81,7 +81,7 @@
     "module": "java_thesis.main",
     "inspectionName": "ObsoleteCollection"
   },
-  "hash": "4238e0b8bf953f0fd9097c6aa16bbb5d79645d2ef1ed7f070596ce64fea48936"
+  "hash": "bad2aba8fc0b6909041d2f1b79b8d816e03b466c22f02f050694f9d73c40d1b7"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -92,13 +92,13 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/reductions/CnfTo3CnfReduction.java",
+      "path": "src/main/java/ru/spbstu/icst/reductions/CnfTo3CnfReduction.java",
       "language": "JAVA",
-      "line": 23,
+      "line": 25,
       "offset": 46,
       "length": 7,
       "code": {
-        "startLine": 21,
+        "startLine": 23,
         "length": 7,
         "offset": 179,
         "surroundingCode": "        for (ArrayList<Literal> clause : cnfFormula.clauses) {\n            // Here we will store copies of literals of current clause\n            Stack<Literal> clauseStack = new Stack<>();\n\n            // Put copies of literals"
@@ -109,5 +109,5 @@
     "module": "java_thesis.main",
     "inspectionName": "ObsoleteCollection"
   },
-  "hash": "cf8d1b2b6c38514c1a416f496f3be427fb4a48cfc82a20f13c93ac8276f9eaaf"
+  "hash": "c67e146f066913c98ce8a5c0a99b9c7ae7edebf956115a816087d890c0f6ae67"
 }]}

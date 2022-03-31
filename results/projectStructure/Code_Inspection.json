@@ -47,7 +47,27 @@
           "type": "Module"
         },
         {
+          "name": "Gradle: org.jgrapht:jgrapht-core:1.5.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: com.google.ortools:ortools-java:9.0.9048",
+          "type": "Library"
+        },
+        {
           "name": "Gradle: org.junit.jupiter:junit-jupiter-api:5.8.2",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.jheaps:jheaps:0.13",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: net.java.dev.jna:jna-platform:5.8.0",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: com.google.protobuf:protobuf-java:3.15.8",
           "type": "Library"
         },
         {
@@ -63,7 +83,23 @@
           "type": "Library"
         },
         {
+          "name": "Gradle: net.java.dev.jna:jna:5.8.0",
+          "type": "Library"
+        },
+        {
           "name": "Gradle: org.junit.jupiter:junit-jupiter-engine:5.8.2",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: com.google.ortools:ortools-linux-x86-64:9.0.9048",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: com.google.ortools:ortools-darwin-x86-64:9.0.9048",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: com.google.ortools:ortools-win32-x86-64:9.0.9048",
           "type": "Library"
         },
         {
@@ -82,6 +118,11 @@
               "path": "file://$PROJECT_DIR$/src/main/java",
               "type": "Source",
               "packagePrefix": ""
+            },
+            {
+              "path": "file://$PROJECT_DIR$/src/main/resources",
+              "type": "Resource",
+              "packagePrefix": ""
             }
           ]
         }
@@ -94,6 +135,42 @@
         {
           "name": "<Module source>",
           "type": "Own sources"
+        },
+        {
+          "name": "Gradle: org.jgrapht:jgrapht-core:1.5.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: com.google.ortools:ortools-java:9.0.9048",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.jheaps:jheaps:0.13",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: net.java.dev.jna:jna-platform:5.8.0",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: com.google.protobuf:protobuf-java:3.15.8",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: net.java.dev.jna:jna:5.8.0",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: com.google.ortools:ortools-linux-x86-64:9.0.9048",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: com.google.ortools:ortools-darwin-x86-64:9.0.9048",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: com.google.ortools:ortools-win32-x86-64:9.0.9048",
+          "type": "Library"
         }
       ]
     }

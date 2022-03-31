@@ -2,12 +2,52 @@
   "gradleJvm": "#JAVA_HOME",
   "libraries": [
     {
+      "ideaName": "Gradle: org.jgrapht:jgrapht-core:1.5.1",
+      "gradleName": "org.jgrapht:jgrapht-core:1.5.1",
+      "unresolved": false,
+      "groupId": "org.jgrapht",
+      "artifactId": "jgrapht-core",
+      "version": "1.5.1"
+    },
+    {
+      "ideaName": "Gradle: com.google.ortools:ortools-java:9.0.9048",
+      "gradleName": "com.google.ortools:ortools-java:9.0.9048",
+      "unresolved": false,
+      "groupId": "com.google.ortools",
+      "artifactId": "ortools-java",
+      "version": "9.0.9048"
+    },
+    {
       "ideaName": "Gradle: org.junit.jupiter:junit-jupiter-api:5.8.2",
       "gradleName": "org.junit.jupiter:junit-jupiter-api:5.8.2",
       "unresolved": false,
       "groupId": "org.junit.jupiter",
       "artifactId": "junit-jupiter-api",
       "version": "5.8.2"
+    },
+    {
+      "ideaName": "Gradle: org.jheaps:jheaps:0.13",
+      "gradleName": "org.jheaps:jheaps:0.13",
+      "unresolved": false,
+      "groupId": "org.jheaps",
+      "artifactId": "jheaps",
+      "version": "0.13"
+    },
+    {
+      "ideaName": "Gradle: net.java.dev.jna:jna-platform:5.8.0",
+      "gradleName": "net.java.dev.jna:jna-platform:5.8.0",
+      "unresolved": false,
+      "groupId": "net.java.dev.jna",
+      "artifactId": "jna-platform",
+      "version": "5.8.0"
+    },
+    {
+      "ideaName": "Gradle: com.google.protobuf:protobuf-java:3.15.8",
+      "gradleName": "com.google.protobuf:protobuf-java:3.15.8",
+      "unresolved": false,
+      "groupId": "com.google.protobuf",
+      "artifactId": "protobuf-java",
+      "version": "3.15.8"
     },
     {
       "ideaName": "Gradle: org.junit.platform:junit-platform-commons:1.8.2",
@@ -34,12 +74,44 @@
       "version": "1.1.2"
     },
     {
+      "ideaName": "Gradle: net.java.dev.jna:jna:5.8.0",
+      "gradleName": "net.java.dev.jna:jna:5.8.0",
+      "unresolved": false,
+      "groupId": "net.java.dev.jna",
+      "artifactId": "jna",
+      "version": "5.8.0"
+    },
+    {
       "ideaName": "Gradle: org.junit.jupiter:junit-jupiter-engine:5.8.2",
       "gradleName": "org.junit.jupiter:junit-jupiter-engine:5.8.2",
       "unresolved": false,
       "groupId": "org.junit.jupiter",
       "artifactId": "junit-jupiter-engine",
       "version": "5.8.2"
+    },
+    {
+      "ideaName": "Gradle: com.google.ortools:ortools-linux-x86-64:9.0.9048",
+      "gradleName": "com.google.ortools:ortools-linux-x86-64:9.0.9048",
+      "unresolved": false,
+      "groupId": "com.google.ortools",
+      "artifactId": "ortools-linux-x86-64",
+      "version": "9.0.9048"
+    },
+    {
+      "ideaName": "Gradle: com.google.ortools:ortools-darwin-x86-64:9.0.9048",
+      "gradleName": "com.google.ortools:ortools-darwin-x86-64:9.0.9048",
+      "unresolved": false,
+      "groupId": "com.google.ortools",
+      "artifactId": "ortools-darwin-x86-64",
+      "version": "9.0.9048"
+    },
+    {
+      "ideaName": "Gradle: com.google.ortools:ortools-win32-x86-64:9.0.9048",
+      "gradleName": "com.google.ortools:ortools-win32-x86-64:9.0.9048",
+      "unresolved": false,
+      "groupId": "com.google.ortools",
+      "artifactId": "ortools-win32-x86-64",
+      "version": "9.0.9048"
     },
     {
       "ideaName": "Gradle: org.junit.platform:junit-platform-engine:1.8.2",

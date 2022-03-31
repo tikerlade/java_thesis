@@ -1,8 +1,8 @@
 {
   "languages": [
     "Java",
-    "Properties",
     "Plain text",
+    "Properties",
     ".gitignore (GitIgnore)",
     "Groovy"
   ]
