@@ -21,11 +21,6 @@ public class CnfFormula extends Problem {
     String inputFormula;
     HashMap<String, ArrayList<Literal>> varToLiterals = new HashMap<>(); // here we'll store all literals which have the same variable name
     public ArrayList<Literal> allLiterals = new ArrayList<>();
-    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{
-        put(BooleanOperation.NEGATION, '-');
-        put(BooleanOperation.AND, '&');
-        put(BooleanOperation.OR, '|');
-    }};
 
     boolean satSetFound = false;
     private CpModel cpModel;
@@ -50,7 +45,7 @@ public class CnfFormula extends Problem {
         // Collect literals by splitting clause at AND operations
         for (Character ch: inputFormula.toCharArray()) {
             // Not reached AND -> collect character to buffer
-            if (ch != allowedOperations.get(BooleanOperation.AND)) {
+            if (!BooleanOperation.AND.equalsName(ch.toString())) {
                 buffer.append(ch);
             }
 
@@ -87,7 +82,7 @@ public class CnfFormula extends Problem {
         // Collect literals by splitting clause at OR operations
         for (Character ch : clauseString.toCharArray()) {
             // Not reached OR -> collect character to buffer
-            if (ch != allowedOperations.get(BooleanOperation.OR)) {
+            if (!BooleanOperation.OR.equalsName(ch.toString())) {
                 buffer.append(ch);
             }
 

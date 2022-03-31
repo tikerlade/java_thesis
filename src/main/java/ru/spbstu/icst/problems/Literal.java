@@ -2,7 +2,6 @@ package ru.spbstu.icst.problems;
 
 import ru.spbstu.icst.exceptions.InputException;
 
-import java.util.HashMap;
 import java.util.regex.Pattern;
 
 /**
@@ -15,14 +14,7 @@ public class Literal implements Cloneable{
     Boolean value = null;
     Boolean isDummy = false;
 
-    // TODO regex - variable name cannot start with 0-9
-    String variableRegex = "[a-zA-Z0-9]+";
-
-    HashMap<BooleanOperation, Character> allowedOperations = new HashMap<>() {{
-        put(BooleanOperation.NEGATION, '-');
-        put(BooleanOperation.AND, '&');
-        put(BooleanOperation.OR, '|');
-    }};
+    String variableRegex = "[a-zA-Z]+[a-zA-Z0-9]*";
 
     public Literal (String literalString) throws Exception {
         // Remove leading and ending spaces
@@ -35,7 +27,8 @@ public class Literal implements Cloneable{
         }
 
         // Check negation usage
-        if (literalString.charAt(0) == allowedOperations.get(BooleanOperation.NEGATION)) {
+        String firstCharacter = String.valueOf(literalString.charAt(0));
+        if (BooleanOperation.NEGATION.equalsName(firstCharacter)) {
             negation = true;
             literalString = literalString.substring(1);
         }
