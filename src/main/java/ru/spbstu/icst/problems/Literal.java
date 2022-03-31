@@ -91,7 +91,6 @@ public class Literal implements Cloneable{
 
     public Boolean getIsDummy() {return this.isDummy;}
 
-
     @Override
     public String toString() {
         String representation = name;

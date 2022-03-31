@@ -1,6 +1,10 @@
 package ru.spbstu.icst.problems;
 
+import com.google.ortools.Loader;
 import com.google.ortools.sat.CpModel;
+import com.google.ortools.sat.CpSolver;
+import com.google.ortools.sat.CpSolverStatus;
+import com.google.ortools.sat.IntVar;
 import ru.spbstu.icst.exceptions.InputException;
 
 import java.util.ArrayList;
@@ -16,20 +20,15 @@ public class CnfFormula extends Problem {
     private final static String shortname = "SAT";
     private final static String fullname = "Satisfiability problem";
 
-    Integer literalCounter = 0;
+    private Integer literalCounter = 0;
     public ArrayList<ArrayList<Literal>> clauses;
     String inputFormula;
-    HashMap<String, ArrayList<Literal>> varToLiterals = new HashMap<>(); // here we'll store all literals which have the same variable name
     public ArrayList<Literal> allLiterals = new ArrayList<>();
-
     boolean satSetFound = false;
-    private CpModel cpModel;
 
     public CnfFormula() {
         this.inputFormula = "";
         this.clauses = new ArrayList<>();
-
-        this.cpModel = new CpModel();
     }
 
     public CnfFormula (String formulaString) throws Exception {
@@ -108,17 +107,6 @@ public class CnfFormula extends Problem {
     }
 
     private void addNewLiteral(Literal literal) {
-        ArrayList<Literal> literals;
-
-        if (varToLiterals.containsKey(literal.toString())) {
-            literals = varToLiterals.get(literal.toString());
-            literals.add(literal);
-        } else {
-            literals = new ArrayList<>();
-            literals.add(literal);
-            varToLiterals.put(literal.toString(), literals);
-        }
-
         this.allLiterals.add(literal);
     }
 
@@ -127,6 +115,58 @@ public class CnfFormula extends Problem {
             addNewLiteral(literal);
         }
         this.clauses.add(clause);
+    }
+
+    /**
+     * Finds values for literals which will satisfy formula.
+     */
+    public void solve() {
+        // Initialize model from or-tools
+        Loader.loadNativeLibraries();
+        CpModel cpModel = new CpModel();
+
+        // Create pull of variables and constraints
+        HashMap<String, IntVar> stringToVar = new HashMap<>();
+        for (ArrayList<Literal> clause : clauses) {
+            com.google.ortools.sat.Literal[] googleClause = new com.google.ortools.sat.Literal[clause.size()];
+
+            for (int i = 0; i < clause.size(); i++) {
+                Literal literal = clause.get(i);
+
+                // Maybe variable still not initialized
+                if (!stringToVar.containsKey(literal.name)) {
+                    IntVar tmp = cpModel.newBoolVar(literal.name);
+                    stringToVar.put(literal.name, tmp);
+                }
+
+                // Put converted variable into array
+                if (literal.negation) {
+                    googleClause[i] = stringToVar.get(literal.name).not();
+                } else {
+                    googleClause[i] = stringToVar.get(literal.name);
+                }
+            }
+
+            // Add clause as constraint
+            cpModel.addBoolOr(googleClause);
+        }
+
+        // Find solution
+        CpSolver solver = new CpSolver();
+        CpSolverStatus status = solver.solve(cpModel);
+
+        // Convert solution into local notation
+        if (status == CpSolverStatus.OPTIMAL || status == CpSolverStatus.FEASIBLE) {
+            satSetFound = true;
+
+            for (ArrayList<Literal> clause : clauses) {
+                for (Literal literal : clause) {
+                    IntVar variable = stringToVar.get(literal.name);
+                    boolean variableValue = solver.value(variable) == 1;
+                    literal.setValue(literal.negation == variableValue);
+                }
+            }
+        }
     }
 
     @Override
@@ -142,91 +182,11 @@ public class CnfFormula extends Problem {
         return String.join(" & ", clausesAsString);
     }
 
-    /**
-     * Generates matrix of boolean values sized 2^colNum * colNum - potential values for boolean variables
-     * @param colNum number of columns in matrix - number of all literals in formula
-     * @return matrix with values for variables
-     */
-    public Boolean[][] getLiteralsValueMatrix(Integer colNum) {
-        String stringFormat = "%" + colNum + "s";
-        int rowNum = (int) Math.pow(2, colNum);
-        Boolean[][] values = new Boolean[rowNum][colNum];
-
-        for (int row = 0; row < rowNum; row++) {
-            String binRowNum = String.format(stringFormat, Integer.toBinaryString(row)).replace(' ', '0');
-            Boolean[] rowValue = new Boolean[colNum];
-
-            for (int i = 0; i < colNum; i++) {
-                rowValue[i] = binRowNum.charAt(i) != '0';
-            }
-
-            values[row] = rowValue;
-        }
-
-        return values;
-    }
-
-    /**
-     * Finds values for literals which will satisfy formula.
-     */
-    public void solve() {
-        int varNum = this.varToLiterals.values().stream().map(ArrayList::size).reduce(0, Integer::sum);
-        Boolean[][] literalsValue = getLiteralsValueMatrix(varNum);
-        int rowIdx = 0;
-
-        while (!this.satSetFound & (rowIdx < literalsValue.length)) {
-            Boolean[] row = literalsValue[rowIdx++];
-            boolean skipCurrentRow = false;
-
-            // Set values
-            for (int i = 0; i < varNum; i++) {
-                this.allLiterals.get(i).setValue(row[i]);
-            }
-
-            // Check that the same value has not been set to opposite literals
-            for (String key : varToLiterals.keySet()) {
-                Boolean refValue = varToLiterals.get(key).get(0).value;
-
-                // Values for all literals with the same key must be the same
-                for (Literal literal : varToLiterals.get(key)) {
-                    if (literal.getValue() != refValue) {
-                        skipCurrentRow = true;
-                        break;
-                    }
-                }
-
-                // Maybe no further check required
-                if (skipCurrentRow) {
-                    continue;
-                }
-
-                // Check opposite literals value
-                String oppositeKey = Literal.getOppositeLiteralName(key);
-                if (this.varToLiterals.containsKey(oppositeKey)) {
-                    Boolean refOppositeValue = !refValue; // must be opposite to value of original literal
-                    for (Literal oppositeLiteral : varToLiterals.get(oppositeKey)) {
-                        if (oppositeLiteral.getValue() != refOppositeValue) {
-                            skipCurrentRow = true;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (skipCurrentRow) {
-                continue;
-            }
-
-            // Check satisfiability
-            if (isSatisfied()) {
-                this.satSetFound = true;
-            }
-        }
-    }
-
     @Override
     public void printSolution() {
-
+        for(Literal literal : allLiterals) {
+            System.out.println(literal.toString() + " = " + literal.getValue());
+        }
     }
 
     @Override
