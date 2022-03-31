@@ -9,6 +9,8 @@ public class VertexCover extends Problem {
     // General information about problem
     public static final String shortname = "VC";
     public static final String fullname = "Vertex cover problem";
+    private final static String description = "For given graph G and number x," +
+            " required to find subset of x vertices, such that every edge in G has at least one of vertex in the subset.";
 
     // Data which is required for problem
     private int coverSize;

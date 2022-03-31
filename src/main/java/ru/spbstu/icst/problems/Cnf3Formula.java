@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class Cnf3Formula extends CnfFormula{
     private final static String shortname = "3SAT";
     private final static String fullname = "3-Satifiability problem";
+    private final static String description = "Given formula in Conjunctive Normal Form, where each clause has at most 3 literals," +
+            " required to find such values" +
+            " for literals in the formula which will make it satisfied.";
 
     public Cnf3Formula() {
         super();

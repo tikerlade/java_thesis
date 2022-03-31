@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class IndependentSet extends Problem {
     private final static String shortname = "IS";
     private final static String fullname = "Independent set problem";
+    private final static String description = "For given graph G and number x," +
+            " required to find subset of x vertices, non of which are adjacent to each other (have an edge) in the graph.";
 
     private int independentSetSize;
     private Graph graph;

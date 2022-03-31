@@ -7,6 +7,8 @@ import java.util.Scanner;
 public class Clique extends Problem {
     public static final String shortname = "Clique";
     public static final String fullaname = "Clique problem";
+    private final static String description = "For given graph G and number x," +
+            " required to find subset of x vertices, all adjacent to each other in the graph.";
 
     private Scanner scanner = new Scanner(System.in);
 

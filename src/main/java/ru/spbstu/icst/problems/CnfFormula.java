@@ -19,6 +19,9 @@ import java.util.Scanner;
 public class CnfFormula extends Problem {
     private final static String shortname = "SAT";
     private final static String fullname = "Satisfiability problem";
+    private final static String description = "Given formula in Conjunctive Normal Form, required to find such values" +
+            " for variables in  the formula which will make it satisfied.";
+
 
     private Integer literalCounter = 0;
     public ArrayList<ArrayList<Literal>> clauses;
