@@ -24,7 +24,7 @@ public class CnfFormula extends Problem {
     public ArrayList<ArrayList<Literal>> clauses;
     String inputFormula;
     public ArrayList<Literal> allLiterals = new ArrayList<>();
-    boolean satSetFound = false;
+    boolean isSolved = false;
 
     public CnfFormula() {
         this.inputFormula = "";
@@ -157,7 +157,7 @@ public class CnfFormula extends Problem {
 
         // Convert solution into local notation
         if (status == CpSolverStatus.OPTIMAL || status == CpSolverStatus.FEASIBLE) {
-            satSetFound = true;
+            isSolved = true;
 
             for (ArrayList<Literal> clause : clauses) {
                 for (Literal literal : clause) {
@@ -184,8 +184,12 @@ public class CnfFormula extends Problem {
 
     @Override
     public void printSolution() {
-        for(Literal literal : allLiterals) {
-            System.out.println(literal.toString() + " = " + literal.getValue());
+        if (isSolved) {
+            for (Literal literal : allLiterals) {
+                System.out.println(literal.toString() + " = " + literal.getValue());
+            }
+        } else {
+            System.out.println("No solution found.");
         }
     }
 
@@ -214,8 +218,9 @@ public class CnfFormula extends Problem {
         return isSatisfied;
     }
 
+    // TODO remove or reorganize this. Return String is redundant
     public HashMap<String, Boolean> getSatisfyingSet() throws Exception {
-        if (!this.satSetFound) {
+        if (!this.isSolved) {
             solve();
 
             if (!isSatisfied()) {
@@ -248,8 +253,6 @@ public class CnfFormula extends Problem {
         this.clauses = parseCnfFormulaToClauses(inputString);
         this.inputFormula = inputString;
     }
-
-
 }
 
 

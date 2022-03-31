@@ -1,5 +1,7 @@
 package ru.spbstu.icst.problems;
 
+import org.jgrapht.alg.independentset.ChordalGraphIndependentSetFinder;
+import org.jgrapht.alg.interfaces.IndependentSetAlgorithm;
 import org.jgrapht.alg.interfaces.VertexCoverAlgorithm;
 import org.jgrapht.alg.vertexcover.GreedyVCImpl;
 import org.jgrapht.graph.DefaultEdge;
@@ -16,7 +18,6 @@ public class Graph {
     private int vertexCount;
     private int edgesCount;
 
-    private final boolean isDirected = false;
     Scanner scanner = new Scanner(System.in);
 
     private org.jgrapht.Graph<Integer, DefaultEdge> metaGraph;
@@ -83,19 +84,14 @@ public class Graph {
         return vertexCoverFinder.getVertexCover();
     }
 
+    public IndependentSetAlgorithm.IndependentSet<Integer> getIndependentSet() {
+        ChordalGraphIndependentSetFinder<Integer, DefaultEdge> independentSetFinder =
+                new ChordalGraphIndependentSetFinder<>(this.metaGraph);
+        return 	independentSetFinder.getIndependentSet();
+    }
+
     public void addEdge(int uIndex, int vIndex) {
-        Node u = this.nodes[uIndex];
-        Node v = this.nodes[vIndex];
-
         this.metaGraph.addEdge(uIndex, vIndex);
-
-        // Add forward edge
-        u.addAdjacent(v);
-
-        // If graph is not directed add also backward edge
-        if (!this.isDirected) {
-            v.addAdjacent(u);
-        }
     }
 
     public int getVertexCount() {

@@ -11,6 +11,7 @@ public class IndependentSet extends Problem {
     private Graph graph;
 
     public HashSet<Integer> independentSet;
+    public boolean isSolved;
 
     Scanner scanner = new Scanner(System.in);
 
@@ -48,7 +49,21 @@ public class IndependentSet extends Problem {
 
     @Override
     public void solve() {
+        // TODO consider Exceptions
+        if (independentSetSize <= 0) {
+            System.out.println("Independent set size cannot be less then 1!");
+        } else if (independentSetSize > this.graph.getVertexCount()) {
+            String answer = String.format("No solution can be found. Independent set size is greater then number of nodes (%d > %d).",
+                    independentSetSize, this.graph.getVertexCount());
+            System.out.println(answer);
+        } else {
+            independentSet = (HashSet<Integer>) this.graph.getIndependentSet();
+            isSolved = independentSet.size() >= independentSetSize;
 
+            for(Integer i : independentSet) {
+                System.out.println(i);
+            }
+        }
     }
 
     @Override
