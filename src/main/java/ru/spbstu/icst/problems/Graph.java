@@ -22,9 +22,6 @@ public class Graph {
 
     private org.jgrapht.Graph<Integer, DefaultEdge> metaGraph;
 
-    // Store graph as adjacency list
-    Node[] nodes;
-
     public Graph() {
         this.metaGraph = new SimpleGraph<>(DefaultEdge.class);
     }
@@ -37,9 +34,7 @@ public class Graph {
         this.vertexCount = vertexCount;
         this.edgesCount = edgesCount;
 
-        this.nodes = new Node[this.vertexCount];
         for (int i = 0; i < vertexCount; i++) {
-            this.nodes[i] = new Node();
             this.metaGraph.addVertex(i);
         }
 
@@ -59,9 +54,7 @@ public class Graph {
         this.vertexCount = scanner.nextInt();
         this.edgesCount = scanner.nextInt();
 
-        this.nodes = new Node[this.vertexCount];
         for (int i = 0; i < this.vertexCount; i++) {
-            this.nodes[i] = new Node();
             this.metaGraph.addVertex(i);
         }
     }
