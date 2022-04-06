@@ -1,7 +1,7 @@
 package ru.spbstu.icst.problems;
 
-import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class IndependentSet extends Problem {
     private final static String shortname = "IS";
@@ -10,9 +10,9 @@ public class IndependentSet extends Problem {
             " required to find subset of x vertices, non of which are adjacent to each other (have an edge) in the graph.";
 
     private int independentSetSize;
-    private Graph graph;
+    private final Graph graph;
 
-    public HashSet<Integer> independentSet;
+    public Set<Integer> independentSet;
     public boolean isSolved;
 
     Scanner scanner = new Scanner(System.in);
@@ -59,12 +59,8 @@ public class IndependentSet extends Problem {
                     independentSetSize, this.graph.getVertexCount());
             System.out.println(answer);
         } else {
-            independentSet = (HashSet<Integer>) this.graph.getIndependentSet();
+            independentSet = this.graph.getIndependentSet();
             isSolved = independentSet.size() >= independentSetSize;
-
-            for(Integer i : independentSet) {
-                System.out.println(i);
-            }
         }
     }
 

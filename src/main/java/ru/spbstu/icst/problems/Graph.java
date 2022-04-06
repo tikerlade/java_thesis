@@ -1,16 +1,12 @@
 package ru.spbstu.icst.problems;
 
+import org.jgrapht.alg.clique.BronKerboschCliqueFinder;
 import org.jgrapht.alg.independentset.ChordalGraphIndependentSetFinder;
-import org.jgrapht.alg.interfaces.IndependentSetAlgorithm;
-import org.jgrapht.alg.interfaces.VertexCoverAlgorithm;
 import org.jgrapht.alg.vertexcover.GreedyVCImpl;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 // Nodes in graph numbered from 0 to vertexCount - 1
 public class Graph {
@@ -20,7 +16,7 @@ public class Graph {
 
     Scanner scanner = new Scanner(System.in);
 
-    private org.jgrapht.Graph<Integer, DefaultEdge> metaGraph;
+    private final org.jgrapht.Graph<Integer, DefaultEdge> metaGraph;
 
     public Graph() {
         this.metaGraph = new SimpleGraph<>(DefaultEdge.class);
@@ -72,15 +68,20 @@ public class Graph {
         }
     }
 
-    public VertexCoverAlgorithm.VertexCover<Integer> getVertexCover() {
-        GreedyVCImpl<Integer, DefaultEdge> vertexCoverFinder = new GreedyVCImpl<Integer, DefaultEdge>(this.metaGraph);
-        return vertexCoverFinder.getVertexCover();
+    public Set<Integer> getVertexCover() {
+        GreedyVCImpl<Integer, DefaultEdge> vertexCoverFinder = new GreedyVCImpl<>(this.metaGraph);
+        return new HashSet<>(vertexCoverFinder.getVertexCover());
     }
 
-    public IndependentSetAlgorithm.IndependentSet<Integer> getIndependentSet() {
+    public Set<Integer> getIndependentSet() {
         ChordalGraphIndependentSetFinder<Integer, DefaultEdge> independentSetFinder =
                 new ChordalGraphIndependentSetFinder<>(this.metaGraph);
-        return 	independentSetFinder.getIndependentSet();
+        return new HashSet<>(independentSetFinder.getIndependentSet());
+    }
+
+    public Set<Integer> getClique() {
+        BronKerboschCliqueFinder<Integer, DefaultEdge> cliqueFinder = new BronKerboschCliqueFinder<>(this.metaGraph);
+        return cliqueFinder.maximumIterator().next();
     }
 
     public void addEdge(int uIndex, int vIndex) {

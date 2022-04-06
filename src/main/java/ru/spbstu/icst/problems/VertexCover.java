@@ -1,9 +1,9 @@
 package ru.spbstu.icst.problems;
 
-import org.jgrapht.alg.interfaces.VertexCoverAlgorithm;
 import org.jgrapht.graph.DefaultEdge;
 
 import java.util.Scanner;
+import java.util.Set;
 
 public class VertexCover extends Problem {
     // General information about problem
@@ -19,7 +19,7 @@ public class VertexCover extends Problem {
     private boolean isSolved = false;
 
     // Answer will be stored here
-    public VertexCoverAlgorithm.VertexCover<Integer> vertexCover;
+    public Set<Integer> vertexCover;
     Scanner scanner = new Scanner(System.in);
 
     public VertexCover() {
@@ -57,10 +57,6 @@ public class VertexCover extends Problem {
         } else {
             vertexCover = this.graph.getVertexCover();
             isSolved = vertexCover.size() <= coverSize;
-
-            for(Integer i : vertexCover) {
-                System.out.println(i);
-            }
         }
     }
 
