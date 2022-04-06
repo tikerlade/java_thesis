@@ -10,11 +10,11 @@
       "type": "file",
       "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 249,
+      "line": 241,
       "offset": 31,
       "length": 7,
       "code": {
-        "startLine": 247,
+        "startLine": 239,
         "length": 7,
         "offset": 91,
         "surroundingCode": "    @Override\n    public void readInput() throws Exception {\n        Scanner scanner = new Scanner(System.in);\n\n        // Get data from user"
@@ -25,35 +25,7 @@
     "module": "java_thesis.main",
     "inspectionName": "IOResource"
   },
-  "hash": "c990653d084978a67cb9b1cf1b84ae79bb30e970673fc1de8dda6a4d381f59ff"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Mismatched query and update of collection",
-  "severity": "High",
-  "comment": "Contents of collection `adjacent` are updated, but never queried",
-  "detailsInfo": "Reports collections whose contents are either queried and not updated, or updated and not queried.\n\n\nSuch inconsistent queries and updates are pointless and may indicate\neither dead code or a typo.\n\n\nUse the inspection settings to specify name patterns that correspond to update/query methods.\nQuery methods that return an element are automatically detected, and only\nthose that write data to an output parameter (for example, an `OutputStream`) need to be specified.\n\n\n**Example:**\n\nSuppose you have your custom `FixedStack` class with method `store()`:\n\n\n      public class FixedStack<T> extends Collection<T> {\n        public T store(T t) {\n          // implementation\n        }\n      }\n\nYou can add `store` to the update methods table in order to report mismatched queries like:\n\n\n      void test(int i) {\n        FixedStack<Integer> stack = new FixedStack<>();\n        stack.store(i);\n      }\n",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/ru/spbstu/icst/problems/Node.java",
-      "language": "JAVA",
-      "line": 12,
-      "offset": 24,
-      "length": 8,
-      "code": {
-        "startLine": 10,
-        "length": 8,
-        "offset": 50,
-        "surroundingCode": "    private String label;\n\n    private List<Node> adjacent;\n\n    public Node() {"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "MismatchedCollectionQueryUpdate"
-  },
-  "hash": "e68834cdc19fad09d695b7ab8478bf92b2dae1d52000f9781f8ffeac7d687ae0"
+  "hash": "c10d300964d2688852f32cb8f9ae46d75427088e1480abbc669735f6a5aa7fb7"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",

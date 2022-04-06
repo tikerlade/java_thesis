@@ -14,11 +14,11 @@
       "type": "method",
       "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 177,
+      "line": 254,
       "offset": 8,
       "length": 4,
       "code": {
-        "startLine": 175,
+        "startLine": 252,
         "length": 4,
         "offset": 53,
         "surroundingCode": "    @Override\n    public String toString() {\n        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();"
@@ -29,7 +29,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "-2288290059195896166"
+  "hash": "-2262820529249914716"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -46,11 +46,11 @@
       "type": "method",
       "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 177,
+      "line": 254,
       "offset": 46,
       "length": 7,
       "code": {
-        "startLine": 175,
+        "startLine": 252,
         "length": 7,
         "offset": 91,
         "surroundingCode": "    @Override\n    public String toString() {\n        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();"
@@ -61,7 +61,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "8429746832101220247"
+  "hash": "853485672604447886"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -78,11 +78,11 @@
       "type": "method",
       "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 178,
+      "line": 255,
       "offset": 65,
       "length": 6,
       "code": {
-        "startLine": 176,
+        "startLine": 253,
         "length": 6,
         "offset": 164,
         "surroundingCode": "    public String toString() {\n        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();\n"
@@ -93,7 +93,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "-8042964948287445674"
+  "hash": "4803630981989880445"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -110,11 +110,11 @@
       "type": "method",
       "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 179,
+      "line": 256,
       "offset": 10,
       "length": 6,
       "code": {
-        "startLine": 177,
+        "startLine": 254,
         "length": 6,
         "offset": 152,
         "surroundingCode": "        List<List<String>> literalsAsString = clauses.stream().map(\n                clause -> clause.stream().map(Literal::toString).toList()\n        ).toList();\n\n        List<String> clausesAsString = literalsAsString.stream().map("
@@ -125,7 +125,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "284812003686411936"
+  "hash": "-8393169511609399217"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -142,11 +142,11 @@
       "type": "method",
       "path": "src/main/java/ru/spbstu/icst/reductions/Reduction.java",
       "language": "JAVA",
-      "line": 16,
+      "line": 47,
       "offset": 12,
       "length": 4,
       "code": {
-        "startLine": 14,
+        "startLine": 45,
         "length": 4,
         "offset": 109,
         "surroundingCode": "    public void start(ProgramMode programMode) throws Exception {\n        switch (programMode) {\n            case FORWARD_ONLY -> {\n                this.forwardOnly();\n                System.out.println(this.problemB);"
@@ -157,5 +157,5 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "-1558070799676508200"
+  "hash": "5498978488933684612"
 }]}
