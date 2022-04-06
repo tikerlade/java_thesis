@@ -75,9 +75,14 @@ public class CnfFormula extends Problem {
         clauseString = clauseString.strip();
 
         // In valid clause must be at least two parenthesis
-        // TODO check that last and first characters are parenthesis
         if (clauseString.length() < 2) {
-            throw new InputException("Clauses must be covered in parentheses.");
+            throw new InputException("Clauses must have at least two characters: be covered in parentheses.");
+        } else if (clauseString.charAt(0) != '(') {
+            throw new InputException(String.format("Not allowed character: %s, clause must start with opening parentheses.",
+                    clauseString.charAt(0)));
+        } else if (clauseString.charAt(clauseString.length()-1) != ')') {
+            throw new InputException(String.format("Not allowed character: %s, clause must end with closing parentheses.",
+                    clauseString.charAt(clauseString.length()-1)));
         }
         clauseString = clauseString.substring(1, clauseString.length()-1);
 
@@ -173,19 +178,6 @@ public class CnfFormula extends Problem {
     }
 
     @Override
-    public String toString() {
-        List<List<String>> literalsAsString = clauses.stream().map(
-                clause -> clause.stream().map(Literal::toString).toList()
-        ).toList();
-
-        List<String> clausesAsString = literalsAsString.stream().map(
-                clause -> "(" + String.join(" | ", clause) + ")"
-        ).toList();
-
-        return String.join(" & ", clausesAsString);
-    }
-
-    @Override
     public void printSolution() {
         if (isSolved) {
             for (Literal literal : allLiterals) {
@@ -256,6 +248,20 @@ public class CnfFormula extends Problem {
         this.clauses = parseCnfFormulaToClauses(inputString);
         this.inputFormula = inputString;
     }
+
+    @Override
+    public String toString() {
+        List<List<String>> literalsAsString = clauses.stream().map(
+                clause -> clause.stream().map(Literal::toString).toList()
+        ).toList();
+
+        List<String> clausesAsString = literalsAsString.stream().map(
+                clause -> "(" + String.join(" | ", clause) + ")"
+        ).toList();
+
+        return String.join(" & ", clausesAsString);
+    }
+
 }
 
 
