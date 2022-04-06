@@ -1,7 +1,9 @@
 package ru.spbstu.icst.problems;
 
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Clique extends Problem {
     public static final String shortname = "Clique";
@@ -33,9 +35,14 @@ public class Clique extends Problem {
     @Override
     public void solve() {
         this.clique = this.graph.getClique();
+        this.isSolved = this.clique.size() >= this.cliqueSize;
 
         // If size of maximum clique found is greater than required just pop some elements
-        this.isSolved = this.clique.size() >= this.cliqueSize;
+        if (this.isSolved) {
+            this.clique = this.clique.stream().limit(cliqueSize).collect(Collectors.toSet());
+        } else {
+            this.clique = new HashSet<>();
+        }
     }
 
     @Override

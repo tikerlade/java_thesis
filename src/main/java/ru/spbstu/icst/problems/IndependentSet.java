@@ -1,7 +1,9 @@
 package ru.spbstu.icst.problems;
 
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class IndependentSet extends Problem {
     private final static String shortname = "IS";
@@ -61,6 +63,13 @@ public class IndependentSet extends Problem {
         } else {
             independentSet = this.graph.getIndependentSet();
             isSolved = independentSet.size() >= independentSetSize;
+
+            // If size of maximum independent set found is greater than required just pop some elements
+            if (this.isSolved) {
+                this.independentSet = this.independentSet.stream().limit(independentSetSize).collect(Collectors.toSet());
+            } else {
+                this.independentSet = new HashSet<>();
+            }
         }
     }
 

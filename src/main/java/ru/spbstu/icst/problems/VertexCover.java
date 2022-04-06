@@ -2,6 +2,7 @@ package ru.spbstu.icst.problems;
 
 import org.jgrapht.graph.DefaultEdge;
 
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -57,6 +58,20 @@ public class VertexCover extends Problem {
         } else {
             vertexCover = this.graph.getVertexCover();
             isSolved = vertexCover.size() <= coverSize;
+
+            // If size of minimum vertex cover found is less than required just add some nodes
+            if (this.isSolved) {
+                // Add nodes here
+                for (int i = 0; i < this.graph.getVertexCount(); i++) {
+                    if (vertexCover.size() <= coverSize) {
+                        vertexCover.add(i);
+                    } else {
+                        break;
+                    }
+                }
+            } else {
+                vertexCover = new HashSet<>();
+            }
         }
     }
 
