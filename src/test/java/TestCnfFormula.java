@@ -1,11 +1,12 @@
-import ru.spbstu.icst.exceptions.InputException;
 import org.junit.jupiter.api.Test;
+import ru.spbstu.icst.exceptions.InputException;
 import ru.spbstu.icst.problems.CnfFormula;
 import ru.spbstu.icst.problems.Literal;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestCnfFormula {
 
@@ -15,6 +16,11 @@ public class TestCnfFormula {
         String[][][] actualNames = {{{"a"}}, {{"abc"}}, {{"abc"}}, {{"abc", "abc", "d"}}, {{"a", "b", "c"}, {"a", "c"}, {"a"}}};
         Boolean[][][] actualNegations = {{{true}}, {{true}}, {{false}}, {{true, false, false}}, {{false, true, false}, {false, false}, {false}}};
         Integer[][][] actualIndexes = {{{0}}, {{0}}, {{0}}, {{0, 1, 2}}, {{0, 1, 2}, {3, 4}, {5}}};
+
+
+        // Firstly run empty constructor
+        CnfFormula empty = new CnfFormula();
+        assertEquals(empty.clauses.size(), 0);
 
         try {
             for (int i = 0; i < testFormulas.length; i++) {
@@ -47,7 +53,7 @@ public class TestCnfFormula {
                 "Clauses must be covered in parentheses.",
                 "problems.Literal must consist at least of one character.",
                 "Clauses must be covered in parentheses.",
-                "Not allowed character: ')' was used."
+                "Not allowed character: a, clause must end with closing parentheses."
         };
 
         try {

@@ -22,7 +22,6 @@ public class Literal implements Cloneable{
 
         // Empty strings are not valid
         if (literalString.length() < 1) {
-            // TODO exception texts to store in one place.
             throw new InputException("problems.Literal must consist at least of one character.");
         }
 
