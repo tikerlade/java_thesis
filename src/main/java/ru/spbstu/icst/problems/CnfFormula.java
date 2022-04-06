@@ -249,6 +249,7 @@ public class CnfFormula extends Problem {
         this.inputFormula = inputString;
     }
 
+
     @Override
     public String toString() {
         List<List<String>> literalsAsString = clauses.stream().map(
