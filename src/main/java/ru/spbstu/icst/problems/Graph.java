@@ -93,6 +93,17 @@ public class Graph {
     }
     public int getEdgesCount() {return this.metaGraph.edgeSet().size();}
 
+    public String makeSetPrintable(Set<Integer> vertices) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int node: vertices) {
+            stringBuilder.append(node).append(" ");
+        }
+
+        // Delete last space
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        return String.valueOf(stringBuilder);
+    }
+
     public Set<DefaultEdge> getEdges() {
         return this.metaGraph.edgeSet();
     }
