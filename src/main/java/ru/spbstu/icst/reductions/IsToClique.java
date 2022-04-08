@@ -7,5 +7,6 @@ public class IsToClique extends Reduction {
 
     public IsToClique() {
         super(new IndependentSet(), new Clique());
+        this.screenLocation = "IsToClique_screen.fxml";
     }
 }

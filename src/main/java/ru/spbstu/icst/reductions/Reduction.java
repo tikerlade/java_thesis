@@ -17,6 +17,11 @@ import ru.spbstu.icst.problems.Problem;
  */
 public abstract class Reduction {
     /**
+     * Filename which will be loaded as GUI when reduction will be selected.
+     */
+    String screenLocation;
+
+    /**
      * Problem which we want to reduce into problem B.
      */
     Problem problemA;
@@ -140,5 +145,9 @@ public abstract class Reduction {
      */
     public String toString() {
         return this.problemA.getShortname() + " -> " + this.problemB.getShortname();
+    }
+
+    public String getScreenLocation() {
+        return screenLocation;
     }
 }

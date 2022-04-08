@@ -8,6 +8,7 @@ public class IsToVc extends Reduction {
 
     public IsToVc() {
         super(new IndependentSet(), new VertexCover());
+        this.screenLocation = "IsToVc_screen.fxml";
     }
 
     public void forward() {

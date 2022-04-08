@@ -11,11 +11,12 @@ import java.util.*;
 public class CnfTo3CnfReduction extends Reduction{
 
     public CnfTo3CnfReduction() {
-        super(new CnfFormula(), new Cnf3Formula());
+        this(new CnfFormula());
     }
 
     public CnfTo3CnfReduction(Problem problemA) {
         super(problemA, new Cnf3Formula());
+        this.screenLocation = "cnf_screen.fxml";
     }
 
     public List<Pair<String, String>> createSteps() throws Exception {
