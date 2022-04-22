@@ -2,6 +2,7 @@ package ru.spbstu.icst.problems;
 
 import ru.spbstu.icst.exceptions.InputException;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -90,6 +91,15 @@ public class Literal implements Cloneable{
 
     public Boolean getIsDummy() {return this.isDummy;}
 
+    /**
+     * Compares two literals by their string representation.
+     * @param other literal to which compare current literal
+     * @return do two literals have same string representation
+     */
+    public Boolean isStringReprEquals(Literal other) {
+        return Objects.equals(this.name, other.name) && this.negation == other.negation;
+    }
+
     @Override
     public String toString() {
         String representation = name;
@@ -103,6 +113,11 @@ public class Literal implements Cloneable{
 
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    public Literal getOppositeLiteral() throws Exception {
+        String oppositeLiteralName = Literal.getOppositeLiteralName(this.toString());
+        return new Literal(oppositeLiteralName);
     }
 
     public static String getOppositeLiteralName(String literalName) {

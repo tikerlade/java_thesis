@@ -17,4 +17,8 @@ public abstract class Problem {
     public abstract void printSolution();
 
     public abstract void readSolution();
+
+    public String getStringSolution() {
+        return "";
+    };
 }

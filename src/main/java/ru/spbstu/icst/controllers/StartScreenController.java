@@ -4,21 +4,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import ru.spbstu.icst.Main;
-import ru.spbstu.icst.reductions.*;
+import ru.spbstu.icst.reductions.CnfTo3CnfReduction;
+import ru.spbstu.icst.reductions.ProgramMode;
+import ru.spbstu.icst.reductions.Reduction;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class StartScreenController implements Initializable {
+public class StartScreenController extends Controller implements Initializable {
+
+
     @FXML
     private ComboBox<ProgramMode> modeCombo;
 
@@ -30,19 +30,21 @@ public class StartScreenController implements Initializable {
 
     @FXML
     void runReduction(ActionEvent event) throws Exception {
+        // Retrieve combination which user selected
         Reduction selectedReduction = reductionCombo.getValue();
         ProgramMode mode = modeCombo.getValue();
 
+        // Set selected mode for selected reduction
+        selectedReduction.setReductionMode(mode);
+
         try {
-            String fxmlLocation = selectedReduction.getScreenLocation();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlLocation));
+            // Load class which will control UI
+            Controller controller = selectedReduction.getScreenController();
+            controller.setReduction(selectedReduction);
 
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-            Main.stg.close();
+            String screenLocation = getClass().getResource(selectedReduction.getScreenFilename()).getPath();
+            controller.runStage(this.stage, screenLocation);
+            this.stage.hide();
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -63,9 +65,9 @@ public class StartScreenController implements Initializable {
         });
 
         ObservableList<Reduction> reductionItems = FXCollections.observableArrayList(
-                new CnfTo3CnfReduction(),
-                new IsToVc(),
-                new IsToClique()
+                new CnfTo3CnfReduction()
+//                new IsToVc(),
+//                new IsToClique()
         );
         reductionCombo.setItems(reductionItems);
     }
@@ -84,7 +86,12 @@ public class StartScreenController implements Initializable {
             }
         });
 
-        ObservableList<ProgramMode> modeItems = FXCollections.observableArrayList(ProgramMode.FORWARD_ONLY);
+        ObservableList<ProgramMode> modeItems = FXCollections.observableArrayList(
+                ProgramMode.FORWARD_ONLY,
+                ProgramMode.FORWARD_SOLVE,
+                ProgramMode.FORWARD_SOLVE_BACKWARD,
+                ProgramMode.BACKWARD_ONLY);
+
         modeCombo.setItems(modeItems);
     }
 
@@ -99,7 +106,7 @@ public class StartScreenController implements Initializable {
     void onModeComboChanged(ActionEvent event) {
         // If other combobox was selected - enable run button
         if (this.reductionCombo.getValue() != null) {
-            this.runButton.setDisable(false);
+            this.startButton.setDisable(false);
         }
     }
 
@@ -107,7 +114,49 @@ public class StartScreenController implements Initializable {
     void onReductionComboChanged(ActionEvent event) {
         // If other combobox was selected - enable run button
         if (this.modeCombo.getValue() != null) {
-            this.runButton.setDisable(false);
+            this.startButton.setDisable(false);
         }
     }
+
+
+    @Override
+    public void setReduction(Reduction reduction) {
+        this.reduction = (CnfTo3CnfReduction) reduction;
+    }
+
+    @Override
+    Stage getStage() {
+        return this.stage;
+    }
+
+    @Override
+    protected void runForwardSteps() {
+
+    }
+
+    @Override
+    protected void solveProblemA() {
+
+    }
+
+    @Override
+    protected void runBackwardSteps() {
+
+    }
+
+    @Override
+    protected void readInput() {
+
+    }
+
+    @Override
+    protected void readSolution() {
+
+    }
+
+    @Override
+    protected Reduction getReduction() {
+        return null;
+    }
+
 }

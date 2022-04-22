@@ -1,5 +1,7 @@
 package ru.spbstu.icst.reductions;
 
+import ru.spbstu.icst.controllers.Controller;
+import ru.spbstu.icst.controllers.IsToVcScreenController;
 import ru.spbstu.icst.problems.*;
 
 import java.util.HashSet;
@@ -8,7 +10,7 @@ public class IsToVc extends Reduction {
 
     public IsToVc() {
         super(new IndependentSet(), new VertexCover());
-        this.screenLocation = "IsToVc_screen.fxml";
+        this.screenFilename = "IsToVc_screen.fxml";
     }
 
     public void forward() {
@@ -47,5 +49,10 @@ public class IsToVc extends Reduction {
 
         // Reassign new version of problem
         this.problemA = independentSet;
+    }
+
+    @Override
+    public Controller getScreenController() {
+        return new IsToVcScreenController();
     }
 }

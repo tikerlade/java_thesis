@@ -1,5 +1,6 @@
 package ru.spbstu.icst.reductions;
 
+import ru.spbstu.icst.controllers.Controller;
 import ru.spbstu.icst.problems.Problem;
 
 /**
@@ -19,7 +20,7 @@ public abstract class Reduction {
     /**
      * Filename which will be loaded as GUI when reduction will be selected.
      */
-    String screenLocation;
+    String screenFilename;
 
     /**
      * Problem which we want to reduce into problem B.
@@ -32,13 +33,30 @@ public abstract class Reduction {
     Problem problemB;
 
     /**
+     * Mode in which reduction was launched.
+     */
+    ProgramMode reductionMode;
+
+    /**
      * Constructor with given two exact problems (without data at this point).
-     * @param problemA empty problem A.
-     * @param problemB empty problem B.
+     * @param problemA blank problem A.
+     * @param problemB blank problem B.
      */
     protected Reduction (Problem problemA, Problem problemB) {
         this.problemA = problemA;
         this.problemB = problemB;
+    }
+
+    /**
+     * Constructor with given two exact problems (without data at this point).
+     * @param problemA blank problem A.
+     * @param problemB blank problem B.
+     * @param screenFilename filename which will be loaded as GUI when reduction will be selected.
+     */
+    protected Reduction (Problem problemA, Problem problemB, String screenFilename) {
+        this.problemA = problemA;
+        this.problemB = problemB;
+        this.screenFilename = screenFilename;
     }
 
     /**
@@ -147,7 +165,44 @@ public abstract class Reduction {
         return this.problemA.getShortname() + " -> " + this.problemB.getShortname();
     }
 
-    public String getScreenLocation() {
-        return screenLocation;
+    public String getScreenFilename() {
+        return screenFilename;
     }
+
+    public void setReductionMode(ProgramMode mode) {
+        this.reductionMode = mode;
+    }
+
+    public ProgramMode getReductionMode() {
+        return this.reductionMode;
+    }
+
+    public abstract Controller getScreenController();
+
+    public void solveProblemB() {
+        this.problemB.solve();
+    }
+
+
+    public String getProblemBStringSolution() {
+        return this.problemB.getStringSolution();
+    }
+
+//
+//    public void runScreen() {
+//
+//        try {
+//            Parent root = (Parent) fxmlLoader.load();
+//            Controller controller = fxmlLoader.getController();
+//            controller.reduction = this;
+//
+//            Stage stage = new Stage();
+//            stage.setScene(new Scene(root));
+//            stage.show();
+//
+//            Main.stg.close();
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//        }
+//    };
 }

@@ -7,10 +7,7 @@ import com.google.ortools.sat.CpSolverStatus;
 import com.google.ortools.sat.IntVar;
 import ru.spbstu.icst.exceptions.InputException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Formulas in CNF are used in both SAT problem and 3-SAT problem.
@@ -27,6 +24,7 @@ public class CnfFormula extends Problem {
     public ArrayList<ArrayList<Literal>> clauses;
     String inputFormula;
     public ArrayList<Literal> allLiterals = new ArrayList<>();
+    ArrayList<Literal> satisfyingSet = new ArrayList<>();
     boolean isSolved = false;
 
     public CnfFormula() {
@@ -188,9 +186,56 @@ public class CnfFormula extends Problem {
         }
     }
 
+    public String getStringSolution() {
+        if (isSolved) {
+            for (Literal literal : allLiterals) {
+                return literal.toString() + " = " + literal.getValue();
+            }
+        }
+
+        return "No solution found.";
+    }
+
     @Override
     public void readSolution() {
 
+    }
+
+    /**
+     * Given string, which contains input formula - parse it into clauses.
+     * @param input string which contains formula
+     */
+    public void readInputFromString(String input) throws Exception {
+        this.clauses = this.parseCnfFormulaToClauses(input);
+    }
+
+    /**
+     * Given string, which contains space-separated variables names which values must be true.
+     * @param trueVariables string which contains names of variables
+     */
+    public void readSolutionFromString(String trueVariables) throws Exception {
+        ArrayList<Literal> tempLiterals = new ArrayList<>();
+        StringBuilder buffer = new StringBuilder();
+
+        // Remove all unnecessary whitespaces
+        trueVariables = trueVariables.strip();
+
+        // Collect literals by splitting string by spaces
+        String[] splitted = trueVariables.split("\\s+");
+
+        // Go for each variable name and create new Literal from it - store them in temp variable
+        for (String literal: splitted) {
+            tempLiterals.add(new Literal(literal));
+        }
+
+        // Match variables from temp with variables from formula
+        for (Literal trueLiteral : tempLiterals) {
+            for (Literal otherLiteral : allLiterals) {
+                if (trueLiteral.isStringReprEquals(otherLiteral)) {
+                    satisfyingSet.add(otherLiteral);
+                }
+            }
+        }
     }
 
     /**
