@@ -1,0 +1,11 @@
+#startButton {
+    -fx-border-width: 1;
+    -fx-border-color: #4CAF50;
+    cursor: pointer;
+}
+
+
+ #startButton:hover {
+   -fx-text-fill:  #FFFFFF;
+   -fx-background-color: #4CAF50;
+ }
