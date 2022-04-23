@@ -3,10 +3,7 @@ package ru.spbstu.icst.reductions;
 import javafx.util.Pair;
 import ru.spbstu.icst.controllers.CnfScreenController;
 import ru.spbstu.icst.controllers.Controller;
-import ru.spbstu.icst.problems.Cnf3Formula;
-import ru.spbstu.icst.problems.CnfFormula;
-import ru.spbstu.icst.problems.Literal;
-import ru.spbstu.icst.problems.Problem;
+import ru.spbstu.icst.problems.*;
 
 import java.util.*;
 
@@ -45,7 +42,7 @@ public class CnfTo3CnfReduction extends Reduction{
         Cnf3Formula cnf3Formula = new Cnf3Formula();
         int newLiteralCounter = 0;
 
-        for (ArrayList<Literal> clause : cnfFormula.clauses) {
+        for (Clause clause : cnfFormula.clauses) {
             // Here we will store copies of literals of current clause
             Stack<Literal> clauseStack = new Stack<>();
 
@@ -55,19 +52,22 @@ public class CnfTo3CnfReduction extends Reduction{
             }
 
             if (clause.size() < 4) {
-                ArrayList<Literal> newClause = new ArrayList<>(clause);
+                Clause newClause = new Clause(clause);
                 cnf3Formula.addNewClause(newClause);
             } else {
                 // Split into new groups
                 // TODO check that names of variables are not used
                 while (clauseStack.size() > 3) {
                     // Get two elements from current big clause
-                    ArrayList<Literal> newClause = new ArrayList<>(Arrays.asList(clauseStack.pop(), clauseStack.pop()));
+                    ArrayList<Literal> newClauseList = new ArrayList<>(Arrays.asList(clauseStack.pop(), clauseStack.pop()));
+                    Clause newClause = new Clause(newClauseList);
+
+                    // Init extra literal
                     Literal extraLiteral = new Literal("x" + newLiteralCounter);
                     extraLiteral.setIsDummy(true);
 
                     // Add extra literal to our two literals in clause
-                    newClause.add(extraLiteral);
+                    newClause.addLiteral(extraLiteral);
                     newLiteralCounter += 1;
 
                     // Update extra variable to put it in next clause
@@ -83,7 +83,7 @@ public class CnfTo3CnfReduction extends Reduction{
                 // Put final 3 values into clauses of 3CNF
                 ArrayList<Literal> lastClause = new ArrayList<>(clauseStack);
                 Collections.reverse(lastClause);
-                cnf3Formula.addNewClause(lastClause);
+                cnf3Formula.addNewClause(new Clause(lastClause));
             }
         }
 
@@ -129,7 +129,7 @@ public class CnfTo3CnfReduction extends Reduction{
         List<Pair<String, String>> output = new ArrayList<>();
 
         int newLiteralCounter = 0;
-        for (ArrayList<Literal> clause : formula.clauses) {
+        for (Clause clause : formula.clauses) {
             // Here we will store copies of literals of current clause
             Stack<Literal> clauseStack = new Stack<>();
 
@@ -139,18 +139,19 @@ public class CnfTo3CnfReduction extends Reduction{
             }
 
             if (clause.size() < 4) {
-                ArrayList<Literal> newClause = new ArrayList<>(clause);
+                Clause newClause = new Clause(clause);
                 cnf3Formula.addNewClause(newClause);
                 output.add(makePrintablePair(clause, newClause));
             } else {
                 while (clauseStack.size() > 3) {
                     // Get two elements from current big clause
-                    ArrayList<Literal> newClause = new ArrayList<>(Arrays.asList(clauseStack.pop(), clauseStack.pop()));
+                    ArrayList<Literal> newClauseList = new ArrayList<>(Arrays.asList(clauseStack.pop(), clauseStack.pop()));
+                    Clause newClause = new Clause(newClauseList);
                     Literal extraLiteral = new Literal("x" + newLiteralCounter);
                     extraLiteral.setIsDummy(true);
 
                     // Add extra literal to our two literals in clause
-                    newClause.add(extraLiteral);
+                    newClause.addLiteral(extraLiteral);
                     newLiteralCounter += 1;
 
                     // Update extra variable to put it in next clause
@@ -165,8 +166,10 @@ public class CnfTo3CnfReduction extends Reduction{
                 }
 
                 // Put final 3 values into clauses of 3CNF
-                ArrayList<Literal> lastClause = new ArrayList<>(clauseStack);
-                Collections.reverse(lastClause);
+                ArrayList<Literal> lastLiterals = new ArrayList<>(clauseStack.stream().toList());
+                Collections.reverse(lastLiterals);
+                Clause lastClause = new Clause(lastLiterals);
+
                 cnf3Formula.addNewClause(lastClause);
                 output.add(makePrintablePair(clause, lastClause));
             }
@@ -176,15 +179,10 @@ public class CnfTo3CnfReduction extends Reduction{
         return output;
     }
 
-    private Pair<String, String> makePrintablePair(ArrayList<Literal> literals1, ArrayList<Literal> literals2) {
-        List<String> literals1AsString = literals1.stream().map(Literal::toString).toList();
-        List<String> literals2AsString = literals2.stream().map(Literal::toString).toList();
-
-        String clause1AsString = "(" + String.join(" | ", literals1AsString) + ")";
-        String clause2AsString = "(" + String.join(" | ", literals2AsString) + ")";
-
-        return new Pair<String, String>(clause1AsString, clause2AsString);
-
+    private Pair<String, String> makePrintablePair(Clause clause1, Clause clause2) {
+        String clause1AsString = clause1.toString();
+        String clause2AsString = clause2.toString();
+        return new Pair<>(clause1AsString, clause2AsString);
     }
 
     public String getReducedInput() {

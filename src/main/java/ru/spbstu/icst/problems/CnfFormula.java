@@ -19,9 +19,7 @@ public class CnfFormula extends Problem {
     private final static String description = "Given formula in Conjunctive Normal Form, required to find such values" +
             " for variables in  the formula which will make it satisfied.";
 
-
-    private Integer literalCounter = 0;
-    public ArrayList<ArrayList<Literal>> clauses;
+    public ArrayList<Clause> clauses;
     String inputFormula;
     public ArrayList<Literal> allLiterals = new ArrayList<>();
     ArrayList<Literal> satisfyingSet = new ArrayList<>();
@@ -38,8 +36,8 @@ public class CnfFormula extends Problem {
         this.inputFormula = formulaString;
     }
 
-    public ArrayList<ArrayList<Literal>> parseCnfFormulaToClauses(String inputFormula) throws Exception {
-        ArrayList<ArrayList<Literal>> clauses = new ArrayList<>();
+    public ArrayList<Clause> parseCnfFormulaToClauses(String inputFormula) throws Exception {
+        ArrayList<Clause> clauses = new ArrayList<>();
         StringBuilder buffer = new StringBuilder();
 
         // Collect literals by splitting clause at AND operations
@@ -51,15 +49,13 @@ public class CnfFormula extends Problem {
 
             // When AND reached -> try to parse literal
             else {
-                ArrayList<Literal> newClause = getClauseFromString(buffer.toString());
-                clauses.add(newClause);
+                clauses.add(new Clause(buffer.toString()));
                 buffer.setLength(0);
             }
         }
 
         // At this point buffer still contain something
-        ArrayList<Literal> lastClause = getClauseFromString(buffer.toString());
-        clauses.add(lastClause);
+        clauses.add(new Clause(buffer.toString()));
 
         // Save clauses as parsed formula
         return clauses;
@@ -93,7 +89,7 @@ public class CnfFormula extends Problem {
 
             // When OR reached -> try to parse literal
             else {
-                Literal newLiteral = new Literal(buffer.toString(), literalCounter++);
+                Literal newLiteral = new Literal(buffer.toString());
                 listOfLiterals.add(newLiteral);
                 buffer.setLength(0);
 
@@ -103,7 +99,7 @@ public class CnfFormula extends Problem {
         }
 
         // At this point buffer still contain something
-        Literal lastLiteral = new Literal(buffer.toString(), literalCounter++);
+        Literal lastLiteral = new Literal(buffer.toString());
         listOfLiterals.add(lastLiteral);
 
         // Save information as metainfo
@@ -116,11 +112,8 @@ public class CnfFormula extends Problem {
         this.allLiterals.add(literal);
     }
 
-    public void addNewClause(ArrayList<Literal> clause) {
-        for (Literal literal : clause) {
-            addNewLiteral(literal);
-        }
-        this.clauses.add(clause);
+    public void addNewClause(Clause newClause) {
+        this.clauses.add(newClause);
     }
 
     /**
@@ -133,7 +126,7 @@ public class CnfFormula extends Problem {
 
         // Create pull of variables and constraints
         HashMap<String, IntVar> stringToVar = new HashMap<>();
-        for (ArrayList<Literal> clause : clauses) {
+        for (Clause clause : clauses) {
             com.google.ortools.sat.Literal[] googleClause = new com.google.ortools.sat.Literal[clause.size()];
 
             for (int i = 0; i < clause.size(); i++) {
@@ -165,7 +158,7 @@ public class CnfFormula extends Problem {
         if (status == CpSolverStatus.OPTIMAL || status == CpSolverStatus.FEASIBLE) {
             isSolved = true;
 
-            for (ArrayList<Literal> clause : clauses) {
+            for (Clause clause : clauses) {
                 for (Literal literal : clause) {
                     IntVar variable = stringToVar.get(literal.name);
                     boolean variableValue = solver.value(variable) == 1;
@@ -243,9 +236,10 @@ public class CnfFormula extends Problem {
      * @return is formula currently satisfyable or not
      */
     public boolean isSatisfied() {
+        // TODO rewrite using Clause class
         boolean isSatisfied = true;
 
-        for (ArrayList<Literal> clause : this.clauses) {
+        for (Clause clause : this.clauses) {
             boolean localSatisfyed = false;
 
             for (Literal literal : clause) {
@@ -297,14 +291,10 @@ public class CnfFormula extends Problem {
 
     @Override
     public String toString() {
-        List<List<String>> literalsAsString = clauses.stream().map(
-                clause -> clause.stream().map(Literal::toString).toList()
-        ).toList();
+        // Represent clauses as Strings
+        List<String> clausesAsString = clauses.stream().map(Clause::toString).toList();
 
-        List<String> clausesAsString = literalsAsString.stream().map(
-                clause -> "(" + String.join(" | ", clause) + ")"
-        ).toList();
-
+        // Join string representations of clauses with & sign
         return String.join(" & ", clausesAsString);
     }
 

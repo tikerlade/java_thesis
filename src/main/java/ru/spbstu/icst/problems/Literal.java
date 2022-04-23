@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
  * problems.Literal is one part of formula in CNF: either variable or it's negation.
  */
 public class Literal implements Cloneable{
+    static int literalCounter = 0;
+
     String name;
     Integer index;
     Boolean negation = false;
@@ -20,6 +22,7 @@ public class Literal implements Cloneable{
     public Literal (String literalString) throws Exception {
         // Remove leading and ending spaces
         literalString = literalString.strip();
+        index = literalCounter++;
 
         // Empty strings are not valid
         if (literalString.length() < 1) {
@@ -45,11 +48,6 @@ public class Literal implements Cloneable{
         name = literalString;
     }
 
-    public Literal (String literalString, Integer index) throws Exception {
-        this(literalString);
-        this.index = index;
-    }
-
     public Boolean getValue() {
         // TODO think about exception: Value has not been set
         if (this.value != null) {
@@ -57,6 +55,18 @@ public class Literal implements Cloneable{
         }
 
         return false;
+    }
+
+    public boolean getLiteralValue() {
+        return this.value;
+    }
+
+    public boolean getVariableValue() {
+        if (this.negation) {
+            return !this.value;
+        }
+
+        return this.value;
     }
 
     public void setValue(Boolean value) {
