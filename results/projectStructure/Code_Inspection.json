@@ -55,6 +55,34 @@
           "type": "Library"
         },
         {
+          "name": "Gradle: org.openjfx:javafx-fxml:linux:17.0.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.openjfx:javafx-controls:17.0.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.openjfx:javafx-controls:linux:17.0.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.openjfx:javafx-graphics:17.0.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.openjfx:javafx-graphics:linux:17.0.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.openjfx:javafx-base:17.0.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.openjfx:javafx-base:linux:17.0.1",
+          "type": "Library"
+        },
+        {
           "name": "Gradle: org.junit.jupiter:junit-jupiter-api:5.8.2",
           "type": "Library"
         },
@@ -142,6 +170,34 @@
         },
         {
           "name": "Gradle: com.google.ortools:ortools-java:9.0.9048",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.openjfx:javafx-fxml:linux:17.0.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.openjfx:javafx-controls:17.0.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.openjfx:javafx-controls:linux:17.0.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.openjfx:javafx-graphics:17.0.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.openjfx:javafx-graphics:linux:17.0.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.openjfx:javafx-base:17.0.1",
+          "type": "Library"
+        },
+        {
+          "name": "Gradle: org.openjfx:javafx-base:linux:17.0.1",
           "type": "Library"
         },
         {
