@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -17,16 +16,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class StartScreenController extends Controller implements Initializable {
-
-
     @FXML
     private ComboBox<ProgramMode> modeCombo;
 
     @FXML
     private ComboBox<Reduction> reductionCombo;
 
-    @FXML
-    private Button runButton;
+
+    public StartScreenController() {}
+
+    public StartScreenController(Stage stage) {
+        this.stage = stage;
+    }
 
     @FXML
     void runReduction(ActionEvent event) throws Exception {
@@ -135,7 +136,7 @@ public class StartScreenController extends Controller implements Initializable {
     }
 
     @Override
-    protected void solveProblemA() {
+    protected void solveProblemB() {
 
     }
 

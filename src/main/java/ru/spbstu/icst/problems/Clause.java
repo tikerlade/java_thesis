@@ -5,7 +5,6 @@ import ru.spbstu.icst.exceptions.InputException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class Clause implements Iterable<Literal> {
     ArrayList<Literal> literals = new ArrayList<>();
@@ -95,10 +94,7 @@ public class Clause implements Iterable<Literal> {
         return this.literals.iterator();
     }
 
-    @Override
-    public void forEach(Consumer action) {
-        for (Literal literal : this.literals) {
-            action.accept(literal);
-        }
+    public ArrayList<Literal> getLiterals() {
+        return literals;
     }
 }

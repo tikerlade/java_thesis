@@ -9,11 +9,17 @@ public class IsToClique extends Reduction {
 
     public IsToClique() {
         super(new IndependentSet(), new Clique());
-        this.screenFilename = "IsToClique_screen.fxml";
+        this.screenFilename = "IsToCliqueScreen.fxml";
     }
 
     @Override
     public Controller getScreenController() {
         return new IsToCliqueScreenController();
+    }
+
+    @Override
+    public void resetProblems() {
+        this.problemA = new IndependentSet();
+        this.problemB = new Clique();
     }
 }

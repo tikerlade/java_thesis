@@ -49,7 +49,7 @@ public class IsToCliqueScreenController extends Controller implements Initializa
     }
 
     @Override
-    protected void solveProblemA() {
+    protected void solveProblemB() {
 
     }
 

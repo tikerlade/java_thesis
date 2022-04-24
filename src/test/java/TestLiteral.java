@@ -13,11 +13,11 @@ public class TestLiteral {
 
         try {
             for (int i = 0; i < testNames.length; i++) {
-                Literal testLiteral = new Literal(testNames[i], 0);
+                Literal testLiteral = new Literal(testNames[i]);
 
                 assertEquals(testLiteral.getName(), actualNames[i]);
                 assertEquals(testLiteral.getNegation(), false);
-                assertEquals(0, testLiteral.getIndex());
+                assertEquals(i, testLiteral.getIndex());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

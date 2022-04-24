@@ -1,9 +1,8 @@
 import org.junit.jupiter.api.Test;
 import ru.spbstu.icst.exceptions.InputException;
+import ru.spbstu.icst.problems.Clause;
 import ru.spbstu.icst.problems.CnfFormula;
 import ru.spbstu.icst.problems.Literal;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -27,7 +26,7 @@ public class TestCnfFormula {
                 CnfFormula testFormula = new CnfFormula(testFormulas[i]);
 
                     for (int j = 0; j < testFormula.clauses.size(); j++) {
-                        ArrayList<Literal> clause = testFormula.clauses.get(j);
+                        Clause clause = testFormula.clauses.get(j);
 
                         for (int k = 0; k < clause.size(); k++) {
                             Literal literal = clause.get(k);

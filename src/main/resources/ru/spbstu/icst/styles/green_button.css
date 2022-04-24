@@ -1,11 +1,43 @@
-#startButton {
+.button {
     -fx-border-width: 1;
-    -fx-border-color: #4CAF50;
-    cursor: pointer;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: pointer;
 }
 
+#startButton {
+    -fx-border-color: #4CAF50;
+}
 
- #startButton:hover {
+#startButton:hover {
+    -fx-text-fill:  #FFFFFF;
+    -fx-background-color: #4CAF50;
+}
+
+#stepButton {
+    -fx-border-color: #4CAF50;
+}
+
+ #stepButton:hover {
    -fx-text-fill:  #FFFFFF;
    -fx-background-color: #4CAF50;
  }
+
+#backButton {
+    -fx-border-color: #2E68EE;
+}
+
+#backButton:hover {
+    -fx-text-fill:  #FFFFFF;
+    -fx-background-color: #2E68EE;
+}
+
+#resetButton {
+    -fx-border-color: #FFA500;
+}
+
+#resetButton:hover {
+    -fx-text-fill:  #FFFFFF;
+    -fx-background-color: #FFA500;
+}
+

@@ -51,7 +51,7 @@ public class IsToVcScreenController extends Controller implements Initializable 
     }
 
     @Override
-    protected void solveProblemA() {
+    protected void solveProblemB() {
 
     }
 

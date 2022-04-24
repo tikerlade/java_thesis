@@ -141,7 +141,7 @@ public abstract class Reduction {
      * In forward method we know only input data for problemA.
      * And we want to convert this data into input data for problemB.
      */
-    public void forward() {}
+    public void forward() throws Exception {}
 
     /**
      * In backward method we have solution for problemB,
@@ -179,30 +179,17 @@ public abstract class Reduction {
 
     public abstract Controller getScreenController();
 
+    public abstract void resetProblems();
+
     public void solveProblemB() {
         this.problemB.solve();
     }
-
 
     public String getProblemBStringSolution() {
         return this.problemB.getStringSolution();
     }
 
-//
-//    public void runScreen() {
-//
-//        try {
-//            Parent root = (Parent) fxmlLoader.load();
-//            Controller controller = fxmlLoader.getController();
-//            controller.reduction = this;
-//
-//            Stage stage = new Stage();
-//            stage.setScene(new Scene(root));
-//            stage.show();
-//
-//            Main.stg.close();
-//        } catch(Exception e) {
-//            e.printStackTrace();
-//        }
-//    };
+    public Problem getProblemA() {
+        return this.problemA;
+    }
 }

@@ -51,7 +51,7 @@ public enum BooleanOperation {
     }
 
     /**
-     * Converts enum value into its string representation.
+     * Converts enum literalValue into its string representation.
      * @return string representation of enum.
      */
     public String toString() {

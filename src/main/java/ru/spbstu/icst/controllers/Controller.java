@@ -40,6 +40,7 @@ public abstract class Controller {
 
             // Set parameteres for our new stage
             Scene newScene = new Scene(fxmlLoader.load(fxmlStream));
+//            newScene.setFill(Color.TRANSPARENT);
             newScene.getStylesheets().add(getClass().getResource("../styles/green_button.css").toExternalForm());
 
             // Inherit style
@@ -49,6 +50,7 @@ public abstract class Controller {
             }
 
             this.stage = new Stage();
+//            this.stage.initStyle(TRAN);
             stage.setScene(newScene);
             stage.getIcons().add(new Image(iconStream));
             stage.show();
@@ -103,7 +105,7 @@ public abstract class Controller {
      */
     public void forwardSolve() throws Exception {
         this.forwardOnly();
-        this.solveProblemA();
+        this.solveProblemB();
     }
 
     /**
@@ -178,7 +180,7 @@ public abstract class Controller {
 
 
     protected abstract void runForwardSteps();
-    protected abstract void solveProblemA();
+    protected abstract void solveProblemB();
     protected abstract void runBackwardSteps();
 
     protected abstract void readInput();

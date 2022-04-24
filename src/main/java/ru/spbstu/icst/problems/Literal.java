@@ -14,7 +14,7 @@ public class Literal implements Cloneable{
     String name;
     Integer index;
     Boolean negation = false;
-    Boolean value = null;
+    Boolean literalValue = null;
     Boolean isDummy = false;
 
     String variableRegex = "[a-zA-Z]+[a-zA-Z0-9]*";
@@ -48,29 +48,16 @@ public class Literal implements Cloneable{
         name = literalString;
     }
 
-    public Boolean getValue() {
-        // TODO think about exception: Value has not been set
-        if (this.value != null) {
-            return this.value;
-        }
-
-        return false;
-    }
-
-    public boolean getLiteralValue() {
-        return this.value;
+    public Boolean getLiteralValue() {
+        return Objects.requireNonNullElse(this.literalValue, false);
     }
 
     public boolean getVariableValue() {
-        if (this.negation) {
-            return !this.value;
-        }
-
-        return this.value;
+        return this.negation != this.literalValue;
     }
 
-    public void setValue(Boolean value) {
-        this.value = value;
+    public void setLiteralValue(Boolean literalValue) {
+        this.literalValue = literalValue;
     }
 
     public void setName(String name) {

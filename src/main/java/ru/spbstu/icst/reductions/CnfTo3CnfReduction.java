@@ -16,7 +16,7 @@ public class CnfTo3CnfReduction extends Reduction{
     }
 
     public CnfTo3CnfReduction(Problem problemA) {
-        super(problemA, new Cnf3Formula(), "cnf_screen.fxml");
+        super(problemA, new Cnf3Formula(), "CnfScreen.fxml");
     }
 
     // Logical part
@@ -27,9 +27,9 @@ public class CnfTo3CnfReduction extends Reduction{
     }
 
     public void readSolutionFromString(String solution) throws Exception {
-        CnfFormula formula = (CnfFormula) this.problemA;
+        CnfFormula formula = (CnfFormula) this.problemB;
         formula.readSolutionFromString(solution);
-        this.problemA = formula;
+        this.problemB = formula;
     }
 
     /**
@@ -37,9 +37,12 @@ public class CnfTo3CnfReduction extends Reduction{
      * Forward method, converts input of problem A to input of problem B (A -> B)
      * @return formula in 3CNF format
      */
-    public Cnf3Formula forward(CnfFormula cnfFormula) throws Exception {
+    public void forward() throws Exception {
         // TODO here we can not copy but use already existing variables and transforming solution will be easier though
-        Cnf3Formula cnf3Formula = new Cnf3Formula();
+        // Interpret existing problems as specific problems
+        CnfFormula cnfFormula = (CnfFormula) this.problemA;
+        Cnf3Formula cnf3Formula = (Cnf3Formula) this.problemB;
+
         int newLiteralCounter = 0;
 
         for (Clause clause : cnfFormula.clauses) {
@@ -87,13 +90,15 @@ public class CnfTo3CnfReduction extends Reduction{
             }
         }
 
-        return cnf3Formula;
+        // Save result of reduction
+        this.problemA = cnfFormula;
+        this.problemB = cnf3Formula;
     }
 
-    public HashMap<String, Boolean> forwardAndBackward(CnfFormula formula) throws Exception {
-        Cnf3Formula cnf3Formula = forward(formula);
-        cnf3Formula.solve();
-        return backward(formula, cnf3Formula);
+    public void forwardAndBackward() throws Exception {
+        this.forward();
+        this.problemB.solve();
+        this.backward();
     }
 
     /**
@@ -101,7 +106,10 @@ public class CnfTo3CnfReduction extends Reduction{
      * Backward method.
      * @return values for variables of formula
      */
-    public HashMap<String, Boolean> backward(CnfFormula formula, Cnf3Formula cnf3Formula) throws Exception {
+    public void backward(CnfFormula formula, Cnf3Formula cnf3Formula) throws Exception {
+        // How to make backward step on Cnf formula?
+        // We have solution for problem B (3CNF) and we need to make solution for problem A (CNF) from it.
+
         int firstIdx = 0;
         int secondIdx = 0;
 
@@ -113,10 +121,8 @@ public class CnfTo3CnfReduction extends Reduction{
                 second = cnf3Formula.allLiterals.get(secondIdx++);
             }
 
-            first.setValue(second.getValue());
+            first.setLiteralValue(second.getLiteralValue());
         }
-
-        return formula.getSatisfyingSet();
     }
 
     // Support part
@@ -192,5 +198,11 @@ public class CnfTo3CnfReduction extends Reduction{
     @Override
     public Controller getScreenController() {
         return new CnfScreenController();
+    }
+
+    @Override
+    public void resetProblems() {
+        this.problemA = new CnfFormula();
+        this.problemB = new Cnf3Formula();
     }
 }
