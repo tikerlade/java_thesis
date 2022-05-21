@@ -4,17 +4,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.spbstu.icst.Main;
 import ru.spbstu.icst.reductions.Reduction;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 public abstract class Controller {
 
@@ -40,7 +39,6 @@ public abstract class Controller {
 
             // Set parameteres for our new stage
             Scene newScene = new Scene(fxmlLoader.load(fxmlStream));
-//            newScene.setFill(Color.TRANSPARENT);
             newScene.getStylesheets().add(getClass().getResource("../styles/green_button.css").toExternalForm());
 
             // Inherit style
@@ -50,7 +48,6 @@ public abstract class Controller {
             }
 
             this.stage = new Stage();
-//            this.stage.initStyle(TRAN);
             stage.setScene(newScene);
             stage.getIcons().add(new Image(iconStream));
             stage.show();
@@ -157,7 +154,11 @@ public abstract class Controller {
     void onAboutMenuItemSelected(ActionEvent event) throws IOException {
         // Load page from fxml file
         String screenLocation = getClass().getResource("AboutScreen.fxml").getPath();
+        String appIconLocation = "icons/reductions_application_icon.png";
+
+        InputStream iconStream = Main.class.getResourceAsStream(appIconLocation);
         FileInputStream fxmlStream = new FileInputStream(screenLocation);
+
         FXMLLoader fxmlLoader = new FXMLLoader();
 
         // Create new temporary Stage
@@ -165,6 +166,7 @@ public abstract class Controller {
         aboutWindow.initModality(Modality.APPLICATION_MODAL);
         aboutWindow.setTitle("About");
         aboutWindow.setResizable(false);
+        aboutWindow.getIcons().add(new Image(iconStream));
 
         // Setting Scene for window
         Scene aboutScene = new Scene(fxmlLoader.load(fxmlStream));
@@ -176,6 +178,40 @@ public abstract class Controller {
         aboutWindow.showAndWait();
     }
 
+    public void createExceptionAlert(Exception e) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+
+        alert.setTitle("Error Dialog");
+        alert.setHeaderText(e.getMessage());
+        alert.setContentText(e.toString());
+
+        // Create expandable Exception.
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        String exceptionText = sw.toString();
+
+        Label label = new Label("The exception stacktrace was:");
+
+        TextArea textArea = new TextArea(exceptionText);
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+
+        textArea.setMaxWidth(Double.MAX_VALUE);
+        textArea.setMaxHeight(Double.MAX_VALUE);
+        GridPane.setVgrow(textArea, Priority.ALWAYS);
+        GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+        GridPane expContent = new GridPane();
+        expContent.setMaxWidth(Double.MAX_VALUE);
+        expContent.add(label, 0, 0);
+        expContent.add(textArea, 0, 1);
+
+        // Set expandable Exception into the dialog pane.
+        alert.getDialogPane().setExpandableContent(expContent);
+        alert.showAndWait();
+    }
+
     abstract Stage getStage();
 
 
@@ -183,9 +219,9 @@ public abstract class Controller {
     protected abstract void solveProblemB();
     protected abstract void runBackwardSteps();
 
-    protected abstract void readInput();
+    protected abstract void readInput() throws Exception;
 
-    protected abstract void readSolution();
+    protected abstract void readSolution() throws Exception;
 
     protected abstract Reduction getReduction();
 }

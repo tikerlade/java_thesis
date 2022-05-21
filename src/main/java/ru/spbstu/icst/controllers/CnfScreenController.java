@@ -3,19 +3,25 @@ package ru.spbstu.icst.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import ru.spbstu.icst.Main;
 import ru.spbstu.icst.reductions.CnfTo3CnfReduction;
-import ru.spbstu.icst.reductions.ProgramMode;
 import ru.spbstu.icst.reductions.Reduction;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CnfScreenController extends Controller implements Initializable {
@@ -23,6 +29,10 @@ public class CnfScreenController extends Controller implements Initializable {
     // Components from FXML file
     @FXML
     private TextField formulaInput, convertedFormula, solutionForConvertedFormula, reducedSolutionOutput;
+
+    @FXML
+    private MenuItem loadInputMenuIteam, loadSolutionMenuItem, saveReducedInputMenuItem,
+            saveReducedSolutionMenuItem, saveInitialSolutionMenuItem;
 
     @FXML
     private TableColumn<Pair, String> leftColumn, rightColumn;
@@ -42,13 +52,17 @@ public class CnfScreenController extends Controller implements Initializable {
 
     @FXML
     void makeStep(ActionEvent event) throws Exception {
-        this.initSteps();
+        try {
+            this.initSteps();
 
-        switch (this.reduction.getReductionMode()) {
-            case FORWARD_ONLY -> makeForwardStep();
-            case FORWARD_SOLVE -> makeForwardSolveStep();
-            case FORWARD_SOLVE_BACKWARD -> makeForwardSolveBackwardStep();
-            case BACKWARD_ONLY -> makeBackwardStep();
+            switch (this.reduction.getReductionMode()) {
+                case FORWARD_ONLY -> makeForwardStep();
+                case FORWARD_SOLVE -> makeForwardSolveStep();
+                case FORWARD_SOLVE_BACKWARD -> makeForwardSolveBackwardStep();
+                case BACKWARD_ONLY -> makeBackwardStep();
+            }
+        } catch (Exception e) {
+            this.createExceptionAlert(e);
         }
     }
 
@@ -74,7 +88,7 @@ public class CnfScreenController extends Controller implements Initializable {
             String solutionForA = this.reduction.getProblemA().getStringSolution();
             this.reducedSolutionOutput.setText(solutionForA);
             this.stepButton.setDisable(true);
-            this.resetButton.setDisable(false);
+            this.saveInitialSolutionMenuItem.setDisable(false);
         }
     }
 
@@ -87,10 +101,15 @@ public class CnfScreenController extends Controller implements Initializable {
                 this.stepButton.setDisable(false);
             }
         } else {
-            this.reduction.backward();
-            String solutionForA = this.reduction.getProblemA().getStringSolution();
-            this.reducedSolutionOutput.setText(solutionForA);
-            this.stepButton.setDisable(true);
+            if (this.solutionForConvertedFormula.getText().isEmpty()) {
+                this.makeForwardSolveStep();
+                this.stepButton.setDisable(false);
+            } else {
+                this.reduction.backward();
+                String solutionForA = this.reduction.getProblemA().getStringSolution();
+                this.reducedSolutionOutput.setText(solutionForA);
+                this.stepButton.setDisable(true);
+            }
         }
     }
 
@@ -100,14 +119,29 @@ public class CnfScreenController extends Controller implements Initializable {
         this.reduction.resetProblems();
         this.clauseIterator = null;
 
+        // Disable save menu items because fields are empty
+        this.saveReducedInputMenuItem.setDisable(true);
+        this.saveReducedSolutionMenuItem.setDisable(true);
+        this.saveInitialSolutionMenuItem.setDisable(true);
+
         // Enable input form
         formulaInput.setDisable(false);
 
         // Enable solution field if required
-        if (reduction.getReductionMode() == ProgramMode.BACKWARD_ONLY) {
-            // Enable field to input solution
-            this.solutionForConvertedFormula.setDisable(false);
-            this.solutionForConvertedFormula.setEditable(true);
+        switch (reduction.getReductionMode()) {
+            case FORWARD_SOLVE -> {
+                this.solutionForConvertedFormula.setDisable(false);
+            }
+            case FORWARD_SOLVE_BACKWARD -> {
+                this.solutionForConvertedFormula.setDisable(false);
+                this.reducedSolutionOutput.setDisable(false);
+            }
+            case BACKWARD_ONLY -> {
+                this.solutionForConvertedFormula.setEditable(true);
+                this.solutionForConvertedFormula.setDisable(false);
+                this.reducedSolutionOutput.setDisable(false);
+                this.loadSolutionMenuItem.setDisable(false);
+            }
         }
 
         // Empty columns of table
@@ -123,7 +157,7 @@ public class CnfScreenController extends Controller implements Initializable {
         reducedSolutionOutput.setText("");
 
         // Update buttons states
-        resetButton.setDisable(true);
+//        resetButton.setDisable(true);
         stepButton.setDisable(false);
     }
 
@@ -131,7 +165,7 @@ public class CnfScreenController extends Controller implements Initializable {
     void backFromReduction() {
         // Load class which will control UI
         StartScreenController controller = new StartScreenController();
-        String screenLocation = Main.class.getResource("StartScreen.fxml").getPath();
+        String screenLocation = Objects.requireNonNull(Main.class.getResource("StartScreen.fxml")).getPath();
         controller.runStage(this.stage, screenLocation);
         this.stage.hide();
     }
@@ -145,7 +179,7 @@ public class CnfScreenController extends Controller implements Initializable {
             if (!this.clauseIterator.hasNext()) {
                 convertedFormula.setText(this.reduction.getReducedInput());
                 stepButton.setDisable(true);
-                resetButton.setDisable(false);
+                this.saveReducedInputMenuItem.setDisable(false);
             }
         }
     }
@@ -159,6 +193,7 @@ public class CnfScreenController extends Controller implements Initializable {
             String solution = this.reduction.getProblemBStringSolution();
             this.solutionForConvertedFormula.setText(solution);
             this.stepButton.setDisable(true);
+            this.saveReducedSolutionMenuItem.setDisable(false);
         } else {
             makeForwardStep();
             if (!this.clauseIterator.hasNext()) {
@@ -224,25 +259,15 @@ public class CnfScreenController extends Controller implements Initializable {
     }
 
     @Override
-    protected void readInput() {
+    protected void readInput() throws Exception {
         String input = formulaInput.getText();
-
-        try {
-            this.reduction.readInputFromString(input);
-        } catch (Exception exception) {
-            System.out.println(exception.getMessage());
-        }
+        this.reduction.readInputFromString(input);
     }
 
     @Override
-    protected void readSolution() {
+    protected void readSolution() throws Exception {
         String solution = solutionForConvertedFormula.getText();
-
-        try {
-            this.reduction.readSolutionFromString(solution);
-        } catch (Exception exception) {
-            System.out.println(exception.getMessage());
-        }
+        this.reduction.readSolutionFromString(solution);
     }
 
     @Override
@@ -261,4 +286,65 @@ public class CnfScreenController extends Controller implements Initializable {
         return this.stage;
     }
 
+    private String readUserDataGui() throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose File");
+
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        if (selectedFile != null) {
+            return Files.readString(Path.of(selectedFile.getPath()));
+        }
+
+        return "";
+    }
+
+    private void saveUserDataGui(String output) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Output");
+        File selectedFile = fileChooser.showSaveDialog(stage);
+
+        try {
+            Files.writeString(Path.of(selectedFile.getPath()), output);
+        } catch (IOException e) {
+            this.createExceptionAlert(e);
+        }
+    }
+
+    @FXML
+    void onLoadInputMenuIteamSelected() {
+        try {
+            String userInput = this.readUserDataGui();
+            this.formulaInput.setText(userInput);
+        } catch (IOException e) {
+            this.createExceptionAlert(e);
+        }
+    }
+
+    @FXML
+    void onLoadSolutionMenuIteamSelected() {
+        try {
+            String userSolution = this.readUserDataGui();
+            this.solutionForConvertedFormula.setText(userSolution);
+        } catch (IOException e) {
+            this.createExceptionAlert(e);
+        }
+    }
+
+    @FXML
+    void onSaveReducedInputMenuIteamSelected() {
+        String reducedInput = this.convertedFormula.getText();
+        this.saveUserDataGui(reducedInput);
+    }
+
+    @FXML
+    void onSaveReducedSolutionMenuItemSelected() {
+        String solutionForReducedInput = this.solutionForConvertedFormula.getText();
+        this.saveUserDataGui(solutionForReducedInput);
+    }
+
+    @FXML
+    void onSaveInitialSolutionMenuItemSelected() {
+        String solutionForInitialInput = this.reducedSolutionOutput.getText();
+        this.saveUserDataGui(solutionForInitialInput);
+    }
 }
