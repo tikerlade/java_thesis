@@ -14,6 +14,7 @@ import ru.spbstu.icst.Main;
 import ru.spbstu.icst.reductions.Reduction;
 
 import java.io.*;
+import java.util.Objects;
 
 public abstract class Controller {
 
@@ -222,6 +223,15 @@ public abstract class Controller {
     protected abstract void readInput() throws Exception;
 
     protected abstract void readSolution() throws Exception;
+
+    @FXML
+    void backFromReduction() {
+        // Load class which will control UI
+        StartScreenController controller = new StartScreenController();
+        String screenLocation = Objects.requireNonNull(Main.class.getResource("StartScreen.fxml")).getPath();
+        controller.runStage(this.stage, screenLocation);
+        this.stage.hide();
+    }
 
     protected abstract Reduction getReduction();
 }

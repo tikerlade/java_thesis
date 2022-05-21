@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import ru.spbstu.icst.reductions.CnfTo3CnfReduction;
+import ru.spbstu.icst.reductions.IsToVc;
 import ru.spbstu.icst.reductions.ProgramMode;
 import ru.spbstu.icst.reductions.Reduction;
 
@@ -66,8 +67,8 @@ public class StartScreenController extends Controller implements Initializable {
         });
 
         ObservableList<Reduction> reductionItems = FXCollections.observableArrayList(
-                new CnfTo3CnfReduction()
-//                new IsToVc(),
+                new CnfTo3CnfReduction(),
+                new IsToVc()
 //                new IsToClique()
         );
         reductionCombo.setItems(reductionItems);

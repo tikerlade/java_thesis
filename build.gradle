@@ -26,7 +26,7 @@ test {
 
 // Here we specify what we actually want from javafx plugin
 javafx {
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.swing']
     version = '17.0.1'
 }
 

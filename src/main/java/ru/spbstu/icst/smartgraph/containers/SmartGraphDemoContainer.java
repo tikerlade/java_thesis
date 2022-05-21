@@ -37,6 +37,7 @@ public class SmartGraphDemoContainer extends BorderPane {
     public SmartGraphDemoContainer(SmartGraphPanel graphView) {
         
         setCenter(new ContentZoomPane(graphView));
+        setCenter(graphView);
         
         //create bottom pane with controls
         HBox bottom = new HBox(10);

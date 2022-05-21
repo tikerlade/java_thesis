@@ -106,6 +106,11 @@ public class SmartGraphPanel<V, E> extends Pane {
     private final double repulsionForce;
     private final double attractionForce;
     private final double attractionScale;
+
+    //
+    private SmartGraphVertexNode<V> lastVertexClicked;
+    private static int vertexCounter = 0;
+    private static int edge_counter = 0;
     
     //This value was obtained experimentally
     private static final int AUTOMATIC_LAYOUT_ITERATIONS = 20;
@@ -197,6 +202,7 @@ public class SmartGraphPanel<V, E> extends Pane {
         initNodes();
 
         enableDoubleClickListener();
+        enableVertexClickListener();
 
         //automatic layout initializations        
         timer = new AnimationTimer() {
@@ -1117,7 +1123,6 @@ public class SmartGraphPanel<V, E> extends Pane {
                         SmartGraphEdge e = (SmartGraphEdge) node;
                         edgeClickConsumer.accept(e);
                     }
-
                 }
             }
         });
@@ -1168,4 +1173,49 @@ public class SmartGraphPanel<V, E> extends Pane {
         }
     }
 
+    public void insertVertex(V name, double x, double y) {
+        Vertex<V> newVertex = this.theGraph.insertVertex(name);
+        SmartGraphVertexNode<V> vertex = new SmartGraphVertexNode<V>(newVertex, x, y, graphProperties.getVertexRadius(), graphProperties.getVertexAllowUserMove());
+
+        this.vertexNodes.put(newVertex, vertex);
+
+        this.addVertex(vertex);
+        this.update();
+    }
+
+
+    private void enableVertexClickListener() {
+        setOnMousePressed((MouseEvent mouseEvent) -> {
+            if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                    this.insertVertex((V) String.valueOf(vertexCounter++), mouseEvent.getX(), mouseEvent.getY());
+            }
+        });
+
+        setOnMouseClicked((MouseEvent mouseEvent) -> {
+            if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+                if (mouseEvent.getClickCount() == 1) {
+                    Node node = UtilitiesJavaFX.pick(SmartGraphPanel.this, mouseEvent.getSceneX(), mouseEvent.getSceneY());
+                    if (this.lastVertexClicked == null) {
+                        try {
+                            this.lastVertexClicked = (SmartGraphVertexNode<V>) node;
+                            return;
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                    } else {
+                        try {
+                            SmartGraphVertexNode<V> newVertex = (SmartGraphVertexNode<V>) node;
+                            Edge<E, V> newEdge = this.theGraph.insertEdge(lastVertexClicked.getUnderlyingVertex(), newVertex.getUnderlyingVertex(), (E) ("e" + String.valueOf(edge_counter++)));
+                            this.createEdge(newEdge, lastVertexClicked, newVertex);
+                            this.update();
+//                            this.addEdge();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                        this.lastVertexClicked = null;
+                    }
+                }
+            }
+        });
+    }
 }
