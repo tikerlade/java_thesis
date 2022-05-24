@@ -34,8 +34,8 @@ mainClassName = 'ru.spbstu.icst.Main'
 
 createExe {
     mainClassName = 'ru.spbstu.icst.Main'
-    icon = "${projectDir}/src/main/resources/ru/spbstu/icst/reductions_application_icon.ico"
-    bundledJrePath = 'jre'
+    icon = "${projectDir}/src/main/resources/ru/spbstu/icst/icons/reductions_application_icon.ico"
+//    bundledJrePath = 'jre'
     jreMinVersion = '1.8.0'
-    bundledJre64Bit = true
+//    bundledJre64Bit = true
 }

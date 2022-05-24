@@ -1,7 +1,7 @@
 package ru.spbstu.icst.problems;
 
 /**
- * Boolean operations which are recognizable by CNF formulas.
+ * Boolean operations which are recognized by CNF formulas.
  */
 public enum BooleanOperation {
     /**
@@ -18,7 +18,7 @@ public enum BooleanOperation {
 
     /**
      * Boolean and operation, or conjunction. Requires variables from both sides of operation.
-     * Example: x & y.
+     * Example: x .&nbsp; y.
      */
     AND ("&");
 

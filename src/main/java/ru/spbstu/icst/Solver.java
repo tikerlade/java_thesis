@@ -6,14 +6,33 @@ import ru.spbstu.icst.reductions.*;
 import java.util.List;
 import java.util.Scanner;
 
+
+/**
+ * Interaction using CLI is provided using this class.
+ * Instance of class must be created first. After this {@link Solver#start()}
+ * should be called to start interacting with user.
+ */
 public class Solver {
+    // TODO provide gradle cli Task to run without GUI
+    /**
+     * Reductions which could be started will be stored here in constructor.
+     */
     private final List<Reduction> reductions;
+
+    /**
+     * Util to interact with user through CLI.
+     */
     private final Scanner scanner = new Scanner(System.in);
 
     public Solver() {
         reductions = List.of(new CnfTo3CnfReduction(), new IsToVc(), new IsToClique());
     }
 
+    /**
+     * Starts interacting with user. After reduction is done waits for continue decision
+     * (Y - perform new reduction / N -  close program).
+     * @throws Exception if user input wrong formatted data.
+     */
     public void start() throws Exception {
         String userContinue = "Y";
 
@@ -48,6 +67,13 @@ public class Solver {
         }
     }
 
+    /**
+     * Reads from user {@link ProgramMode} in which reduction will be performed.
+     * Gives information which data from user will be required.
+     * @return mode in which reduction will be performed.
+     *
+     * @see ProgramMode
+     */
     public ProgramMode readProgramMode() {
         // Let's understand in which mode user want to run program
         System.out.println("\nBefore you input data for problem please choose mode in which you will run program:");

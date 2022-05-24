@@ -73,6 +73,31 @@ public class IsToCliqueScreenController extends Controller implements Initializa
         return null;
     }
 
+    @Override
+    void makeForwardStep() {
+
+    }
+
+    @Override
+    void makeForwardSolveStep() {
+
+    }
+
+    @Override
+    void makeForwardSolveBackwardStep() {
+
+    }
+
+    @Override
+    void makeBackwardStep() throws Exception {
+
+    }
+
+    @Override
+    void initSteps() throws Exception {
+
+    }
+
 
     @Override
     Stage getStage() {

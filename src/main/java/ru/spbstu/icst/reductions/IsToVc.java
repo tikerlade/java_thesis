@@ -10,7 +10,7 @@ public class IsToVc extends Reduction {
 
     public IsToVc() {
         super(new IndependentSet(), new VertexCover());
-        this.screenFilename = "IsToVcScreen.fxml";
+        this.screenFilename = "controllers/IsToVcScreen.fxml";
     }
 
     public void forward() {

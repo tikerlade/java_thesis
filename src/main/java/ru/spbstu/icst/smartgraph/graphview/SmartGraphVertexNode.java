@@ -58,6 +58,7 @@ public class SmartGraphVertexNode<T> extends Circle implements SmartGraphVertex<
 
     private SmartLabel attachedLabel = null;
     private boolean isDragging = false;
+    private boolean allowMove = false;
 
     /*
     Automatic layout functionality members
@@ -83,11 +84,32 @@ public class SmartGraphVertexNode<T> extends Circle implements SmartGraphVertex<
         this.underlyingVertex = v;
         this.attachedLabel = null;
         this.isDragging = false;
+        this.allowMove = allowMove;
 
         this.adjacentVertices = new HashSet<>();
 
         styleProxy = new SmartStyleProxy(this);
         styleProxy.addStyleClass("vertex");
+
+        if (allowMove) {
+            enableDrag();
+        }
+    }
+
+
+    public SmartGraphVertexNode(Vertex<T> v, SmartGraphVertexNode<T> other) {
+        super(other.getCenterX(), other.getCenterY(), other.getRadius());
+
+        this.underlyingVertex = v;
+        this.attachedLabel = other.attachedLabel;
+        this.isDragging = other.isDragging;
+        this.allowMove = other.allowMove;
+
+        this.adjacentVertices = new HashSet<>();
+
+        styleProxy = new SmartStyleProxy(this);
+        styleProxy.addStyleClass("vertex");
+
 
         if (allowMove) {
             enableDrag();
@@ -353,6 +375,10 @@ public class SmartGraphVertexNode<T> extends Circle implements SmartGraphVertex<
     @Override
     public SmartStylableNode getStylableLabel() {
         return this.attachedLabel;
+    }
+
+    public Set<SmartGraphVertexNode<T>> getAdjacentVertices() {
+        return this.adjacentVertices;
     }
 
     /**

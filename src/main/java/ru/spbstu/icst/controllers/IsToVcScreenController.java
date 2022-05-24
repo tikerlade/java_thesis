@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -17,7 +18,6 @@ import ru.spbstu.icst.smartgraph.graphview.SmartCircularSortedPlacementStrategy;
 import ru.spbstu.icst.smartgraph.graphview.SmartGraphPanel;
 import ru.spbstu.icst.smartgraph.graphview.SmartPlacementStrategy;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,9 +25,15 @@ import java.util.ResourceBundle;
 public class IsToVcScreenController extends Controller implements Initializable {
 
     @FXML
-    private BorderPane graphBox;
+    private BorderPane graphInputPane, graphOutputPane;
 
-    private SmartGraphPanel<String, String> graphView;
+    @FXML
+    private TextField independentSetSizeInput, vertexCoverSizeInput;
+
+    private SmartGraphPanel<String, String> inputGraphView, outputGraphView;
+
+    private DigraphEdgeList<String, String> inputGraph, outputGraph;
+    private SmartPlacementStrategy placementStrategy;
 
     public IsToVcScreenController() {
     }
@@ -35,8 +41,8 @@ public class IsToVcScreenController extends Controller implements Initializable 
     @Override
     public void runStage(Stage currentStage, String screenLocation) {
         try {
-            FileInputStream fxmlStream = new FileInputStream(screenLocation);
-            InputStream iconStream = Main.class.getResourceAsStream("reductions_application_icon.png");
+            InputStream fxmlStream = Main.class.getResourceAsStream(screenLocation);
+            InputStream iconStream = Main.class.getResourceAsStream("icons/reductions_application_icon.png");
 
             // Initialize new Stage loader
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -44,7 +50,7 @@ public class IsToVcScreenController extends Controller implements Initializable 
 
             // Set parameteres for our new stage
             Scene newScene = new Scene(fxmlLoader.load(fxmlStream));
-            newScene.getStylesheets().add(getClass().getResource("../styles/green_button.css").toExternalForm());
+//            newScene.getStylesheets().add(getClass().getResource("../styles/application_styles.css").toExternalForm());
 
             // Inherit style
             if (currentStage != null) {
@@ -52,36 +58,38 @@ public class IsToVcScreenController extends Controller implements Initializable 
                 newScene.getRoot().setStyle(oldStyle);
             }
 
-            // Initialize graph
-            Graph<String, String> g = build_sample_digraph();
-            SmartPlacementStrategy strategy = new SmartCircularSortedPlacementStrategy();
-            graphView = new SmartGraphPanel<>(g, strategy);
-            this.graphBox.setCenter(graphView);
+            this.inputGraphView = new SmartGraphPanel<>(inputGraph, placementStrategy);
+            this.outputGraphView = new SmartGraphPanel<>(outputGraph, placementStrategy);
+
+            this.graphInputPane.setCenter(this.inputGraphView);
+            this.graphOutputPane.setCenter(this.outputGraphView);
 
             // Present screen
             this.stage = new Stage();
             stage.setScene(newScene);
             stage.getIcons().add(new Image(iconStream));
+            stage.setMaximized(true);
             stage.show();
 
-            graphView.init();
+            inputGraphView.init();
+            outputGraphView.init();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
 
-    @FXML
-    public void onCreateGraphButtonClicked() {
-        System.out.println("Clicked");
-        GraphInputController graphInputController = new GraphInputController();
-        graphInputController.runStage(this.stage, "");
-    }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Initialize two graphs
+//        this.inputGraph = build_sample_digraph();
+//        this.outputGraph = build_sample_digraph();
 
+        this.inputGraph = new DigraphEdgeList<>();
+        this.outputGraph = new DigraphEdgeList<>();
+
+        // Initialize placement strategy for graphs
+        this.placementStrategy = new SmartCircularSortedPlacementStrategy();
     }
 
     private Graph<String, String> build_sample_digraph() {
@@ -164,7 +172,32 @@ public class IsToVcScreenController extends Controller implements Initializable 
 
     @Override
     protected Reduction getReduction() {
-        return null;
+        return this.reduction;
+    }
+
+    @Override
+    void makeForwardStep() {
+        this.outputGraphView.addNewGraph(inputGraphView, outputGraph);
+    }
+
+    @Override
+    void makeForwardSolveStep() {
+
+    }
+
+    @Override
+    void makeForwardSolveBackwardStep() {
+
+    }
+
+    @Override
+    void makeBackwardStep() throws Exception {
+
+    }
+
+    @Override
+    void initSteps() throws Exception {
+
     }
 
 
@@ -175,12 +208,10 @@ public class IsToVcScreenController extends Controller implements Initializable 
 
     @FXML
     public void resetEnvironment() {
+        this.inputGraph.clearGraph();
+        this.outputGraph.clearGraph();
 
+        this.inputGraphView.update();
+        this.outputGraphView.update();
     }
-
-    @FXML
-    public void makeStep() {
-
-    }
-
 }

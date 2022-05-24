@@ -365,5 +365,10 @@ public class DigraphEdgeList<V, E> implements Digraph<V, E> {
 
         return edge;
     }
+
+    public void clearGraph() {
+        this.vertices.clear();
+        this.edges.clear();
+    }
     
 }

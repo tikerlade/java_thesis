@@ -7,22 +7,25 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import ru.spbstu.icst.controllers.StartScreenController;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 
+/**
+ * JavaFX GUI Application generates and starts from this class.
+ * Instance of the class should be created and after this {@link StartScreen#run()}
+ * must be called on created instance to start application.
+ */
 public class StartScreen extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         // Locations of important resources
-        String screenLocation = "StartScreen.fxml";
+        String screenLocation = "controllers/StartScreen.fxml";
         String appIconLocation = "icons/reductions_application_icon.png";
-        String stylesLocation = "styles/green_button.css";
+        String stylesLocation = "styles/application_styles.css";
 
         // Load resources for initializing start screen
-        String startScreenLocation = getClass().getResource(screenLocation).getPath();
         InputStream iconStream = Main.class.getResourceAsStream(appIconLocation);
         String sceneStylesString = getClass().getResource(stylesLocation).toExternalForm();
-        FileInputStream fxmlStream = new FileInputStream(startScreenLocation);
+        InputStream fxmlStream = getClass().getResourceAsStream(screenLocation);
 
         // Check that resources loaded
         assert iconStream != null;
@@ -33,14 +36,20 @@ public class StartScreen extends Application {
 
         // Initialize start screen
         Scene scene = new Scene(fxmlLoader.load(fxmlStream));
+        // TODO remove stylesheets and start using BootstrapFX
         scene.getStylesheets().add(sceneStylesString);
 
         // Finaly show start screen
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.getIcons().add(new Image(iconStream));
         stage.show();
     }
 
+    /**
+     * Starts application using underlying JavaFX methods.
+     * Must be called on instance of {@link StartScreen} class.
+     */
     public void run() {
         launch();
     }

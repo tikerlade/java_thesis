@@ -28,6 +28,7 @@ public class StartScreenController extends Controller implements Initializable {
 
     public StartScreenController(Stage stage) {
         this.stage = stage;
+
     }
 
     @FXML
@@ -44,8 +45,8 @@ public class StartScreenController extends Controller implements Initializable {
             Controller controller = selectedReduction.getScreenController();
             controller.setReduction(selectedReduction);
 
-            String screenLocation = getClass().getResource(selectedReduction.getScreenFilename()).getPath();
-            controller.runStage(this.stage, screenLocation);
+//            String screenLocation = getClass().getResource(selectedReduction.getScreenFilename()).getPath();
+            controller.runStage(this.stage, selectedReduction.getScreenFilename());
             this.stage.hide();
         } catch(Exception e) {
             e.printStackTrace();
@@ -99,6 +100,7 @@ public class StartScreenController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        super.initialize(location, resources);
         initializeReductionCombo();
         initializeModeCombo();
     }
@@ -159,6 +161,31 @@ public class StartScreenController extends Controller implements Initializable {
     @Override
     protected Reduction getReduction() {
         return null;
+    }
+
+    @Override
+    void makeForwardStep() {
+
+    }
+
+    @Override
+    void makeForwardSolveStep() {
+
+    }
+
+    @Override
+    void makeForwardSolveBackwardStep() {
+
+    }
+
+    @Override
+    void makeBackwardStep() throws Exception {
+
+    }
+
+    @Override
+    void initSteps() throws Exception {
+
     }
 
 }

@@ -16,7 +16,7 @@ public class CnfTo3CnfReduction extends Reduction{
     }
 
     public CnfTo3CnfReduction(Problem problemA) {
-        super(problemA, new Cnf3Formula(), "CnfScreen.fxml");
+        super(problemA, new Cnf3Formula(), "controllers/CnfScreen.fxml");
     }
 
     // Logical part
@@ -35,7 +35,6 @@ public class CnfTo3CnfReduction extends Reduction{
     /**
      * Given formula in CNF reduce it to 3CNF formula.
      * Forward method, converts input of problem A to input of problem B (A -> B)
-     * @return formula in 3CNF format
      */
     public void forward() throws Exception {
         // TODO here we can not copy but use already existing variables and transforming solution will be easier though
@@ -104,7 +103,6 @@ public class CnfTo3CnfReduction extends Reduction{
     /**
      * Given solution to 3CNF problem -> convert this into CNF problem solution
      * Backward method.
-     * @return values for variables of formula
      */
     public void backward(CnfFormula formula, Cnf3Formula cnf3Formula) throws Exception {
         // How to make backward step on Cnf formula?

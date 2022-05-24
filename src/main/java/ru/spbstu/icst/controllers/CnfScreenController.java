@@ -11,7 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-import ru.spbstu.icst.Main;
 import ru.spbstu.icst.reductions.CnfTo3CnfReduction;
 import ru.spbstu.icst.reductions.Reduction;
 
@@ -21,7 +20,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CnfScreenController extends Controller implements Initializable {
@@ -50,23 +48,8 @@ public class CnfScreenController extends Controller implements Initializable {
         this.resetEnvironment();
     }
 
-    @FXML
-    void makeStep(ActionEvent event) throws Exception {
-        try {
-            this.initSteps();
 
-            switch (this.reduction.getReductionMode()) {
-                case FORWARD_ONLY -> makeForwardStep();
-                case FORWARD_SOLVE -> makeForwardSolveStep();
-                case FORWARD_SOLVE_BACKWARD -> makeForwardSolveBackwardStep();
-                case BACKWARD_ONLY -> makeBackwardStep();
-            }
-        } catch (Exception e) {
-            this.createExceptionAlert(e);
-        }
-    }
-
-    private void makeBackwardStep() throws Exception {
+    protected void makeBackwardStep() throws Exception {
         if (this.clauseIterator.hasNext()) {
             // Initialize table of conversions
             while (this.clauseIterator.hasNext()) {
@@ -92,7 +75,7 @@ public class CnfScreenController extends Controller implements Initializable {
         }
     }
 
-    private void makeForwardSolveBackwardStep() {
+    protected void makeForwardSolveBackwardStep() {
         // Make forward steps while we can
         if (this.clauseIterator.hasNext()) {
             this.makeForwardSolveStep();
@@ -161,17 +144,7 @@ public class CnfScreenController extends Controller implements Initializable {
         stepButton.setDisable(false);
     }
 
-    @FXML
-    void backFromReduction() {
-        // Load class which will control UI
-        StartScreenController controller = new StartScreenController();
-        String screenLocation = Objects.requireNonNull(Main.class.getResource("StartScreen.fxml")).getPath();
-        controller.runStage(this.stage, screenLocation);
-        this.stage.hide();
-    }
-
-
-    private void makeForwardStep() {
+    protected void makeForwardStep() {
         if (this.clauseIterator.hasNext()) {
             table.getItems().add(this.clauseIterator.next());
             table.scrollTo(table.getItems().size()-1);
@@ -184,7 +157,7 @@ public class CnfScreenController extends Controller implements Initializable {
         }
     }
 
-    private void makeForwardSolveStep() {
+    protected void makeForwardSolveStep() {
         if (!this.clauseIterator.hasNext()) {
             // Run solve function
             this.reduction.solveProblemB();
@@ -214,7 +187,7 @@ public class CnfScreenController extends Controller implements Initializable {
         }
     }
 
-    private void initSteps() throws Exception {
+    protected void initSteps() throws Exception {
         // Get required steps
         if (this.clauseIterator == null) {
             this.readInput();

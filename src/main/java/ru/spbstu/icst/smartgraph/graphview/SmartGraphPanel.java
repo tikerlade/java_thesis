@@ -38,12 +38,12 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import ru.spbstu.icst.Main;
 import ru.spbstu.icst.smartgraph.graph.Digraph;
 import ru.spbstu.icst.smartgraph.graph.Edge;
 import ru.spbstu.icst.smartgraph.graph.Graph;
 import ru.spbstu.icst.smartgraph.graph.Vertex;
 
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -84,13 +84,13 @@ public class SmartGraphPanel<V, E> extends Pane {
     /*
     INTERNAL DATA STRUCTURE
      */
-    private final Graph<V, E> theGraph;
+    private Graph<V, E> theGraph;
     private final SmartPlacementStrategy placementStrategy;
-    private final Map<Vertex<V>, SmartGraphVertexNode<V>> vertexNodes;
-    private final Map<Edge<E, V>, SmartGraphEdgeBase> edgeNodes;
-    private final Map<Tuple<SmartGraphVertexNode>, Integer> placedEdges = new HashMap<>();
+    private Map<Vertex<V>, SmartGraphVertexNode<V>> vertexNodes;
+    private Map<Edge<E, V>, SmartGraphEdgeBase> edgeNodes;
+    private Map<Tuple<SmartGraphVertexNode>, Integer> placedEdges = new HashMap<>();
     private boolean initialized = false;
-    private final boolean edgesWithArrows;
+    private boolean edgesWithArrows;
     
     /*
     INTERACTION WITH VERTICES AND EDGES
@@ -109,8 +109,8 @@ public class SmartGraphPanel<V, E> extends Pane {
 
     //
     private SmartGraphVertexNode<V> lastVertexClicked;
-    private static int vertexCounter = 0;
-    private static int edge_counter = 0;
+    private int vertexCounter = 0;
+    private int edge_counter = 0;
     
     //This value was obtained experimentally
     private static final int AUTOMATIC_LAYOUT_ITERATIONS = 20;
@@ -175,7 +175,7 @@ public class SmartGraphPanel<V, E> extends Pane {
      * @param theGraph underlying graph
      * @param properties custom properties, null for default
      * @param placementStrategy placement strategy, null for default
-     * @param cssFile alternative css file, instead of default 'smartgraph.css'
+     * @param cssFile alternative css file, instead of default 'smartgraph_styles.css'
      */
     public SmartGraphPanel(Graph<V, E> theGraph, SmartGraphProperties properties,
             SmartPlacementStrategy placementStrategy, URI cssFile) {
@@ -1074,7 +1074,7 @@ public class SmartGraphPanel<V, E> extends Pane {
         
         return edge != null ? edge.getStylableLabel() : null;
     }
-   
+
 
     /**
      * Loads the stylesheet and applies the .graph class to this panel.
@@ -1085,8 +1085,7 @@ public class SmartGraphPanel<V, E> extends Pane {
             if( cssFile != null ) {
                 css = cssFile.toURL().toExternalForm();
             } else {
-                File f = new File("smartgraph.css");
-                css = f.toURI().toURL().toExternalForm();
+                css = Main.class.getResource("styles/smartgraph_styles.css").toExternalForm();
             }
 
             getStylesheets().add(css);
@@ -1193,29 +1192,74 @@ public class SmartGraphPanel<V, E> extends Pane {
 
         setOnMouseClicked((MouseEvent mouseEvent) -> {
             if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
-                if (mouseEvent.getClickCount() == 1) {
-                    Node node = UtilitiesJavaFX.pick(SmartGraphPanel.this, mouseEvent.getSceneX(), mouseEvent.getSceneY());
-                    if (this.lastVertexClicked == null) {
-                        try {
-                            this.lastVertexClicked = (SmartGraphVertexNode<V>) node;
-                            return;
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
-                    } else {
-                        try {
-                            SmartGraphVertexNode<V> newVertex = (SmartGraphVertexNode<V>) node;
-                            Edge<E, V> newEdge = this.theGraph.insertEdge(lastVertexClicked.getUnderlyingVertex(), newVertex.getUnderlyingVertex(), (E) ("e" + String.valueOf(edge_counter++)));
-                            this.createEdge(newEdge, lastVertexClicked, newVertex);
-                            this.update();
-//                            this.addEdge();
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
-                        this.lastVertexClicked = null;
+                Node node = UtilitiesJavaFX.pick(SmartGraphPanel.this, mouseEvent.getSceneX(), mouseEvent.getSceneY());
+                if (this.lastVertexClicked == null) {
+                    try {
+                        this.lastVertexClicked = (SmartGraphVertexNode<V>) node;
+                        return;
+                    } catch (Exception e) {
+                        System.out.println(e);
                     }
+                } else {
+                    try {
+                        SmartGraphVertexNode<V> newVertex = (SmartGraphVertexNode<V>) node;
+
+                        if (this.lastVertexClicked != newVertex) {
+
+                            Edge<E, V> newEdge = this.theGraph.insertEdge(lastVertexClicked.getUnderlyingVertex(), newVertex.getUnderlyingVertex(), (E) ("e" + String.valueOf(edge_counter++)));
+//                        SmartGraphEdgeBase graphEdge = this.createEdge(newEdge, lastVertexClicked, newVertex);
+                            createEdge(newEdge, lastVertexClicked, newVertex);
+//                        this.addEdge(graphEdge, newVertexewEdge);
+
+                            this.update();
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                    this.lastVertexClicked = null;
                 }
             }
         });
+    }
+
+    public void addNewGraph(SmartGraphPanel<V, E> other, Graph<V, E> newGraph) {
+        HashMap<SmartGraphVertexNode<V>, SmartGraphVertexNode<V>> oldToNew = new HashMap<>();
+
+        // Create vertices
+        for (Vertex<V> vertex : other.listOfVertices()) {
+            // Create vertex in graph
+            Vertex<V> newVertex = this.theGraph.insertVertex(vertex.element());
+
+            // Copy style of Node on Scene
+            SmartGraphVertexNode<V> oldNode = other.vertexNodes.get(vertex);
+            SmartGraphVertexNode<V> newNode = new SmartGraphVertexNode<>(newVertex, oldNode);
+
+            // Store in important variables
+            oldToNew.put(oldNode, newNode);
+            this.vertexNodes.put(newVertex, newNode);
+
+            // Add vertex using existing code
+            this.addVertex(newNode);
+        }
+
+        HashSet<SmartGraphVertexNode<V>> visitedVertices = new HashSet<>();
+
+        // Copy adjacent vertices
+        for (SmartGraphVertexNode<V> oldFrom : oldToNew.keySet()) {
+            SmartGraphVertexNode<V> newFrom = oldToNew.get(oldFrom);
+
+            for (SmartGraphVertexNode<V> oldTo : oldFrom.getAdjacentVertices()) {
+                SmartGraphVertexNode<V> newTo = oldToNew.get(oldTo);
+                newFrom.addAdjacentVertex(newTo);
+
+                if (!visitedVertices.contains(newTo)) {
+                    Edge<E, V> newEdge = this.theGraph.insertEdge(newFrom.getUnderlyingVertex().element(), newTo.getUnderlyingVertex().element(), (E) ("e" + String.valueOf(edge_counter++)));
+                    SmartGraphEdgeBase graphEdge = createEdge(newEdge, newFrom, newTo);
+//                this.addEdge(graphEdge, newEdge);
+                    this.update();
+                }
+            }
+            visitedVertices.add(newFrom);
+        }
     }
 }

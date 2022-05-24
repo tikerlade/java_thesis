@@ -3,6 +3,7 @@ package ru.spbstu.icst.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -13,10 +14,19 @@ import javafx.stage.Stage;
 import ru.spbstu.icst.Main;
 import ru.spbstu.icst.reductions.Reduction;
 
-import java.io.*;
-import java.util.Objects;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
-public abstract class Controller {
+/**
+ * Interaction with different components of GUI (buttons/comboboxes/graphs/etc.) is held here.
+ * This is an abstract class, so most of the functions defined child classes.
+ */
+public abstract class Controller implements Initializable {
 
     @FXML
     private MenuItem darkThemeMenuItem, aboutMenuItem;
@@ -29,10 +39,13 @@ public abstract class Controller {
 
     public abstract void setReduction(Reduction reduction);
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {}
+
     public void runStage(Stage currentStage, String screenLocation) {
         try {
-            FileInputStream fxmlStream = new FileInputStream(screenLocation);
-            InputStream iconStream = Main.class.getResourceAsStream("reductions_application_icon.png");
+            InputStream fxmlStream = Main.class.getResourceAsStream(screenLocation);
+            InputStream iconStream = Main.class.getResourceAsStream("icons/reductions_application_icon.png");
 
             // Initialize new Stage loader
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -40,7 +53,7 @@ public abstract class Controller {
 
             // Set parameteres for our new stage
             Scene newScene = new Scene(fxmlLoader.load(fxmlStream));
-            newScene.getStylesheets().add(getClass().getResource("../styles/green_button.css").toExternalForm());
+            newScene.getStylesheets().add(getClass().getResource("../styles/application_styles.css").toExternalForm());
 
             // Inherit style
             if (currentStage != null) {
@@ -50,7 +63,9 @@ public abstract class Controller {
 
             this.stage = new Stage();
             stage.setScene(newScene);
+            stage.setMaximized(true);
             stage.getIcons().add(new Image(iconStream));
+            this.onDarkThemeMenuItemSelected(null);
             stage.show();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -83,7 +98,6 @@ public abstract class Controller {
         }
     }
 
-
     /**
      * Wrapper function for FORWARD_ONLY mode to read user data and after that
      * execute clean forward reduction.
@@ -93,8 +107,6 @@ public abstract class Controller {
         this.readInput();
         this.runForwardSteps();
     }
-
-
 
     /**
      * Wrapper function for FORWARD_SOLVE mode to read user data and after that
@@ -132,14 +144,19 @@ public abstract class Controller {
 
     @FXML
     void onDarkThemeMenuItemSelected(ActionEvent event) {
+        Preferences pref = Preferences.userNodeForPackage(Controller.class);
         // TODO add preferences file and change state there
+        // If theme is light - do nothing, light is default
+        String theme = pref.get("theme", "light");
+        System.out.println(theme);
 
-        if (darkThemeMenuItem.getText().equals("Dark Theme")) {
+        if (theme.equals("dark")) {
             // Move system into dark mode
             this.stage.getScene().getRoot().setStyle("-fx-base:#3f474f");
 
             // Change menu item for changing into white mode
             darkThemeMenuItem.setText("Light Theme");
+            pref.put("theme","dark");
         } else {
             // Move system into dark mode
             Scene currentScene = this.stage.getScene();
@@ -147,6 +164,7 @@ public abstract class Controller {
 
             // Change menu item for changing into white mode
             darkThemeMenuItem.setText("Dark Theme");
+            pref.put("theme","light");
         }
     }
 
@@ -154,11 +172,10 @@ public abstract class Controller {
     @FXML
     void onAboutMenuItemSelected(ActionEvent event) throws IOException {
         // Load page from fxml file
-        String screenLocation = getClass().getResource("AboutScreen.fxml").getPath();
         String appIconLocation = "icons/reductions_application_icon.png";
 
         InputStream iconStream = Main.class.getResourceAsStream(appIconLocation);
-        FileInputStream fxmlStream = new FileInputStream(screenLocation);
+        InputStream fxmlStream = getClass().getResourceAsStream("AboutScreen.fxml");
 
         FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -213,7 +230,6 @@ public abstract class Controller {
         alert.showAndWait();
     }
 
-    abstract Stage getStage();
 
 
     protected abstract void runForwardSteps();
@@ -228,10 +244,41 @@ public abstract class Controller {
     void backFromReduction() {
         // Load class which will control UI
         StartScreenController controller = new StartScreenController();
-        String screenLocation = Objects.requireNonNull(Main.class.getResource("StartScreen.fxml")).getPath();
-        controller.runStage(this.stage, screenLocation);
+        controller.runStage(this.stage, "StartScreen.fxml");
         this.stage.hide();
     }
 
+    abstract Stage getStage();
     protected abstract Reduction getReduction();
+
+
+    /**
+     * Entry point into actual algorithm.
+     * From here we decide which parts of reduction we want to complete.
+     */
+    @FXML
+    void makeStep(ActionEvent event) {
+        try {
+            this.initSteps();
+
+            switch (this.getReduction().getReductionMode()) {
+                case FORWARD_ONLY -> makeForwardStep();
+                case FORWARD_SOLVE -> makeForwardSolveStep();
+                case FORWARD_SOLVE_BACKWARD -> makeForwardSolveBackwardStep();
+                case BACKWARD_ONLY -> makeBackwardStep();
+            }
+        } catch (Exception e) {
+            this.createExceptionAlert(e);
+        }
+    }
+
+    abstract void makeForwardStep();
+
+    abstract void makeForwardSolveStep();
+
+    abstract void makeForwardSolveBackwardStep();
+
+    abstract void makeBackwardStep() throws Exception;
+
+    abstract void initSteps() throws Exception;
 }
