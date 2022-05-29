@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.10'
-    id 'edu.sc.seis.launch4j' version '2.5.3'
 }
 
 group 'ru.spbstu.icst'
@@ -10,7 +9,6 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 dependencies {
@@ -31,11 +29,3 @@ javafx {
 }
 
 mainClassName = 'ru.spbstu.icst.Main'
-
-createExe {
-    mainClassName = 'ru.spbstu.icst.Main'
-    icon = "${projectDir}/src/main/resources/ru/spbstu/icst/icons/reductions_application_icon.ico"
-//    bundledJrePath = 'jre'
-    jreMinVersion = '1.8.0'
-//    bundledJre64Bit = true
-}

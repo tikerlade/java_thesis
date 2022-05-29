@@ -23,6 +23,8 @@
  */
 package ru.spbstu.icst.smartgraph.graphview;
 
+import ru.spbstu.icst.Main;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -85,7 +87,7 @@ public class SmartGraphProperties {
         properties = new Properties();
         
         try {
-            InputStream resourceAsStream = getClass().getResourceAsStream("../../"+DEFAULT_FILE);
+            InputStream resourceAsStream = Main.class.getResourceAsStream("/styles/"+DEFAULT_FILE);
             properties.load(resourceAsStream);
         } catch (IOException|NullPointerException ex) {
             String msg = String.format("The default %s was not found. Using default values.", DEFAULT_FILE);

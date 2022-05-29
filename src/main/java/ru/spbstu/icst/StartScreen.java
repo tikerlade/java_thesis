@@ -24,8 +24,8 @@ public class StartScreen extends Application {
 
         // Load resources for initializing start screen
         InputStream iconStream = Main.class.getResourceAsStream(appIconLocation);
-        String sceneStylesString = getClass().getResource(stylesLocation).toExternalForm();
-        InputStream fxmlStream = getClass().getResourceAsStream(screenLocation);
+        String sceneStylesString = Main.class.getResource(stylesLocation).toExternalForm();
+        InputStream fxmlStream = Main.class.getResourceAsStream(screenLocation);
 
         // Check that resources loaded
         assert iconStream != null;

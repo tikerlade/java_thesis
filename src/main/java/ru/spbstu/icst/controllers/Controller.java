@@ -175,7 +175,7 @@ public abstract class Controller implements Initializable {
         String appIconLocation = "icons/reductions_application_icon.png";
 
         InputStream iconStream = Main.class.getResourceAsStream(appIconLocation);
-        InputStream fxmlStream = getClass().getResourceAsStream("AboutScreen.fxml");
+        InputStream fxmlStream = Main.class.getResourceAsStream("controllers/AboutScreen.fxml");
 
         FXMLLoader fxmlLoader = new FXMLLoader();
 
