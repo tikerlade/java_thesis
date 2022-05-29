@@ -32,7 +32,7 @@ public class IsToVc extends Reduction {
     public void backward() {
         // Cast problems to required type
         IndependentSet independentSet = (IndependentSet) this.problemA;
-        VertexCover vertexCover = (VertexCover) this.problemB;
+        VertexCover vertexCover = (VertexCover) this.getProblemB();
 
         // TODO check that solution exists
 
@@ -61,4 +61,18 @@ public class IsToVc extends Reduction {
         this.problemA = new IndependentSet();
         this.problemB = new VertexCover();
     }
+
+    public void setProblemA(IndependentSet independentSet) {
+        this.problemA = independentSet;
+    }
+
+    public void setProblemB(VertexCover vertexCover) {
+        this.problemB = vertexCover;
+    }
+
+
+    public Problem getProblemB() {
+        return this.problemB;
+    }
+
 }

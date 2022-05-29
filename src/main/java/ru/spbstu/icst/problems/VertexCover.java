@@ -1,6 +1,7 @@
 package ru.spbstu.icst.problems;
 
 import org.jgrapht.graph.DefaultEdge;
+import ru.spbstu.icst.exceptions.InputException;
 
 import java.util.HashSet;
 import java.util.Scanner;
@@ -63,7 +64,7 @@ public class VertexCover extends Problem {
             if (this.isSolved) {
                 // Add nodes here
                 for (int i = 0; i < this.graph.getVertexCount(); i++) {
-                    if (vertexCover.size() <= coverSize) {
+                    if (vertexCover.size() < coverSize) {
                         vertexCover.add(i);
                     } else {
                         break;
@@ -88,6 +89,31 @@ public class VertexCover extends Problem {
     @Override
     public void readSolution() {
 
+    }
+
+    public boolean isVertexCover(HashSet<Integer> vertexCoverCandidate) {
+
+        if (vertexCoverCandidate.size() != coverSize) {
+            return false;
+        }
+
+        for (DefaultEdge edge : graph.getEdges()) {
+            boolean containsSource = vertexCoverCandidate.contains(this.graph.getEdgeSource(edge));
+            boolean containsTarget = vertexCoverCandidate.contains(this.graph.getEdgeTarget(edge));
+
+            if (!containsSource && !containsTarget) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void setVertexCover(HashSet<Integer> vertexCoverCandidate) throws InputException {
+        if (!isVertexCover(vertexCoverCandidate)) {
+            throw new InputException("Selected vertices don't create vertex cover of given size.");
+        }
+        this.vertexCover = vertexCoverCandidate;
     }
 
     @Override

@@ -110,7 +110,8 @@ public class SmartGraphPanel<V, E> extends Pane {
     //
     private SmartGraphVertexNode<V> lastVertexClicked;
     private int vertexCounter = 0;
-    private int edge_counter = 0;
+    private int edgeCounter = 0;
+    private HashSet<Vertex<V>> selectedVertices;
     
     //This value was obtained experimentally
     private static final int AUTOMATIC_LAYOUT_ITERATIONS = 20;
@@ -194,7 +195,8 @@ public class SmartGraphPanel<V, E> extends Pane {
         this.attractionScale = this.graphProperties.getAttractionScale();
 
         vertexNodes = new HashMap<>();
-        edgeNodes = new HashMap<>(); 
+        edgeNodes = new HashMap<>();
+        selectedVertices = new HashSet<>();
 
         //set stylesheet and class
         loadStylesheet(cssFile);
@@ -1128,6 +1130,18 @@ public class SmartGraphPanel<V, E> extends Pane {
     }
 
     /**
+     * When required to get underlying graph without visualizations.
+     * @return underlying graph.
+     */
+    public Graph<V, E> getGraph() {
+        return this.theGraph;
+    }
+
+    public HashSet<Vertex<V>> getSelectedVertices() {
+        return this.selectedVertices;
+    }
+
+    /**
      * Represents a tuple in Java.
      *
      * @param <T> the type of the tuple
@@ -1182,11 +1196,40 @@ public class SmartGraphPanel<V, E> extends Pane {
         this.update();
     }
 
+    public void enableDoubleClickListenerForSelecting() {
+        setOnMouseClicked((MouseEvent mouseEvent) -> {
+            if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                if (mouseEvent.getClickCount() == 2) {
+                    SmartGraphVertexNode<V> node = (SmartGraphVertexNode<V>) UtilitiesJavaFX.pick(SmartGraphPanel.this, mouseEvent.getSceneX(), mouseEvent.getSceneY());
+
+                    try {
+                        Vertex<V> vertex = node.getUnderlyingVertex();
+                        this.colorVertex(vertex);
+                    } catch (NullPointerException exception) {}
+                }
+            }
+        });
+    }
+
+    public void enableClickForNewNode() {
+        setOnMousePressed((MouseEvent mouseEvent) -> {
+            if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                System.out.println("Clicked");
+                if (mouseEvent.getClickCount() == 1) {
+                    this.insertVertex((V) String.valueOf(vertexCounter++), mouseEvent.getX(), mouseEvent.getY());
+                }
+            }
+        });
+    }
+
 
     private void enableVertexClickListener() {
         setOnMousePressed((MouseEvent mouseEvent) -> {
             if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                System.out.println("Clicked");
+                if (mouseEvent.getClickCount() == 1) {
                     this.insertVertex((V) String.valueOf(vertexCounter++), mouseEvent.getX(), mouseEvent.getY());
+                }
             }
         });
 
@@ -1206,7 +1249,7 @@ public class SmartGraphPanel<V, E> extends Pane {
 
                         if (this.lastVertexClicked != newVertex) {
 
-                            Edge<E, V> newEdge = this.theGraph.insertEdge(lastVertexClicked.getUnderlyingVertex(), newVertex.getUnderlyingVertex(), (E) ("e" + String.valueOf(edge_counter++)));
+                            Edge<E, V> newEdge = this.theGraph.insertEdge(lastVertexClicked.getUnderlyingVertex(), newVertex.getUnderlyingVertex(), (E) ("e" + String.valueOf(edgeCounter++)));
 //                        SmartGraphEdgeBase graphEdge = this.createEdge(newEdge, lastVertexClicked, newVertex);
                             createEdge(newEdge, lastVertexClicked, newVertex);
 //                        this.addEdge(graphEdge, newVertexewEdge);
@@ -1217,6 +1260,13 @@ public class SmartGraphPanel<V, E> extends Pane {
                         System.out.println(e);
                     }
                     this.lastVertexClicked = null;
+                }
+            } else if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+                if (mouseEvent.getClickCount() == 2) {
+                    System.out.println("Clicked twice");
+                    SmartGraphVertexNode<V> node = (SmartGraphVertexNode<V>) UtilitiesJavaFX.pick(SmartGraphPanel.this, mouseEvent.getSceneX(), mouseEvent.getSceneY());
+                    Vertex<V> vertex = node.getUnderlyingVertex();
+                    this.colorVertex(vertex);
                 }
             }
         });
@@ -1253,7 +1303,7 @@ public class SmartGraphPanel<V, E> extends Pane {
                 newFrom.addAdjacentVertex(newTo);
 
                 if (!visitedVertices.contains(newTo)) {
-                    Edge<E, V> newEdge = this.theGraph.insertEdge(newFrom.getUnderlyingVertex().element(), newTo.getUnderlyingVertex().element(), (E) ("e" + String.valueOf(edge_counter++)));
+                    Edge<E, V> newEdge = this.theGraph.insertEdge(newFrom.getUnderlyingVertex().element(), newTo.getUnderlyingVertex().element(), (E) ("e" + String.valueOf(edgeCounter++)));
                     SmartGraphEdgeBase graphEdge = createEdge(newEdge, newFrom, newTo);
 //                this.addEdge(graphEdge, newEdge);
                     this.update();
@@ -1261,5 +1311,22 @@ public class SmartGraphPanel<V, E> extends Pane {
             }
             visitedVertices.add(newFrom);
         }
+    }
+
+    public void colorVertex(Vertex<V> graphVertex) {
+        SmartGraphVertexNode<V> underlyingNode = vertexNodes.get(graphVertex);
+
+        if (this.selectedVertices.contains(graphVertex)) {
+            this.selectedVertices.remove(graphVertex);
+            underlyingNode.removeStyleClass("myVertex");
+        } else {
+            this.selectedVertices.add(graphVertex);
+            underlyingNode.addStyleClass("myVertex");
+        }
+    }
+
+    public void resetCounters() {
+        this.vertexCounter = 0;
+        this.edgeCounter = 0;
     }
 }

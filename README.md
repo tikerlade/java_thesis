@@ -4,6 +4,9 @@
 # Reductions of search problems (Java)
 The goal of this project is to complete reductions of search problems in Java.
 
+## How to run
+This is a gradle project. To run it in GUI form use `./gradlew run`.
+
 ## Plan of supported reductions
 * SAT → 3-SAT
 * IS → VC (vertex cover problem)

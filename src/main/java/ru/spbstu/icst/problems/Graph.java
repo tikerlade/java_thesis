@@ -5,6 +5,7 @@ import org.jgrapht.alg.independentset.ChordalGraphIndependentSetFinder;
 import org.jgrapht.alg.vertexcover.GreedyVCImpl;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
+import ru.spbstu.icst.smartgraph.graph.Edge;
 
 import java.util.*;
 
@@ -30,6 +31,7 @@ public class Graph {
         this.vertexCount = vertexCount;
         this.edgesCount = edgesCount;
 
+        // Create all vertices
         for (int i = 0; i < vertexCount; i++) {
             this.metaGraph.addVertex(i);
         }
@@ -40,6 +42,25 @@ public class Graph {
             int v = edges.get(i).getValue();
 
             this.addEdge(u, v);
+        }
+    }
+
+    public Graph(ru.spbstu.icst.smartgraph.graph.Graph<String, String> smartgraph) {
+        this();
+
+        // Init meta information
+        this.vertexCount = smartgraph.numVertices();
+        this.edgesCount = smartgraph.numEdges();
+
+        for (int i = 0; i < vertexCount; i++) {
+            this.metaGraph.addVertex(i);
+        }
+
+        // Put pairs of edges into adjacency list
+        for (Edge<String, String> edge : smartgraph.edges()) {
+            int fromNode = Integer.parseInt(edge.vertices()[0].element());
+            int toNode = Integer.parseInt(edge.vertices()[1].element());
+            this.addEdge(fromNode, toNode);
         }
     }
 
@@ -106,5 +127,20 @@ public class Graph {
 
     public Set<DefaultEdge> getEdges() {
         return this.metaGraph.edgeSet();
+    }
+
+    public Integer getEdgeSource(DefaultEdge edge) {
+        return this.metaGraph.getEdgeSource(edge);
+    }
+
+    public Integer getEdgeTarget(DefaultEdge edge) {
+        return this.metaGraph.getEdgeTarget(edge);
+    }
+
+    public boolean isEmpty() {
+        if (this.vertexCount == 0) {
+            return true;
+        }
+        return false;
     }
 }

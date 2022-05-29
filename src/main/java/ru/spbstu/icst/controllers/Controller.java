@@ -150,22 +150,22 @@ public abstract class Controller implements Initializable {
         String theme = pref.get("theme", "light");
         System.out.println(theme);
 
-        if (theme.equals("dark")) {
-            // Move system into dark mode
-            this.stage.getScene().getRoot().setStyle("-fx-base:#3f474f");
-
-            // Change menu item for changing into white mode
-            darkThemeMenuItem.setText("Light Theme");
-            pref.put("theme","dark");
-        } else {
-            // Move system into dark mode
-            Scene currentScene = this.stage.getScene();
-            currentScene.getRoot().setStyle("");
-
-            // Change menu item for changing into white mode
-            darkThemeMenuItem.setText("Dark Theme");
-            pref.put("theme","light");
-        }
+//        if (theme.equals("dark")) {
+//            // Move system into dark mode
+//            this.stage.getScene().getRoot().setStyle("-fx-base:#3f474f");
+//
+//            // Change menu item for changing into white mode
+//            darkThemeMenuItem.setText("Light Theme");
+//            pref.put("theme","dark");
+//        } else {
+//            // Move system into dark mode
+//            Scene currentScene = this.stage.getScene();
+//            currentScene.getRoot().setStyle("");
+//
+//            // Change menu item for changing into white mode
+//            darkThemeMenuItem.setText("Dark Theme");
+//            pref.put("theme","light");
+//        }
     }
 
 
@@ -244,7 +244,7 @@ public abstract class Controller implements Initializable {
     void backFromReduction() {
         // Load class which will control UI
         StartScreenController controller = new StartScreenController();
-        controller.runStage(this.stage, "StartScreen.fxml");
+        controller.runStage(this.stage, "controllers/StartScreen.fxml");
         this.stage.hide();
     }
 
@@ -253,11 +253,11 @@ public abstract class Controller implements Initializable {
 
 
     /**
-     * Entry point into actual algorithm.
-     * From here we decide which parts of reduction we want to complete.
+     * Entry point into actual reduction algorithm.
+     * From here we decide in which mode reduction should be performed.
      */
     @FXML
-    void makeStep(ActionEvent event) {
+    void    makeStep(ActionEvent event) {
         try {
             this.initSteps();
 

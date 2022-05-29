@@ -1,6 +1,5 @@
 package ru.spbstu.icst.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
@@ -175,17 +174,17 @@ public class CnfScreenController extends Controller implements Initializable {
         }
     }
 
-    @Override
-    public void forwardOnly() throws Exception {
-        super.forwardOnly();
-
-        // If any of steps exists we can go with them
-        if (this.clauseIterator.hasNext()) {
-            stepButton.setDisable(false);
-            formulaInput.setDisable(true);
-            this.makeStep(new ActionEvent());
-        }
-    }
+//    @Override
+//    public void forwardOnly() throws Exception {
+//        super.forwardOnly();
+//
+//        // If any of steps exists we can go with them
+//        if (this.clauseIterator.hasNext()) {
+//            stepButton.setDisable(false);
+//            formulaInput.setDisable(true);
+//            this.makeStep(new ActionEvent());
+//        }
+//    }
 
     protected void initSteps() throws Exception {
         // Get required steps

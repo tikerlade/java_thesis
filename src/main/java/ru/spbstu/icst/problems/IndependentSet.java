@@ -1,5 +1,7 @@
 package ru.spbstu.icst.problems;
 
+import ru.spbstu.icst.exceptions.InputException;
+
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -12,7 +14,7 @@ public class IndependentSet extends Problem {
             " required to find subset of x vertices, non of which are adjacent to each other (have an edge) in the graph.";
 
     private int independentSetSize;
-    private final Graph graph;
+    private Graph graph;
 
     public Set<Integer> independentSet;
     public boolean isSolved;
@@ -23,7 +25,10 @@ public class IndependentSet extends Problem {
         this.graph = new Graph();
     }
 
-    public IndependentSet(int independentSetSize, Graph graph) {
+    public IndependentSet(int independentSetSize, Graph graph) throws InputException {
+        if (independentSetSize > graph.getVertexCount() || independentSetSize < 0) {
+            throw new InputException("Size of independant set must be in [0, N]; N - number of vertices in graph.");
+        }
         this.independentSetSize = independentSetSize;
         this.graph = graph;
     }
@@ -86,5 +91,9 @@ public class IndependentSet extends Problem {
     @Override
     public void readSolution() {
 
+    }
+
+    public void setGraph(Graph graph) {
+        this.graph = graph;
     }
 }
