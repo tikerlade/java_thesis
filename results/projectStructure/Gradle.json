@@ -42,6 +42,14 @@
       "version": "17.0.1"
     },
     {
+      "ideaName": "Gradle: org.openjfx:javafx-swing:linux:17.0.1",
+      "gradleName": "org.openjfx:javafx-swing:linux:17.0.1",
+      "unresolved": false,
+      "groupId": "org.openjfx",
+      "artifactId": "javafx-swing",
+      "version": "17.0.1"
+    },
+    {
       "ideaName": "Gradle: org.openjfx:javafx-graphics:17.0.1",
       "gradleName": "org.openjfx:javafx-graphics:17.0.1",
       "unresolved": false,

@@ -71,21 +71,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Cannot infer arguments (unable to resolve constructor)",
+  "comment": "Cannot resolve constructor 'ArrayList(?)'",
   "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
   "sources": [
     {
       "type": "method",
       "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 139,
-      "offset": 50,
-      "length": 1,
+      "line": 104,
+      "offset": 52,
+      "length": 9,
       "code": {
-        "startLine": 137,
-        "length": 1,
-        "offset": 120,
-        "surroundingCode": "\n        // Go through literals and try to assign true value for them\n        HashSet<String> trueLiterals = new HashSet<>(tempLiterals.stream().map(Literal::toString).toList());\n        for (Literal literal : allLiterals) {\n            if (trueLiterals.contains(literal.toString())) {"
+        "startLine": 102,
+        "length": 9,
+        "offset": 98,
+        "surroundingCode": "\n        if (this.satisfyingSet.size() > 0) {\n            ArrayList<String> satSetAsStrings = new ArrayList<>(this.satisfyingSet.stream().map(Literal::toString).toList());\n            return String.join(\" \", new HashSet<>(satSetAsStrings));\n        }"
       }
     }
   ],
@@ -93,7 +93,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "-413208108105257733"
+  "hash": "-3641222317527971709"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -103,21 +103,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Cannot resolve constructor 'HashSet(?)'",
+  "comment": "Cannot resolve constructor 'ArrayList(?)'",
   "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
   "sources": [
     {
       "type": "method",
       "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 139,
-      "offset": 52,
+      "line": 104,
+      "offset": 63,
       "length": 1,
       "code": {
-        "startLine": 137,
+        "startLine": 102,
         "length": 1,
-        "offset": 122,
-        "surroundingCode": "\n        // Go through literals and try to assign true value for them\n        HashSet<String> trueLiterals = new HashSet<>(tempLiterals.stream().map(Literal::toString).toList());\n        for (Literal literal : allLiterals) {\n            if (trueLiterals.contains(literal.toString())) {"
+        "offset": 109,
+        "surroundingCode": "\n        if (this.satisfyingSet.size() > 0) {\n            ArrayList<String> satSetAsStrings = new ArrayList<>(this.satisfyingSet.stream().map(Literal::toString).toList());\n            return String.join(\" \", new HashSet<>(satSetAsStrings));\n        }"
       }
     }
   ],
@@ -125,7 +125,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "1488246319791305632"
+  "hash": "-8704543837792315670"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -142,14 +142,14 @@
       "type": "method",
       "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 139,
-      "offset": 98,
+      "line": 104,
+      "offset": 115,
       "length": 6,
       "code": {
-        "startLine": 137,
+        "startLine": 102,
         "length": 6,
-        "offset": 168,
-        "surroundingCode": "\n        // Go through literals and try to assign true value for them\n        HashSet<String> trueLiterals = new HashSet<>(tempLiterals.stream().map(Literal::toString).toList());\n        for (Literal literal : allLiterals) {\n            if (trueLiterals.contains(literal.toString())) {"
+        "offset": 161,
+        "surroundingCode": "\n        if (this.satisfyingSet.size() > 0) {\n            ArrayList<String> satSetAsStrings = new ArrayList<>(this.satisfyingSet.stream().map(Literal::toString).toList());\n            return String.join(\" \", new HashSet<>(satSetAsStrings));\n        }"
       }
     }
   ],
@@ -157,7 +157,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "1760170342514018775"
+  "hash": "6898455912154178165"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -204,6 +204,102 @@
   "sources": [
     {
       "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/controllers/Controller.java",
+      "language": "JAVA",
+      "line": 265,
+      "offset": 16,
+      "length": 4,
+      "code": {
+        "startLine": 263,
+        "length": 4,
+        "offset": 79,
+        "surroundingCode": "\n            switch (this.getReduction().getReductionMode()) {\n                case FORWARD_ONLY -> makeForwardStep();\n                case FORWARD_SOLVE -> makeForwardSolveStep();\n                case FORWARD_SOLVE_BACKWARD -> makeForwardSolveBackwardStep();"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "4248636016785730453"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Enhanced 'switch' blocks are not supported at language level '11'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/controllers/Controller.java",
+      "language": "JAVA",
+      "line": 83,
+      "offset": 12,
+      "length": 4,
+      "code": {
+        "startLine": 81,
+        "length": 4,
+        "offset": 132,
+        "surroundingCode": "    void startReduction(ActionEvent event) throws Exception {\n        switch (this.getReduction().getReductionMode()) {\n            case FORWARD_ONLY -> {\n                this.forwardOnly();\n            }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "-8736973692995675508"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Enhanced 'switch' blocks are not supported at language level '11'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/controllers/CnfScreenController.java",
+      "language": "JAVA",
+      "line": 115,
+      "offset": 12,
+      "length": 4,
+      "code": {
+        "startLine": 113,
+        "length": 4,
+        "offset": 105,
+        "surroundingCode": "        // Enable solution field if required\n        switch (reduction.getReductionMode()) {\n            case FORWARD_SOLVE -> {\n                this.solutionForConvertedFormula.setDisable(false);\n            }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "-5474230091776000404"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Enhanced 'switch' blocks are not supported at language level '11'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
       "path": "src/main/java/ru/spbstu/icst/reductions/Reduction.java",
       "language": "JAVA",
       "line": 70,
@@ -231,38 +327,6 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Cannot infer arguments (unable to resolve constructor)",
-  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/reductions/CnfTo3CnfReduction.java",
-      "language": "JAVA",
-      "line": 175,
-      "offset": 63,
-      "length": 1,
-      "code": {
-        "startLine": 173,
-        "length": 1,
-        "offset": 123,
-        "surroundingCode": "\n                // Put final 3 values into clauses of 3CNF\n                ArrayList<Literal> lastLiterals = new ArrayList<>(clauseStack.stream().toList());\n                Collections.reverse(lastLiterals);\n                Clause lastClause = new Clause(lastLiterals);"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "JavaAnnotator"
-  },
-  "hash": "-7252996760681006989"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java annotator",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
   "comment": "Cannot resolve constructor 'ArrayList(?)'",
   "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
   "sources": [
@@ -270,11 +334,11 @@
       "type": "method",
       "path": "src/main/java/ru/spbstu/icst/reductions/CnfTo3CnfReduction.java",
       "language": "JAVA",
-      "line": 175,
+      "line": 173,
       "offset": 65,
       "length": 1,
       "code": {
-        "startLine": 173,
+        "startLine": 171,
         "length": 1,
         "offset": 125,
         "surroundingCode": "\n                // Put final 3 values into clauses of 3CNF\n                ArrayList<Literal> lastLiterals = new ArrayList<>(clauseStack.stream().toList());\n                Collections.reverse(lastLiterals);\n                Clause lastClause = new Clause(lastLiterals);"
@@ -285,7 +349,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "-165324693332297816"
+  "hash": "-6516615949029226154"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -302,11 +366,11 @@
       "type": "method",
       "path": "src/main/java/ru/spbstu/icst/reductions/CnfTo3CnfReduction.java",
       "language": "JAVA",
-      "line": 175,
+      "line": 173,
       "offset": 87,
       "length": 6,
       "code": {
-        "startLine": 173,
+        "startLine": 171,
         "length": 6,
         "offset": 147,
         "surroundingCode": "\n                // Put final 3 values into clauses of 3CNF\n                ArrayList<Literal> lastLiterals = new ArrayList<>(clauseStack.stream().toList());\n                Collections.reverse(lastLiterals);\n                Clause lastClause = new Clause(lastLiterals);"
@@ -317,69 +381,5 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "-96660326365129206"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java annotator",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Enhanced 'switch' blocks are not supported at language level '11'",
-  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/controllers/Controller.java",
-      "language": "JAVA",
-      "line": 70,
-      "offset": 12,
-      "length": 4,
-      "code": {
-        "startLine": 68,
-        "length": 4,
-        "offset": 132,
-        "surroundingCode": "    void startReduction(ActionEvent event) throws Exception {\n        switch (this.getReduction().getReductionMode()) {\n            case FORWARD_ONLY -> {\n                this.forwardOnly();\n            }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "JavaAnnotator"
-  },
-  "hash": "524781534695543910"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java annotator",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Enhanced 'switch' blocks are not supported at language level '11'",
-  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/controllers/CnfScreenController.java",
-      "language": "JAVA",
-      "line": 48,
-      "offset": 12,
-      "length": 4,
-      "code": {
-        "startLine": 46,
-        "length": 4,
-        "offset": 66,
-        "surroundingCode": "\n        switch (this.reduction.getReductionMode()) {\n            case FORWARD_ONLY -> makeForwardStep();\n            case FORWARD_SOLVE -> makeForwardSolveStep();\n            case FORWARD_SOLVE_BACKWARD -> makeForwardSolveBackwardStep();"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "JavaAnnotator"
-  },
-  "hash": "-6015448124489032040"
+  "hash": "3629741236529991199"
 }]}

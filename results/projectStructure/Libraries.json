@@ -31,6 +31,12 @@
       ]
     },
     {
+      "name": "Gradle: org.openjfx:javafx-swing:linux:17.0.1",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.openjfx/javafx-swing/17.0.1/51ae6d8af4d609b80807408fb0fdbb78a7fe6d43/javafx-swing-17.0.1-linux.jar!/"
+      ]
+    },
+    {
       "name": "Gradle: org.openjfx:javafx-graphics:17.0.1",
       "roots": [
         "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.openjfx/javafx-graphics/17.0.1/324fd0f6c9c55330fc64a44dde0887d9646e800a/javafx-graphics-17.0.1.jar!/"

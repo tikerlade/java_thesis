@@ -1,7 +1,38 @@
 {"version":"3","listProblem":[{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of System.out or System.err",
+  "type": "Commented out code",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "Moderate",
+  "comment": "Commented out code (7 lines)",
+  "detailsInfo": "Reports comments that contain Java code.\n\nUsually, code that is commented out gets outdated very quickly and becomes misleading.\nAs most projects use some kind of version control system,\nit is better to delete commented out code completely and use the VCS history instead.\n\nNew in 2020.3",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
+      "language": "JAVA",
+      "line": 163,
+      "offset": 0,
+      "length": 2,
+      "code": {
+        "startLine": 161,
+        "length": 2,
+        "offset": 66,
+        "surroundingCode": "\n        // Match variables from temp with variables from formula\n//        for (Literal trueLiteral : tempLiterals) {\n//            for (Literal otherLiteral : allLiterals) {\n//                if (trueLiteral.isStringReprEquals(otherLiteral)) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "CommentedOutCode"
+  },
+  "hash": "-4235908609396198012"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
   "tags": [
     "JAVA"
   ],
@@ -28,11 +59,11 @@
     "module": "java_thesis.main",
     "inspectionName": "SystemOutErr"
   },
-  "hash": "3177424345010311163"
+  "hash": "-4195929115234346042"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of System.out or System.err",
+  "type": "Use of 'System.out' or 'System.err'",
   "tags": [
     "JAVA"
   ],
@@ -59,42 +90,11 @@
     "module": "java_thesis.main",
     "inspectionName": "SystemOutErr"
   },
-  "hash": "-1602066583203544338"
+  "hash": "-9006027504628650052"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of System.out or System.err",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/IndependentSet.java",
-      "language": "JAVA",
-      "line": 47,
-      "offset": 8,
-      "length": 10,
-      "code": {
-        "startLine": 45,
-        "length": 10,
-        "offset": 103,
-        "surroundingCode": "    public void readInput() {\n        // Get information about size of cover we'll try to find\n        System.out.print(\"Number of nodes required in independent set: \");\n        this.independentSetSize = scanner.nextInt();\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "7985535826792821981"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of System.out or System.err",
+  "type": "Use of 'System.out' or 'System.err'",
   "tags": [
     "JAVA"
   ],
@@ -121,11 +121,11 @@
     "module": "java_thesis.main",
     "inspectionName": "SystemOutErr"
   },
-  "hash": "-8307085516362291388"
+  "hash": "3189694084773256045"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of System.out or System.err",
+  "type": "Use of 'System.out' or 'System.err'",
   "tags": [
     "JAVA"
   ],
@@ -152,11 +152,11 @@
     "module": "java_thesis.main",
     "inspectionName": "SystemOutErr"
   },
-  "hash": "7121181020979524546"
+  "hash": "2304468751555443132"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of System.out or System.err",
+  "type": "Use of 'System.out' or 'System.err'",
   "tags": [
     "JAVA"
   ],
@@ -183,11 +183,11 @@
     "module": "java_thesis.main",
     "inspectionName": "SystemOutErr"
   },
-  "hash": "1530499705074050232"
+  "hash": "-1235568007048611968"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of System.out or System.err",
+  "type": "Use of 'System.out' or 'System.err'",
   "tags": [
     "JAVA"
   ],
@@ -197,140 +197,16 @@
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
+      "path": "src/main/java/ru/spbstu/icst/problems/IndependentSet.java",
       "language": "JAVA",
-      "line": 22,
-      "offset": 12,
-      "length": 10,
-      "code": {
-        "startLine": 20,
-        "length": 10,
-        "offset": 85,
-        "surroundingCode": "        while (userContinue.equals(\"Y\")) {\n            // Intro messages\n            System.out.println(\"Hello, this program will complete reduction of your problem to other NPC problem with your data.\");\n            System.out.println(\"Please select, which one of the following reductions you would like to complete:\");\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "6963668833108201000"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of System.out or System.err",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
-      "language": "JAVA",
-      "line": 23,
-      "offset": 12,
-      "length": 10,
-      "code": {
-        "startLine": 21,
-        "length": 10,
-        "offset": 174,
-        "surroundingCode": "            // Intro messages\n            System.out.println(\"Hello, this program will complete reduction of your problem to other NPC problem with your data.\");\n            System.out.println(\"Please select, which one of the following reductions you would like to complete:\");\n\n            // Print all reductions we have"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "-218881445872103955"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of System.out or System.err",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
-      "language": "JAVA",
-      "line": 28,
-      "offset": 16,
-      "length": 10,
-      "code": {
-        "startLine": 26,
-        "length": 10,
-        "offset": 131,
-        "surroundingCode": "            for (int i = 0; i < reductions.size(); i++) {\n                Reduction reduction = reductions.get(i);\n                System.out.println(i + \". \" + reduction.toString());\n            }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "-3086257229104006203"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of System.out or System.err",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
-      "language": "JAVA",
-      "line": 46,
-      "offset": 12,
-      "length": 10,
-      "code": {
-        "startLine": 44,
-        "length": 10,
-        "offset": 55,
-        "surroundingCode": "\n            // Does user want to continue\n            System.out.print(\"Do you want to continue (Y/N): \");\n            userContinue = scanner.next();\n        }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "-5971111609059873615"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of System.out or System.err",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
-      "language": "JAVA",
-      "line": 53,
+      "line": 47,
       "offset": 8,
       "length": 10,
       "code": {
-        "startLine": 51,
+        "startLine": 45,
         "length": 10,
-        "offset": 118,
-        "surroundingCode": "    public ProgramMode readProgramMode() {\n        // Let's understand in which mode user want to run program\n        System.out.println(\"\\nBefore you input data for problem please choose mode in which you will run program:\");\n\n        for (int i = 0; i < ProgramMode.numModes; i++) {"
+        "offset": 103,
+        "surroundingCode": "    public void readInput() {\n        // Get information about size of cover we'll try to find\n        System.out.print(\"Number of nodes required in independent set: \");\n        this.independentSetSize = scanner.nextInt();\n"
       }
     }
   ],
@@ -338,67 +214,67 @@
     "module": "java_thesis.main",
     "inspectionName": "SystemOutErr"
   },
-  "hash": "-1703592259864468703"
+  "hash": "-2094020153648438965"
 },{
   "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of System.out or System.err",
+  "category": "Code style issues",
+  "type": "Unnecessary qualifier for 'this' or 'super'",
   "tags": [
     "JAVA"
   ],
   "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Qualifier <code>SmartGraphPanel</code> on 'this' is unnecessary in this context",
+  "detailsInfo": "Reports unnecessary qualification of `this` or `super`.\n\n\nUsing a qualifier on `this` or `super` to\ndisambiguate a code reference may easily become unnecessary via automatic refactorings and should be deleted for clarity.\n\n**Example:**\n\n\n      class Foo {\n        void foo() {}\n      }\n\n      class Bar extends Foo {\n        void bar() {\n          Bar.super.foo();\n        }\n      }\n\nAfter the quick-fix is applied:\n\n\n      class Foo {\n        void foo() {}\n      }\n\n      class Bar extends Foo {\n        void bar() {\n          super.foo();\n        }\n      }\n",
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
       "language": "JAVA",
-      "line": 57,
-      "offset": 12,
-      "length": 10,
+      "line": 1113,
+      "offset": 53,
+      "length": 15,
       "code": {
-        "startLine": 55,
-        "length": 10,
-        "offset": 158,
-        "surroundingCode": "        for (int i = 0; i < ProgramMode.numModes; i++) {\n            String formattedEntry = String.format(\"%d. %s\", i, ProgramMode.values()[i]);\n            System.out.println(formattedEntry);\n        }\n"
+        "startLine": 1111,
+        "length": 15,
+        "offset": 76,
+        "surroundingCode": "                    }\n\n                    Node node = UtilitiesJavaFX.pick(SmartGraphPanel.this, mouseEvent.getSceneX(), mouseEvent.getSceneY());\n                    if (node == null) {\n                        return;"
       }
     }
   ],
   "attributes": {
     "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "UnnecessaryQualifierForThis"
   },
-  "hash": "-8733836174577356397"
+  "hash": "-1592749978629423917"
 },{
   "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of System.out or System.err",
+  "category": "Code style issues",
+  "type": "Unnecessary qualifier for 'this' or 'super'",
   "tags": [
     "JAVA"
   ],
   "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "Qualifier <code>SmartGraphPanel</code> on 'this' is unnecessary in this context",
+  "detailsInfo": "Reports unnecessary qualification of `this` or `super`.\n\n\nUsing a qualifier on `this` or `super` to\ndisambiguate a code reference may easily become unnecessary via automatic refactorings and should be deleted for clarity.\n\n**Example:**\n\n\n      class Foo {\n        void foo() {}\n      }\n\n      class Bar extends Foo {\n        void bar() {\n          Bar.super.foo();\n        }\n      }\n\nAfter the quick-fix is applied:\n\n\n      class Foo {\n        void foo() {}\n      }\n\n      class Bar extends Foo {\n        void bar() {\n          super.foo();\n        }\n      }\n",
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
       "language": "JAVA",
-      "line": 63,
-      "offset": 12,
-      "length": 10,
+      "line": 1195,
+      "offset": 49,
+      "length": 15,
       "code": {
-        "startLine": 61,
-        "length": 10,
-        "offset": 90,
-        "surroundingCode": "        // Wrong input\n        if (mode < 0 || mode > ProgramMode.numModes) {\n            System.out.println(\"Wrong mode number\");\n        }\n"
+        "startLine": 1193,
+        "length": 15,
+        "offset": 176,
+        "surroundingCode": "        setOnMouseClicked((MouseEvent mouseEvent) -> {\n            if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {\n                Node node = UtilitiesJavaFX.pick(SmartGraphPanel.this, mouseEvent.getSceneX(), mouseEvent.getSceneY());\n                if (this.lastVertexClicked == null) {\n                    try {"
       }
     }
   ],
   "attributes": {
     "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "UnnecessaryQualifierForThis"
   },
-  "hash": "6401095705401756146"
+  "hash": "-3798088074082897937"
 }]}
