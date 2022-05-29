@@ -206,38 +206,6 @@
       "type": "method",
       "path": "src/main/java/ru/spbstu/icst/controllers/Controller.java",
       "language": "JAVA",
-      "line": 265,
-      "offset": 16,
-      "length": 4,
-      "code": {
-        "startLine": 263,
-        "length": 4,
-        "offset": 79,
-        "surroundingCode": "\n            switch (this.getReduction().getReductionMode()) {\n                case FORWARD_ONLY -> makeForwardStep();\n                case FORWARD_SOLVE -> makeForwardSolveStep();\n                case FORWARD_SOLVE_BACKWARD -> makeForwardSolveBackwardStep();"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "JavaAnnotator"
-  },
-  "hash": "4248636016785730453"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java annotator",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Enhanced 'switch' blocks are not supported at language level '11'",
-  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/controllers/Controller.java",
-      "language": "JAVA",
       "line": 83,
       "offset": 12,
       "length": 4,
@@ -268,13 +236,45 @@
   "sources": [
     {
       "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/controllers/Controller.java",
+      "language": "JAVA",
+      "line": 265,
+      "offset": 16,
+      "length": 4,
+      "code": {
+        "startLine": 263,
+        "length": 4,
+        "offset": 79,
+        "surroundingCode": "\n            switch (this.getReduction().getReductionMode()) {\n                case FORWARD_ONLY -> makeForwardStep();\n                case FORWARD_SOLVE -> makeForwardSolveStep();\n                case FORWARD_SOLVE_BACKWARD -> makeForwardSolveBackwardStep();"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "4248636016785730453"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Enhanced 'switch' blocks are not supported at language level '11'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
       "path": "src/main/java/ru/spbstu/icst/controllers/CnfScreenController.java",
       "language": "JAVA",
-      "line": 115,
+      "line": 114,
       "offset": 12,
       "length": 4,
       "code": {
-        "startLine": 113,
+        "startLine": 112,
         "length": 4,
         "offset": 105,
         "surroundingCode": "        // Enable solution field if required\n        switch (reduction.getReductionMode()) {\n            case FORWARD_SOLVE -> {\n                this.solutionForConvertedFormula.setDisable(false);\n            }"
@@ -285,7 +285,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "-5474230091776000404"
+  "hash": "-2915153203222338338"
 },{
   "tool": "Code Inspection",
   "category": "General",

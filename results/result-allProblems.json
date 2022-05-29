@@ -38,11 +38,11 @@
       "type": "file",
       "path": "src/main/java/ru/spbstu/icst/controllers/CnfScreenController.java",
       "language": "JAVA",
-      "line": 114,
+      "line": 113,
       "offset": 9,
       "length": 665,
       "code": {
-        "startLine": 112,
+        "startLine": 111,
         "length": 665,
         "offset": 54,
         "surroundingCode": "\n        // Enable solution field if required\n        switch (reduction.getReductionMode()) {\n            case FORWARD_SOLVE -> {\n                this.solutionForConvertedFormula.setDisable(false);\n            }\n            case FORWARD_SOLVE_BACKWARD -> {\n                this.solutionForConvertedFormula.setDisable(false);\n                this.reducedSolutionOutput.setDisable(false);\n            }\n            case BACKWARD_ONLY -> {\n                this.solutionForConvertedFormula.setEditable(true);\n                this.solutionForConvertedFormula.setDisable(false);\n                this.reducedSolutionOutput.setDisable(false);\n                this.loadSolutionMenuItem.setDisable(false);\n            }\n        }\n\n        // Empty columns of table"
@@ -53,7 +53,7 @@
     "module": "java_thesis.main",
     "inspectionName": "EnumSwitchStatementWhichMissesCases"
   },
-  "hash": "dfae174c26ea81317cace05bd0410f3c762e71d6ab66f0c6da3ac4954791186f"
+  "hash": "4c7e3bb859b58e0a3f9a3aff8229cf9422334e47f9786b6d228c2ca5488aab94"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -115,6 +115,34 @@
   "category": "Threading issues",
   "type": "Field accessed in both 'synchronized' and unsynchronized contexts",
   "severity": "High",
+  "comment": "Field 'edgesWithArrows' is accessed in both synchronized and unsynchronized contexts",
+  "detailsInfo": "Reports non-final fields that are accessed in both `synchronized` and non-`synchronized` contexts. `volatile` fields as well as accesses in constructors and initializers are ignored by this inspection.\n\n\nSuch \"partially synchronized\" access is often the result of a coding oversight\nand may lead to unexpectedly inconsistent data structures.\n\n**Example:**\n\n\n      public class Program {\n        Console console; // warning: Field 'console' is accessed in both synchronized and unsynchronized contexts\n\n        public synchronized void execute() {\n          console.print(\"running\");\n        }\n\n        public void check() {\n          console.check();\n        }\n      }\n\n\nUse the option to specify if simple getters and setters are counted as accesses too.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
+      "language": "JAVA",
+      "line": 93,
+      "offset": 21,
+      "length": 15,
+      "code": {
+        "startLine": 91,
+        "length": 15,
+        "offset": 146,
+        "surroundingCode": "    private Map<Tuple<SmartGraphVertexNode>, Integer> placedEdges = new HashMap<>();\n    private boolean initialized = false;\n    private boolean edgesWithArrows;\n    \n    /*"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "FieldAccessedSynchronizedAndUnsynchronized"
+  },
+  "hash": "8ad70a8981aa58f5309dd8d0b3108c732199bf5e12cd797fc0527d6d0bd94f2b"
+},{
+  "tool": "Code Inspection",
+  "category": "Threading issues",
+  "type": "Field accessed in both 'synchronized' and unsynchronized contexts",
+  "severity": "High",
   "comment": "Field 'edgeNodes' is accessed in both synchronized and unsynchronized contexts",
   "detailsInfo": "Reports non-final fields that are accessed in both `synchronized` and non-`synchronized` contexts. `volatile` fields as well as accesses in constructors and initializers are ignored by this inspection.\n\n\nSuch \"partially synchronized\" access is often the result of a coding oversight\nand may lead to unexpectedly inconsistent data structures.\n\n**Example:**\n\n\n      public class Program {\n        Console console; // warning: Field 'console' is accessed in both synchronized and unsynchronized contexts\n\n        public synchronized void execute() {\n          console.print(\"running\");\n        }\n\n        public void check() {\n          console.check();\n        }\n      }\n\n\nUse the option to specify if simple getters and setters are counted as accesses too.",
   "sources": [
@@ -171,34 +199,6 @@
   "category": "Threading issues",
   "type": "Field accessed in both 'synchronized' and unsynchronized contexts",
   "severity": "High",
-  "comment": "Field 'edgesWithArrows' is accessed in both synchronized and unsynchronized contexts",
-  "detailsInfo": "Reports non-final fields that are accessed in both `synchronized` and non-`synchronized` contexts. `volatile` fields as well as accesses in constructors and initializers are ignored by this inspection.\n\n\nSuch \"partially synchronized\" access is often the result of a coding oversight\nand may lead to unexpectedly inconsistent data structures.\n\n**Example:**\n\n\n      public class Program {\n        Console console; // warning: Field 'console' is accessed in both synchronized and unsynchronized contexts\n\n        public synchronized void execute() {\n          console.print(\"running\");\n        }\n\n        public void check() {\n          console.check();\n        }\n      }\n\n\nUse the option to specify if simple getters and setters are counted as accesses too.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
-      "language": "JAVA",
-      "line": 93,
-      "offset": 21,
-      "length": 15,
-      "code": {
-        "startLine": 91,
-        "length": 15,
-        "offset": 146,
-        "surroundingCode": "    private Map<Tuple<SmartGraphVertexNode>, Integer> placedEdges = new HashMap<>();\n    private boolean initialized = false;\n    private boolean edgesWithArrows;\n    \n    /*"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "FieldAccessedSynchronizedAndUnsynchronized"
-  },
-  "hash": "8ad70a8981aa58f5309dd8d0b3108c732199bf5e12cd797fc0527d6d0bd94f2b"
-},{
-  "tool": "Code Inspection",
-  "category": "Threading issues",
-  "type": "Field accessed in both 'synchronized' and unsynchronized contexts",
-  "severity": "High",
   "comment": "Field 'vertexNodes' is accessed in both synchronized and unsynchronized contexts",
   "detailsInfo": "Reports non-final fields that are accessed in both `synchronized` and non-`synchronized` contexts. `volatile` fields as well as accesses in constructors and initializers are ignored by this inspection.\n\n\nSuch \"partially synchronized\" access is often the result of a coding oversight\nand may lead to unexpectedly inconsistent data structures.\n\n**Example:**\n\n\n      public class Program {\n        Console console; // warning: Field 'console' is accessed in both synchronized and unsynchronized contexts\n\n        public synchronized void execute() {\n          console.print(\"running\");\n        }\n\n        public void check() {\n          console.check();\n        }\n      }\n\n\nUse the option to specify if simple getters and setters are counted as accesses too.",
   "sources": [
@@ -222,34 +222,6 @@
     "inspectionName": "FieldAccessedSynchronizedAndUnsynchronized"
   },
   "hash": "111cdcb9835f34b712db91e2f41668e29447af351c9d1afcb88742f502230c21"
-},{
-  "tool": "Code Inspection",
-  "category": "Threading issues",
-  "type": "Field accessed in both 'synchronized' and unsynchronized contexts",
-  "severity": "High",
-  "comment": "Field 'vertices' is accessed in both synchronized and unsynchronized contexts",
-  "detailsInfo": "Reports non-final fields that are accessed in both `synchronized` and non-`synchronized` contexts. `volatile` fields as well as accesses in constructors and initializers are ignored by this inspection.\n\n\nSuch \"partially synchronized\" access is often the result of a coding oversight\nand may lead to unexpectedly inconsistent data structures.\n\n**Example:**\n\n\n      public class Program {\n        Console console; // warning: Field 'console' is accessed in both synchronized and unsynchronized contexts\n\n        public synchronized void execute() {\n          console.print(\"running\");\n        }\n\n        public void check() {\n          console.check();\n        }\n      }\n\n\nUse the option to specify if simple getters and setters are counted as accesses too.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/ru/spbstu/icst/smartgraph/graph/GraphEdgeList.java",
-      "language": "JAVA",
-      "line": 43,
-      "offset": 31,
-      "length": 8,
-      "code": {
-        "startLine": 41,
-        "length": 8,
-        "offset": 126,
-        "surroundingCode": "    /* inner classes are defined at the end of the class, so are the auxiliary methods \n     */\n    private Map<V, Vertex<V>> vertices;\n    private Map<E, Edge<E, V>> edges;\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "FieldAccessedSynchronizedAndUnsynchronized"
-  },
-  "hash": "367da90a91635680c7aabda8ccdc919c95db0abf5dfc4d92a71fce326ef719da"
 },{
   "tool": "Code Inspection",
   "category": "Threading issues",
@@ -280,60 +252,32 @@
   "hash": "93ec9ee3344f8d033f74f20c0a87b7d3ca561ec86333ee782dccda3c4a69d0e3"
 },{
   "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of obsolete collection type",
+  "category": "Threading issues",
+  "type": "Field accessed in both 'synchronized' and unsynchronized contexts",
   "severity": "High",
-  "comment": "Obsolete collection type 'Stack' used",
-  "detailsInfo": "Reports usages of `java.util.Vector`, `java.util.Hashtable` and `java.util.Stack`.\n\nUsages of these classes can often be replaced with usages of\n`java.util.ArrayList`, `java.util.HashMap` and `java.util.ArrayDeque` respectively.\nWhile still supported,\nthe former classes were made obsolete by the JDK1.2 collection classes, and should probably\nnot be used in new development.\n\n\nUse the **Ignore obsolete collection types where they are required** option to ignore any cases where the obsolete collections are used\nas method arguments or assigned to a variable that requires the obsolete type.\nEnabling this option may consume significant processor resources.",
+  "comment": "Field 'vertices' is accessed in both synchronized and unsynchronized contexts",
+  "detailsInfo": "Reports non-final fields that are accessed in both `synchronized` and non-`synchronized` contexts. `volatile` fields as well as accesses in constructors and initializers are ignored by this inspection.\n\n\nSuch \"partially synchronized\" access is often the result of a coding oversight\nand may lead to unexpectedly inconsistent data structures.\n\n**Example:**\n\n\n      public class Program {\n        Console console; // warning: Field 'console' is accessed in both synchronized and unsynchronized contexts\n\n        public synchronized void execute() {\n          console.print(\"running\");\n        }\n\n        public void check() {\n          console.check();\n        }\n      }\n\n\nUse the option to specify if simple getters and setters are counted as accesses too.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/ru/spbstu/icst/reductions/CnfTo3CnfReduction.java",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graph/GraphEdgeList.java",
       "language": "JAVA",
-      "line": 138,
-      "offset": 13,
-      "length": 14,
+      "line": 43,
+      "offset": 31,
+      "length": 8,
       "code": {
-        "startLine": 136,
-        "length": 14,
-        "offset": 131,
-        "surroundingCode": "        for (Clause clause : formula.clauses) {\n            // Here we will store copies of literals of current clause\n            Stack<Literal> clauseStack = new Stack<>();\n\n            // Put copies of literals"
+        "startLine": 41,
+        "length": 8,
+        "offset": 126,
+        "surroundingCode": "    /* inner classes are defined at the end of the class, so are the auxiliary methods \n     */\n    private Map<V, Vertex<V>> vertices;\n    private Map<E, Edge<E, V>> edges;\n"
       }
     }
   ],
   "attributes": {
     "module": "java_thesis.main",
-    "inspectionName": "ObsoleteCollection"
+    "inspectionName": "FieldAccessedSynchronizedAndUnsynchronized"
   },
-  "hash": "1de4d76918a88af97b510645d315162492f3b03c7f850b3a73c87384433205ad"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of obsolete collection type",
-  "severity": "High",
-  "comment": "Obsolete collection type 'Stack<>' used",
-  "detailsInfo": "Reports usages of `java.util.Vector`, `java.util.Hashtable` and `java.util.Stack`.\n\nUsages of these classes can often be replaced with usages of\n`java.util.ArrayList`, `java.util.HashMap` and `java.util.ArrayDeque` respectively.\nWhile still supported,\nthe former classes were made obsolete by the JDK1.2 collection classes, and should probably\nnot be used in new development.\n\n\nUse the **Ignore obsolete collection types where they are required** option to ignore any cases where the obsolete collections are used\nas method arguments or assigned to a variable that requires the obsolete type.\nEnabling this option may consume significant processor resources.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/ru/spbstu/icst/reductions/CnfTo3CnfReduction.java",
-      "language": "JAVA",
-      "line": 138,
-      "offset": 46,
-      "length": 7,
-      "code": {
-        "startLine": 136,
-        "length": 7,
-        "offset": 164,
-        "surroundingCode": "        for (Clause clause : formula.clauses) {\n            // Here we will store copies of literals of current clause\n            Stack<Literal> clauseStack = new Stack<>();\n\n            // Put copies of literals"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "ObsoleteCollection"
-  },
-  "hash": "f6e0cc12364dd123695cc5b017018f0658780846668c0f0e76fbda44aedcdef0"
+  "hash": "367da90a91635680c7aabda8ccdc919c95db0abf5dfc4d92a71fce326ef719da"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -392,6 +336,90 @@
   "hash": "d1e18730518ead89ac19fdd5a4651f1bc3a1a68e2069de5a9dd314f6f274fbda"
 },{
   "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of obsolete collection type",
+  "severity": "High",
+  "comment": "Obsolete collection type 'Stack' used",
+  "detailsInfo": "Reports usages of `java.util.Vector`, `java.util.Hashtable` and `java.util.Stack`.\n\nUsages of these classes can often be replaced with usages of\n`java.util.ArrayList`, `java.util.HashMap` and `java.util.ArrayDeque` respectively.\nWhile still supported,\nthe former classes were made obsolete by the JDK1.2 collection classes, and should probably\nnot be used in new development.\n\n\nUse the **Ignore obsolete collection types where they are required** option to ignore any cases where the obsolete collections are used\nas method arguments or assigned to a variable that requires the obsolete type.\nEnabling this option may consume significant processor resources.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/ru/spbstu/icst/reductions/CnfTo3CnfReduction.java",
+      "language": "JAVA",
+      "line": 138,
+      "offset": 13,
+      "length": 14,
+      "code": {
+        "startLine": 136,
+        "length": 14,
+        "offset": 131,
+        "surroundingCode": "        for (Clause clause : formula.clauses) {\n            // Here we will store copies of literals of current clause\n            Stack<Literal> clauseStack = new Stack<>();\n\n            // Put copies of literals"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "ObsoleteCollection"
+  },
+  "hash": "1de4d76918a88af97b510645d315162492f3b03c7f850b3a73c87384433205ad"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of obsolete collection type",
+  "severity": "High",
+  "comment": "Obsolete collection type 'Stack<>' used",
+  "detailsInfo": "Reports usages of `java.util.Vector`, `java.util.Hashtable` and `java.util.Stack`.\n\nUsages of these classes can often be replaced with usages of\n`java.util.ArrayList`, `java.util.HashMap` and `java.util.ArrayDeque` respectively.\nWhile still supported,\nthe former classes were made obsolete by the JDK1.2 collection classes, and should probably\nnot be used in new development.\n\n\nUse the **Ignore obsolete collection types where they are required** option to ignore any cases where the obsolete collections are used\nas method arguments or assigned to a variable that requires the obsolete type.\nEnabling this option may consume significant processor resources.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/ru/spbstu/icst/reductions/CnfTo3CnfReduction.java",
+      "language": "JAVA",
+      "line": 138,
+      "offset": 46,
+      "length": 7,
+      "code": {
+        "startLine": 136,
+        "length": 7,
+        "offset": 164,
+        "surroundingCode": "        for (Clause clause : formula.clauses) {\n            // Here we will store copies of literals of current clause\n            Stack<Literal> clauseStack = new Stack<>();\n\n            // Put copies of literals"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "ObsoleteCollection"
+  },
+  "hash": "f6e0cc12364dd123695cc5b017018f0658780846668c0f0e76fbda44aedcdef0"
+},{
+  "tool": "Code Inspection",
+  "category": "Error handling",
+  "type": "Catch block may ignore exception",
+  "severity": "High",
+  "comment": "Empty 'catch' block",
+  "detailsInfo": "Reports `catch` blocks that are empty or may ignore an exception.\n\nWhile occasionally intended, empty `catch` blocks may complicate debugging.\nAlso, ignoring a `catch` parameter might be wrong.\nFinally, the static code analyzer reports if it detects that a `catch` block may silently ignore important VM\nexceptions like `NullPointerException`. Ignoring such an exception\n(without logging or rethrowing it) may hide a bug.\n\n\nThe inspection won't report any `catch` parameters named `ignore` or `ignored`.\nConversely, the inspection will warn you about any `catch` parameters named `ignore` or `ignored` that are actually in use.\nAdditionally, the inspection won't report `catch` parameters inside test sources named `expected` or `ok`.\n\n\nYou can use a quick-fix to change the exception name to `ignored`.\nFor empty **catch** blocks, an additional quick-fix to generate the **catch** body is suggested.\nYou can modify the \"Catch Statement Body\" template on the Code tab in\n[Settings \\| Editor \\| File and Code Templates](settings://fileTemplates).\n\n**Example:**\n\n\n      try {\n        throwingMethod();\n      } catch (IOException ex) {\n\n      }\n\nAfter the quick-fix is applied:\n\n\n      try {\n        System.out.println(System.in.read());\n      } catch (IOException ignored) {\n\n      }\n\nConfigure the inspection:\n\n* Use the **Do not warn when 'catch' block contains a comment** option to ignore `catch` blocks with comments.\n* Use the **Do not warn when 'catch' block is not empty** option to ignore `catch` blocks that contain statements or comments inside, while the variable itself is not used.\n* Use the **Do not warn when exception named 'ignore(d)' is not actually ignored** option to ignore variables named `ignored` if they are in use.\n\nNew in 2018.1",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
+      "language": "JAVA",
+      "line": 1208,
+      "offset": 23,
+      "length": 5,
+      "code": {
+        "startLine": 1206,
+        "length": 5,
+        "offset": 143,
+        "surroundingCode": "                        Vertex<V> vertex = node.getUnderlyingVertex();\n                        this.colorVertex(vertex);\n                    } catch (NullPointerException exception) {}\n                }\n            }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "CatchMayIgnoreException"
+  },
+  "hash": "eb68fefabc33fe04dd6cdbd9a697cfdc6bd6216cf7255916e2b2ec8049a97de8"
+},{
+  "tool": "Code Inspection",
   "category": "Performance",
   "type": "Redundant 'Collection.addAll()' call",
   "severity": "High",
@@ -430,11 +458,11 @@
       "type": "file",
       "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
       "language": "JAVA",
-      "line": 1199,
+      "line": 1242,
       "offset": 25,
       "length": 6,
       "code": {
-        "startLine": 1197,
+        "startLine": 1240,
         "length": 6,
         "offset": 131,
         "surroundingCode": "                    try {\n                        this.lastVertexClicked = (SmartGraphVertexNode<V>) node;\n                        return;\n                    } catch (Exception e) {\n                        System.out.println(e);"
@@ -445,7 +473,7 @@
     "module": "java_thesis.main",
     "inspectionName": "UnnecessaryReturn"
   },
-  "hash": "480b0c6f59bb3ff900ace521cc3dd3aca1216272df66414d4e08b00fe9059c92"
+  "hash": "6764ec48f12c4d0431300e86fece87fae43c0694313f2dcb9b89bf52586720e1"
 },{
   "tool": "Code Inspection",
   "category": "Verbose or redundant code constructs",
@@ -474,34 +502,6 @@
     "inspectionName": "ManualMinMaxCalculation"
   },
   "hash": "86e0a0d1a7ed708e69d912bdc9e703fd3be92aac1318dee629ac8f7048880242"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Constant conditions & exceptions",
-  "severity": "High",
-  "comment": "Argument 'iconStream' might be null",
-  "detailsInfo": "Reports code constructs that always produce the same result, may throw exceptions, or violates nullability contracts.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when reading a value guaranteed to be constant** option to add warnings on reading variables that contain some constant values, for example: `true`, `false`, or `null`.\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/ru/spbstu/icst/controllers/Controller.java",
-      "language": "JAVA",
-      "line": 187,
-      "offset": 46,
-      "length": 10,
-      "code": {
-        "startLine": 185,
-        "length": 10,
-        "offset": 125,
-        "surroundingCode": "        aboutWindow.setTitle(\"About\");\n        aboutWindow.setResizable(false);\n        aboutWindow.getIcons().add(new Image(iconStream));\n\n        // Setting Scene for window"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "ConstantConditions"
-  },
-  "hash": "111de5ac2d0af0278a8c3edae0cc8008d206a274f6e992bcc3f29df4b02abc7b"
 },{
   "tool": "Code Inspection",
   "category": "Probable bugs",
@@ -563,21 +563,21 @@
   "category": "Probable bugs",
   "type": "Constant conditions & exceptions",
   "severity": "High",
-  "comment": "Method invocation 'getUnderlyingVertex' may produce 'NullPointerException'",
+  "comment": "Argument 'iconStream' might be null",
   "detailsInfo": "Reports code constructs that always produce the same result, may throw exceptions, or violates nullability contracts.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when reading a value guaranteed to be constant** option to add warnings on reading variables that contain some constant values, for example: `true`, `false`, or `null`.\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
+      "path": "src/main/java/ru/spbstu/icst/controllers/Controller.java",
       "language": "JAVA",
-      "line": 1209,
-      "offset": 126,
-      "length": 19,
+      "line": 187,
+      "offset": 46,
+      "length": 10,
       "code": {
-        "startLine": 1207,
-        "length": 19,
-        "offset": 193,
-        "surroundingCode": "                        if (this.lastVertexClicked != newVertex) {\n\n                            Edge<E, V> newEdge = this.theGraph.insertEdge(lastVertexClicked.getUnderlyingVertex(), newVertex.getUnderlyingVertex(), (E) (\"e\" + String.valueOf(edge_counter++)));\n//                        SmartGraphEdgeBase graphEdge = this.createEdge(newEdge, lastVertexClicked, newVertex);\n                            createEdge(newEdge, lastVertexClicked, newVertex);"
+        "startLine": 185,
+        "length": 10,
+        "offset": 125,
+        "surroundingCode": "        aboutWindow.setTitle(\"About\");\n        aboutWindow.setResizable(false);\n        aboutWindow.getIcons().add(new Image(iconStream));\n\n        // Setting Scene for window"
       }
     }
   ],
@@ -585,35 +585,7 @@
     "module": "java_thesis.main",
     "inspectionName": "ConstantConditions"
   },
-  "hash": "efd38fe07b727c3c16b3f53e86cd8e66dbf5dace83f1360ba15282768f53ceb1"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Constant conditions & exceptions",
-  "severity": "High",
-  "comment": "Method invocation 'toExternalForm' may produce 'NullPointerException'",
-  "detailsInfo": "Reports code constructs that always produce the same result, may throw exceptions, or violates nullability contracts.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when reading a value guaranteed to be constant** option to add warnings on reading variables that contain some constant values, for example: `true`, `false`, or `null`.\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
-      "language": "JAVA",
-      "line": 1088,
-      "offset": 78,
-      "length": 14,
-      "code": {
-        "startLine": 1086,
-        "length": 14,
-        "offset": 154,
-        "surroundingCode": "                css = cssFile.toURL().toExternalForm();\n            } else {\n                css = Main.class.getResource(\"styles/smartgraph_styles.css\").toExternalForm();\n            }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "ConstantConditions"
-  },
-  "hash": "235d25b386f6ad0fa3b3774d8cebeadbd7f691494c5492b4f29d2c2d0deb2b37"
+  "hash": "8f33b702c2935683a968f1bea9638b49a6e6c8d179367f0d48de82d298dfbbf2"
 },{
   "tool": "Code Inspection",
   "category": "Probable bugs",
@@ -626,11 +598,11 @@
       "type": "file",
       "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
       "language": "JAVA",
-      "line": 769,
+      "line": 771,
       "offset": 16,
       "length": 12,
       "code": {
-        "startLine": 767,
+        "startLine": 769,
         "length": 12,
         "offset": 34,
         "surroundingCode": "        }\n        \n        return edge != null ? edge.toString() : \"<NULL>\";\n    }\n    "
@@ -641,7 +613,119 @@
     "module": "java_thesis.main",
     "inspectionName": "ConstantConditions"
   },
-  "hash": "d87fa6edbce2b4fd692ea85dbea946cd8a4f2431d9f1a10460f6d81bd88f39b8"
+  "hash": "6234f5cfcf3a8c60a3d5f36de52d4db21fdc4d7d8c2f77e58de84d54adfe1588"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Constant conditions & exceptions",
+  "severity": "High",
+  "comment": "Method invocation 'getUnderlyingVertex' may produce 'NullPointerException'",
+  "detailsInfo": "Reports code constructs that always produce the same result, may throw exceptions, or violates nullability contracts.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when reading a value guaranteed to be constant** option to add warnings on reading variables that contain some constant values, for example: `true`, `false`, or `null`.\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
+      "language": "JAVA",
+      "line": 1206,
+      "offset": 49,
+      "length": 19,
+      "code": {
+        "startLine": 1204,
+        "length": 19,
+        "offset": 75,
+        "surroundingCode": "\n                    try {\n                        Vertex<V> vertex = node.getUnderlyingVertex();\n                        this.colorVertex(vertex);\n                    } catch (NullPointerException exception) {}"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "ConstantConditions"
+  },
+  "hash": "064e634cbe01f035140c59fe8d92936013fd825039b7fde787b09ce302f09a85"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Constant conditions & exceptions",
+  "severity": "High",
+  "comment": "Method invocation 'getUnderlyingVertex' may produce 'NullPointerException'",
+  "detailsInfo": "Reports code constructs that always produce the same result, may throw exceptions, or violates nullability contracts.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when reading a value guaranteed to be constant** option to add warnings on reading variables that contain some constant values, for example: `true`, `false`, or `null`.\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
+      "language": "JAVA",
+      "line": 1252,
+      "offset": 126,
+      "length": 19,
+      "code": {
+        "startLine": 1250,
+        "length": 19,
+        "offset": 193,
+        "surroundingCode": "                        if (this.lastVertexClicked != newVertex) {\n\n                            Edge<E, V> newEdge = this.theGraph.insertEdge(lastVertexClicked.getUnderlyingVertex(), newVertex.getUnderlyingVertex(), (E) (\"e\" + String.valueOf(edgeCounter++)));\n//                        SmartGraphEdgeBase graphEdge = this.createEdge(newEdge, lastVertexClicked, newVertex);\n                            createEdge(newEdge, lastVertexClicked, newVertex);"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "ConstantConditions"
+  },
+  "hash": "7a884b81bf1c30b143e8cfdb43c55ad830d0271cf4d39d2e516452dd70aa8686"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Constant conditions & exceptions",
+  "severity": "High",
+  "comment": "Method invocation 'getUnderlyingVertex' may produce 'NullPointerException'",
+  "detailsInfo": "Reports code constructs that always produce the same result, may throw exceptions, or violates nullability contracts.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when reading a value guaranteed to be constant** option to add warnings on reading variables that contain some constant values, for example: `true`, `false`, or `null`.\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
+      "language": "JAVA",
+      "line": 1268,
+      "offset": 45,
+      "length": 19,
+      "code": {
+        "startLine": 1266,
+        "length": 19,
+        "offset": 270,
+        "surroundingCode": "                    System.out.println(\"Clicked twice\");\n                    SmartGraphVertexNode<V> node = (SmartGraphVertexNode<V>) UtilitiesJavaFX.pick(SmartGraphPanel.this, mouseEvent.getSceneX(), mouseEvent.getSceneY());\n                    Vertex<V> vertex = node.getUnderlyingVertex();\n                    this.colorVertex(vertex);\n                }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "ConstantConditions"
+  },
+  "hash": "cdb171b5c1340e3b0f273d3a39540dfda7bb0ef6367c806676cb11ddb73d6ceb"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Constant conditions & exceptions",
+  "severity": "High",
+  "comment": "Method invocation 'toExternalForm' may produce 'NullPointerException'",
+  "detailsInfo": "Reports code constructs that always produce the same result, may throw exceptions, or violates nullability contracts.\n\nExamples:\n\n    if (array.length < index) {\n      System.out.println(array[index]);\n    } // Array index is always out of bounds\n\n    if (str == null) System.out.println(\"str is null\");\n    System.out.println(str.trim());\n    // the last statement may throw an NPE\n\n    @NotNull\n    Integer square(@Nullable Integer input) {\n        // the method contract is violated\n        return input == null ? null : input * input;\n    }\n\n\nThe inspection behavior may be controlled by a number of annotations, such as\n[nullability](https://www.jetbrains.com/help/idea/nullable-and-notnull-annotations.html) annotations,\n[@Contract](https://www.jetbrains.com/help/idea/contract-annotations.html) annotation,\n`@Range` annotation and so on.\n\nConfigure the inspection:\n\n* Use the **Suggest @Nullable annotation for methods/fields/parameters where nullable values are used** option to warn when a nullable value is passed as an argument to a method with a non-annotated parameter, stored into non-annotated field, or returned from a non-annotated method. In this case, the inspection will suggest propagating the `@Nullable` annotation. You can also configure nullability annotations using the **Configure Annotations** button.\n* Use the **Treat non-annotated members and parameters as @Nullable** option to assume that non-annotated members can be null, so they must not be used in non-null context.\n* Use the **Report not-null required parameter with null-literal argument usages** option to report method parameters that cannot be null (e.g. immediately dereferenced in the method body), but there are call sites where a `null` literal is passed.\n* Use the **Report nullable methods that always return a non-null value** option to report methods that are annotated as `@Nullable`, but always return non-null value. In this case, it's suggested that you change the annotation to `@NotNull`.\n* Use the **Don't report assertions with condition statically proven to be always true** option to avoid reporting assertions that were statically proven to be always true. This also includes conditions like `if (alwaysFalseCondition) throw new IllegalArgumentException();`.\n* Use the **Ignore assert statements** option to control how the inspection treats `assert` statements. By default, the option is disabled, which means that the assertions are assumed to be executed (-ea mode). If the option is enabled, the assertions will be completely ignored (-da mode).\n* Use the **Warn when reading a value guaranteed to be constant** option to add warnings on reading variables that contain some constant values, for example: `true`, `false`, or `null`.\n* Use the **Report problems that happen only on some code paths** option to control whether to report problems that may happen only on some code path. If this option is disabled, warnings like *exception is possible* will not be reported. The inspection will report only warnings like *exception will definitely occur*. This mode may greatly reduce the number of false-positives, especially if the code is not consistently annotated with nullability and contract annotations. That is why it can be useful for finding the most important problems in legacy code bases.",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
+      "language": "JAVA",
+      "line": 1090,
+      "offset": 78,
+      "length": 14,
+      "code": {
+        "startLine": 1088,
+        "length": 14,
+        "offset": 154,
+        "surroundingCode": "                css = cssFile.toURL().toExternalForm();\n            } else {\n                css = Main.class.getResource(\"styles/smartgraph_styles.css\").toExternalForm();\n            }\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "ConstantConditions"
+  },
+  "hash": "952c6f08a05e2c9bfa1705e6ff4d5cdeace8cbcc9eade297bd6b4e1de7741464"
 },{
   "tool": "Code Inspection",
   "category": "Probable bugs",
@@ -654,11 +738,11 @@
       "type": "file",
       "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
       "language": "JAVA",
-      "line": 751,
+      "line": 753,
       "offset": 16,
       "length": 14,
       "code": {
-        "startLine": 749,
+        "startLine": 751,
         "length": 14,
         "offset": 34,
         "surroundingCode": "        }\n        \n        return vertex != null ? vertex.toString() : \"<NULL>\";\n    }\n    "
@@ -669,7 +753,7 @@
     "module": "java_thesis.main",
     "inspectionName": "ConstantConditions"
   },
-  "hash": "6388473c353b697c3e7c76b91e0b007d167b9a82fe288375fb0e446816454907"
+  "hash": "712431ba398192463f34a3391a1e44c8c799653af77cbfe989ab51d8612968a8"
 },{
   "tool": "Code Inspection",
   "category": "Probable bugs",
@@ -710,11 +794,11 @@
       "type": "file",
       "path": "src/main/java/ru/spbstu/icst/controllers/IsToVcScreenController.java",
       "language": "JAVA",
-      "line": 70,
+      "line": 84,
       "offset": 44,
       "length": 10,
       "code": {
-        "startLine": 68,
+        "startLine": 82,
         "length": 10,
         "offset": 119,
         "surroundingCode": "            this.stage = new Stage();\n            stage.setScene(newScene);\n            stage.getIcons().add(new Image(iconStream));\n            stage.setMaximized(true);\n            stage.show();"
@@ -725,7 +809,7 @@
     "module": "java_thesis.main",
     "inspectionName": "ConstantConditions"
   },
-  "hash": "41d446684beb6f957b533737a9b1e9d60156bb03ee297e5618c7adc3643030b1"
+  "hash": "7f6669d17545bc0f29e9c7285e8d70037eb7c7e33e80d77f00a115490fa37cbf"
 },{
   "tool": "Code Inspection",
   "category": "Memory",
@@ -766,11 +850,11 @@
       "type": "file",
       "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
       "language": "JAVA",
-      "line": 1135,
+      "line": 1149,
       "offset": 19,
       "length": 5,
       "code": {
-        "startLine": 1133,
+        "startLine": 1147,
         "length": 5,
         "offset": 66,
         "surroundingCode": "     * @param <T> the type of the tuple\n     */\n    private class Tuple<T> {\n\n        private final T first;"
@@ -781,7 +865,7 @@
     "module": "java_thesis.main",
     "inspectionName": "InnerClassMayBeStatic"
   },
-  "hash": "003f60777b79bebee48dc00abdde4fdeef8b67ee00a90b995626829ed841b91d"
+  "hash": "7efac1c37b9a72f9fc00d1823ff81d75d34dc5e31741184907248b57346495eb"
 },{
   "tool": "Code Inspection",
   "category": "Memory",
@@ -822,11 +906,11 @@
       "type": "file",
       "path": "src/main/java/ru/spbstu/icst/controllers/CnfScreenController.java",
       "language": "JAVA",
-      "line": 114,
+      "line": 113,
       "offset": 9,
       "length": 6,
       "code": {
-        "startLine": 112,
+        "startLine": 111,
         "length": 6,
         "offset": 54,
         "surroundingCode": "\n        // Enable solution field if required\n        switch (reduction.getReductionMode()) {\n            case FORWARD_SOLVE -> {\n                this.solutionForConvertedFormula.setDisable(false);"
@@ -837,35 +921,7 @@
     "module": "java_thesis.main",
     "inspectionName": "SwitchStatementsWithoutDefault"
   },
-  "hash": "1a8e03eeab85841b8a58e4d07e994fbc0481d9ab679206df601275375d719b90"
-},{
-  "tool": "Code Inspection",
-  "category": "Probable bugs",
-  "type": "Unused assignment",
-  "severity": "High",
-  "comment": "Variable 'isDragging' initializer 'false' is redundant",
-  "detailsInfo": "Reports assignment values that are not used after the assignment. If the assignment value is unused, it's better to remove the assignment to shorten the code and avoid redundant allocations.\n\nThe following cases are reported:\n\n* The variable never gets read after the assignment.\n* The variable is always overwritten with a new value before it is read.\n* The variable initializer is redundant (for one of the two reasons above).\n\nConfigure the inspection:\n\n\nUse the **Report redundant initializers** option to report redundant initializers:\n\n\n      int getI() {\n        int i = 0; // redundant initialization\n        i = 2;\n        return i;\n      }\n\n\nUse the **Report ++i when may be replaced with (i + 1)** option to report the cases when `++i` expression\nmay be replaced with `i + 1`:\n\n\n      int preInc(int i) {\n        int res = i;\n        return ++res;\n      }\n\n\nUse the **Report i++ when changed value is not used afterwards** option to report the cases when the result of `i++` expression\nis not used later:\n\n\n      int postInc(int i) {\n        int res = i;\n        return res++;\n      }\n",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphVertexNode.java",
-      "language": "JAVA",
-      "line": 60,
-      "offset": 34,
-      "length": 5,
-      "code": {
-        "startLine": 58,
-        "length": 5,
-        "offset": 79,
-        "surroundingCode": "\n    private SmartLabel attachedLabel = null;\n    private boolean isDragging = false;\n    private boolean allowMove = false;\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "UnusedAssignment"
-  },
-  "hash": "3edc36b6e3dd6a0a45fcd55101e9717bdc6e7974a0394ff8b56a8d305ff719b8"
+  "hash": "009b304fc0a6a13ebc9cbd05c34234e138bf17dc84b71a344c8dc2013062b6c4"
 },{
   "tool": "Code Inspection",
   "category": "Probable bugs",
@@ -894,6 +950,34 @@
     "inspectionName": "UnusedAssignment"
   },
   "hash": "d77fdd2aa10b0fdf0e68d22b0546b42b3121d73d3cb51f05278d667979f3165f"
+},{
+  "tool": "Code Inspection",
+  "category": "Probable bugs",
+  "type": "Unused assignment",
+  "severity": "High",
+  "comment": "Variable 'isDragging' initializer 'false' is redundant",
+  "detailsInfo": "Reports assignment values that are not used after the assignment. If the assignment value is unused, it's better to remove the assignment to shorten the code and avoid redundant allocations.\n\nThe following cases are reported:\n\n* The variable never gets read after the assignment.\n* The variable is always overwritten with a new value before it is read.\n* The variable initializer is redundant (for one of the two reasons above).\n\nConfigure the inspection:\n\n\nUse the **Report redundant initializers** option to report redundant initializers:\n\n\n      int getI() {\n        int i = 0; // redundant initialization\n        i = 2;\n        return i;\n      }\n\n\nUse the **Report ++i when may be replaced with (i + 1)** option to report the cases when `++i` expression\nmay be replaced with `i + 1`:\n\n\n      int preInc(int i) {\n        int res = i;\n        return ++res;\n      }\n\n\nUse the **Report i++ when changed value is not used afterwards** option to report the cases when the result of `i++` expression\nis not used later:\n\n\n      int postInc(int i) {\n        int res = i;\n        return res++;\n      }\n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphVertexNode.java",
+      "language": "JAVA",
+      "line": 60,
+      "offset": 34,
+      "length": 5,
+      "code": {
+        "startLine": 58,
+        "length": 5,
+        "offset": 79,
+        "surroundingCode": "\n    private SmartLabel attachedLabel = null;\n    private boolean isDragging = false;\n    private boolean allowMove = false;\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "UnusedAssignment"
+  },
+  "hash": "3edc36b6e3dd6a0a45fcd55101e9717bdc6e7974a0394ff8b56a8d305ff719b8"
 },{
   "tool": "Code Inspection",
   "category": "Probable bugs",
@@ -934,11 +1018,11 @@
       "type": "file",
       "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
       "language": "JAVA",
-      "line": 807,
+      "line": 809,
       "offset": 38,
       "length": 1,
       "code": {
-        "startLine": 805,
+        "startLine": 807,
         "length": 1,
         "offset": 168,
         "surroundingCode": "                Point2D repellingForce = repellingForce(v.getUpdatedPosition(), other.getUpdatedPosition(), this.repulsionForce);\n\n                double deltaForceX = 0, deltaForceY = 0;\n\n                //compute attractive and reppeling forces"
@@ -949,7 +1033,7 @@
     "module": "java_thesis.main",
     "inspectionName": "UnusedAssignment"
   },
-  "hash": "c8a7934b0f2024708ace2010def52e2f73ed81b89b7cfb08aafb302987e91136"
+  "hash": "58bcf047ed93e69d7d9c9390737963788cce4df28058ae5464f43b77c716b8e4"
 },{
   "tool": "Code Inspection",
   "category": "Probable bugs",
@@ -962,11 +1046,11 @@
       "type": "file",
       "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
       "language": "JAVA",
-      "line": 807,
+      "line": 809,
       "offset": 55,
       "length": 1,
       "code": {
-        "startLine": 805,
+        "startLine": 807,
         "length": 1,
         "offset": 185,
         "surroundingCode": "                Point2D repellingForce = repellingForce(v.getUpdatedPosition(), other.getUpdatedPosition(), this.repulsionForce);\n\n                double deltaForceX = 0, deltaForceY = 0;\n\n                //compute attractive and reppeling forces"
@@ -977,7 +1061,7 @@
     "module": "java_thesis.main",
     "inspectionName": "UnusedAssignment"
   },
-  "hash": "60086cc394498433b6efb3eb6f9a7f1d0ac082cf5d912ba67402b9c7a277f459"
+  "hash": "356daee0c3aceaed633bdd12c4865222c22ee11ff32591012a8c30bf64047e26"
 },{
   "tool": "Code Inspection",
   "category": "Probable bugs",
@@ -1018,34 +1102,6 @@
       "type": "file",
       "path": "src/main/java/ru/spbstu/icst/smartgraph/graph/DigraphEdgeList.java",
       "language": "JAVA",
-      "line": 138,
-      "offset": 13,
-      "length": 8,
-      "code": {
-        "startLine": 136,
-        "length": 8,
-        "offset": 103,
-        "surroundingCode": "        List<Edge<E, V>> list = new ArrayList<>();\n        edges.values().forEach((e) -> {\n            list.add(e);\n        });\n        return list;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "UseBulkOperation"
-  },
-  "hash": "3ff51072a565824984ddb6b87d52fd7602444f9432ff7b78d22bec3fd923c623"
-},{
-  "tool": "Code Inspection",
-  "category": "Performance",
-  "type": "Bulk operation can be used instead of iteration",
-  "severity": "High",
-  "comment": "Iteration can be replaced with bulk 'Collection.addAll()' call",
-  "detailsInfo": "Reports single operations inside loops that could be replaced with a bulk method.\n\n\nNot only are bulk methods shorter, but in some cases they may be more performant as well.\n\n**Example:**\n\n      void test(Collection<Integer> numbers) {\n        List<Integer> result = new ArrayList<>();\n        for (Integer i : numbers) {\n          result.add(i);\n        }\n      }\n\nAfter the fix is applied:\n\n\n      void test(Collection<Integer> numbers) {\n        List<Integer> result = new ArrayList<>();\n        result.addAll(numbers);\n      }\n\n\nThe **Use Arrays.asList() to wrap arrays** option allows to report arrays, even if the bulk method requires a collection.\nIn this case the quick-fix will automatically wrap the array in `Arrays.asList()` call.\n\nNew in 2017.1",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/ru/spbstu/icst/smartgraph/graph/DigraphEdgeList.java",
-      "language": "JAVA",
       "line": 129,
       "offset": 13,
       "length": 8,
@@ -1072,13 +1128,41 @@
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graph/DigraphEdgeList.java",
       "language": "JAVA",
-      "line": 876,
+      "line": 138,
       "offset": 13,
       "length": 8,
       "code": {
-        "startLine": 874,
+        "startLine": 136,
+        "length": 8,
+        "offset": 103,
+        "surroundingCode": "        List<Edge<E, V>> list = new ArrayList<>();\n        edges.values().forEach((e) -> {\n            list.add(e);\n        });\n        return list;"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "UseBulkOperation"
+  },
+  "hash": "3ff51072a565824984ddb6b87d52fd7602444f9432ff7b78d22bec3fd923c623"
+},{
+  "tool": "Code Inspection",
+  "category": "Performance",
+  "type": "Bulk operation can be used instead of iteration",
+  "severity": "High",
+  "comment": "Iteration can be replaced with bulk 'Collection.addAll()' call",
+  "detailsInfo": "Reports single operations inside loops that could be replaced with a bulk method.\n\n\nNot only are bulk methods shorter, but in some cases they may be more performant as well.\n\n**Example:**\n\n      void test(Collection<Integer> numbers) {\n        List<Integer> result = new ArrayList<>();\n        for (Integer i : numbers) {\n          result.add(i);\n        }\n      }\n\nAfter the fix is applied:\n\n\n      void test(Collection<Integer> numbers) {\n        List<Integer> result = new ArrayList<>();\n        result.addAll(numbers);\n      }\n\n\nThe **Use Arrays.asList() to wrap arrays** option allows to report arrays, even if the bulk method requires a collection.\nIn this case the quick-fix will automatically wrap the array in `Arrays.asList()` call.\n\nNew in 2017.1",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
+      "language": "JAVA",
+      "line": 878,
+      "offset": 13,
+      "length": 8,
+      "code": {
+        "startLine": 876,
         "length": 8,
         "offset": 118,
         "surroundingCode": "        List<Vertex<V>> list = new LinkedList<>();\n        for (Vertex<V> vertex : theGraph.vertices()) {\n            list.add(vertex);\n        }\n        return list;"
@@ -1089,7 +1173,7 @@
     "module": "java_thesis.main",
     "inspectionName": "UseBulkOperation"
   },
-  "hash": "8873af78b8f720cc6ed35d820ac785c024eb73db90e39016e1457b1387da2c1c"
+  "hash": "de53fa9840edc2dd920b91c82c8650d8069d1acabbf0bb8556fe76fb835aa1b5"
 },{
   "tool": "Code Inspection",
   "category": "Performance",
@@ -1102,11 +1186,11 @@
       "type": "file",
       "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
       "language": "JAVA",
-      "line": 868,
+      "line": 870,
       "offset": 13,
       "length": 8,
       "code": {
-        "startLine": 866,
+        "startLine": 868,
         "length": 8,
         "offset": 115,
         "surroundingCode": "        List<Edge<E, V>> list = new LinkedList<>();\n        for (Edge<E, V> edge : theGraph.edges()) {\n            list.add(edge);\n        }\n        return list;"
@@ -1117,35 +1201,7 @@
     "module": "java_thesis.main",
     "inspectionName": "UseBulkOperation"
   },
-  "hash": "32303f51542506881b92c04864de2c28c911ad06195ddbca6dafcd1dbc91d413"
-},{
-  "tool": "Code Inspection",
-  "category": "Performance",
-  "type": "Bulk operation can be used instead of iteration",
-  "severity": "High",
-  "comment": "Iteration can be replaced with bulk 'Collection.addAll()' call",
-  "detailsInfo": "Reports single operations inside loops that could be replaced with a bulk method.\n\n\nNot only are bulk methods shorter, but in some cases they may be more performant as well.\n\n**Example:**\n\n      void test(Collection<Integer> numbers) {\n        List<Integer> result = new ArrayList<>();\n        for (Integer i : numbers) {\n          result.add(i);\n        }\n      }\n\nAfter the fix is applied:\n\n\n      void test(Collection<Integer> numbers) {\n        List<Integer> result = new ArrayList<>();\n        result.addAll(numbers);\n      }\n\n\nThe **Use Arrays.asList() to wrap arrays** option allows to report arrays, even if the bulk method requires a collection.\nIn this case the quick-fix will automatically wrap the array in `Arrays.asList()` call.\n\nNew in 2017.1",
-  "sources": [
-    {
-      "type": "file",
-      "path": "src/main/java/ru/spbstu/icst/smartgraph/graph/GraphEdgeList.java",
-      "language": "JAVA",
-      "line": 68,
-      "offset": 13,
-      "length": 8,
-      "code": {
-        "startLine": 66,
-        "length": 8,
-        "offset": 110,
-        "surroundingCode": "        List<Vertex<V>> list = new ArrayList<>();\n        for (Vertex<V> v : vertices.values()) {\n            list.add(v);\n        }\n        return list;"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "UseBulkOperation"
-  },
-  "hash": "3e62ea929ce5c500e40b4c6d83e180217b44448ec5e24e286a1f516d680c37d7"
+  "hash": "23b9075cc564f990ee746026d1beb3468be750274c2dae4c833d1b76d20fe314"
 },{
   "tool": "Code Inspection",
   "category": "Performance",
@@ -1176,32 +1232,32 @@
   "hash": "c4af4093ed0d98712b8f48ddc20b0807671154e8c4545acc3e8756395ef3b2e6"
 },{
   "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "'Throwable' printed to 'System.out'",
+  "category": "Performance",
+  "type": "Bulk operation can be used instead of iteration",
   "severity": "High",
-  "comment": "'Throwable' argument 'e' to 'System.out.println()' call",
-  "detailsInfo": "Reports calls to `System.out.println()` with an exception as an argument.\n\nUsing print statements for logging exceptions hides the stack trace from you, which can complicate the investigation of the problem.\nIt is recommended that you use logger instead.\n\nCalls to `System.out.print()`, `System.err.println()`, and `System.err.print()` with an exception argument are also\nreported. It is better to use a logger to log exceptions instead.\n\nFor example, instead of:\n\n\n      try {\n          foo();\n      } catch (Exception e) {\n          System.out.println(e);\n      }\n\nuse the following code:\n\n\n      try {\n          foo();\n      } catch (Exception e) {\n          logger.warn(e); // logger call may be different\n      }\n",
+  "comment": "Iteration can be replaced with bulk 'Collection.addAll()' call",
+  "detailsInfo": "Reports single operations inside loops that could be replaced with a bulk method.\n\n\nNot only are bulk methods shorter, but in some cases they may be more performant as well.\n\n**Example:**\n\n      void test(Collection<Integer> numbers) {\n        List<Integer> result = new ArrayList<>();\n        for (Integer i : numbers) {\n          result.add(i);\n        }\n      }\n\nAfter the fix is applied:\n\n\n      void test(Collection<Integer> numbers) {\n        List<Integer> result = new ArrayList<>();\n        result.addAll(numbers);\n      }\n\n\nThe **Use Arrays.asList() to wrap arrays** option allows to report arrays, even if the bulk method requires a collection.\nIn this case the quick-fix will automatically wrap the array in `Arrays.asList()` call.\n\nNew in 2017.1",
   "sources": [
     {
       "type": "file",
-      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graph/GraphEdgeList.java",
       "language": "JAVA",
-      "line": 1201,
-      "offset": 44,
-      "length": 1,
+      "line": 68,
+      "offset": 13,
+      "length": 8,
       "code": {
-        "startLine": 1199,
-        "length": 1,
-        "offset": 119,
-        "surroundingCode": "                        return;\n                    } catch (Exception e) {\n                        System.out.println(e);\n                    }\n                } else {"
+        "startLine": 66,
+        "length": 8,
+        "offset": 110,
+        "surroundingCode": "        List<Vertex<V>> list = new ArrayList<>();\n        for (Vertex<V> v : vertices.values()) {\n            list.add(v);\n        }\n        return list;"
       }
     }
   ],
   "attributes": {
     "module": "java_thesis.main",
-    "inspectionName": "ThrowablePrintedToSystemOut"
+    "inspectionName": "UseBulkOperation"
   },
-  "hash": "cc6960e4393621e36673e03de8ff12a945cdf896bb5bdffd617dda5bef1a9a4b"
+  "hash": "3e62ea929ce5c500e40b4c6d83e180217b44448ec5e24e286a1f516d680c37d7"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -1214,11 +1270,39 @@
       "type": "file",
       "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
       "language": "JAVA",
-      "line": 1217,
+      "line": 1244,
       "offset": 44,
       "length": 1,
       "code": {
-        "startLine": 1215,
+        "startLine": 1242,
+        "length": 1,
+        "offset": 119,
+        "surroundingCode": "                        return;\n                    } catch (Exception e) {\n                        System.out.println(e);\n                    }\n                } else {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "ThrowablePrintedToSystemOut"
+  },
+  "hash": "1ed1b69a4609d5e494108264499479b0d1fedb162f7ee69dfcd84c4bfeb791cd"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "'Throwable' printed to 'System.out'",
+  "severity": "High",
+  "comment": "'Throwable' argument 'e' to 'System.out.println()' call",
+  "detailsInfo": "Reports calls to `System.out.println()` with an exception as an argument.\n\nUsing print statements for logging exceptions hides the stack trace from you, which can complicate the investigation of the problem.\nIt is recommended that you use logger instead.\n\nCalls to `System.out.print()`, `System.err.println()`, and `System.err.print()` with an exception argument are also\nreported. It is better to use a logger to log exceptions instead.\n\nFor example, instead of:\n\n\n      try {\n          foo();\n      } catch (Exception e) {\n          System.out.println(e);\n      }\n\nuse the following code:\n\n\n      try {\n          foo();\n      } catch (Exception e) {\n          logger.warn(e); // logger call may be different\n      }\n",
+  "sources": [
+    {
+      "type": "file",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphPanel.java",
+      "language": "JAVA",
+      "line": 1260,
+      "offset": 44,
+      "length": 1,
+      "code": {
+        "startLine": 1258,
         "length": 1,
         "offset": 113,
         "surroundingCode": "                        }\n                    } catch (Exception e) {\n                        System.out.println(e);\n                    }\n                    this.lastVertexClicked = null;"
@@ -1229,5 +1313,5 @@
     "module": "java_thesis.main",
     "inspectionName": "ThrowablePrintedToSystemOut"
   },
-  "hash": "d32589c8fa297221e3a08d22de2ff0c2d45a2b1408d9395f4c7ffbcaf1f306a4"
+  "hash": "57ab2bebd489716c3cbc40bc9dc354050c34d958bb17bf845ee22bedd3e0fb44"
 }]}

@@ -1,13 +1,13 @@
 {
-  "total": 44,
+  "total": 47,
   "tools inspection": {
-    "Code Inspection": 44
+    "Code Inspection": 47
   },
   "attributes": {
     "vcs": {
       "sarifIdea": {
         "repositoryUri": "https://github.com/tikerlade/java_thesis",
-        "revisionId": "1cd79c42df328910feaf9f6f8c78466996640c74",
+        "revisionId": "7fa5e20762cbc453000db10ddf6e5cc155d5d37c",
         "branch": "master"
       }
     },
