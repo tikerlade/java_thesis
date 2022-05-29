@@ -1,65 +1,65 @@
 {"version":"3","listProblem":[{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "type": "Commented out code",
   "tags": [
     "JAVA"
   ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "severity": "Moderate",
+  "comment": "Commented out code (7 lines)",
+  "detailsInfo": "Reports comments that contain Java code.\n\nUsually, code that is commented out gets outdated very quickly and becomes misleading.\nAs most projects use some kind of version control system,\nit is better to delete commented out code completely and use the VCS history instead.\n\nNew in 2020.3",
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/Graph.java",
+      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
       "language": "JAVA",
-      "line": 69,
-      "offset": 8,
-      "length": 10,
+      "line": 163,
+      "offset": 0,
+      "length": 2,
       "code": {
-        "startLine": 67,
-        "length": 10,
-        "offset": 69,
-        "surroundingCode": "    public void readMeta() {\n        // Read metainformation\n        System.out.println(\"Graph nodes are 0-based indexed.\\n\" +\n                \"On next line print space separated two numbers: <Number of nodes in graph> and <Number of edges you will input>\");\n        this.vertexCount = scanner.nextInt();"
+        "startLine": 161,
+        "length": 2,
+        "offset": 66,
+        "surroundingCode": "\n        // Match variables from temp with variables from formula\n//        for (Literal trueLiteral : tempLiterals) {\n//            for (Literal otherLiteral : allLiterals) {\n//                if (trueLiteral.isStringReprEquals(otherLiteral)) {"
       }
     }
   ],
   "attributes": {
     "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "CommentedOutCode"
   },
-  "hash": "3364467078328259998"
+  "hash": "-4235908609396198012"
 },{
   "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "category": "Assignment issues",
+  "type": "Assignment can be replaced with operator assignment",
   "tags": [
     "JAVA"
   ],
   "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "<code>angle = angle - (distance / 1500 * angle)</code> could be simplified to 'angle -= (distance / 1500 * angle)'",
+  "detailsInfo": "Reports assignment operations which can be replaced by operator-assignment.\n\nCode using operator assignment is shorter and may be clearer.\n\n**Example:**\n\n      x = x + 3;\n      x = x / 3;\n\nAfter the quick fix is applied:\n\n      x += 3;\n      x /= 3;\n\n\nUse the **Ignore conditional operators** option to ignore `&&`\nand `||`. Replacing conditional operators with operator\nassignment would change the evaluation from lazy to eager, which may change the semantics of the expression.\n\n\nUse the **Ignore obscure operators** option to ignore `^` and `%`, which are less known.",
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/controllers/Controller.java",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphEdgeCurve.java",
       "language": "JAVA",
-      "line": 71,
+      "line": 143,
       "offset": 12,
-      "length": 10,
+      "length": 41,
       "code": {
-        "startLine": 69,
-        "length": 10,
-        "offset": 70,
-        "surroundingCode": "            stage.show();\n        } catch (Exception e) {\n            System.out.println(e.getMessage());\n        }\n    }"
+        "startLine": 141,
+        "length": 41,
+        "offset": 145,
+        "surroundingCode": "            //TODO: remove \"magic number\" 1500 and provide a distance function for the \n            //decreasing angle with distance\n            angle = angle - (distance / 1500 * angle);\n\n            midpoint = UtilitiesPoint2D.rotate(midpoint,"
       }
     }
   ],
   "attributes": {
     "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ReplaceAssignmentWithOperatorAssignment"
   },
-  "hash": "-2758222932714473829"
+  "hash": "-8965507301301934599"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -73,16 +73,16 @@
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/controllers/Controller.java",
+      "path": "src/main/java/ru/spbstu/icst/reductions/Reduction.java",
       "language": "JAVA",
-      "line": 151,
+      "line": 99,
       "offset": 8,
       "length": 10,
       "code": {
-        "startLine": 149,
+        "startLine": 97,
         "length": 10,
-        "offset": 119,
-        "surroundingCode": "        // If theme is light - do nothing, light is default\n        String theme = pref.get(\"theme\", \"light\");\n        System.out.println(theme);\n\n//        if (theme.equals(\"dark\")) {"
+        "offset": 65,
+        "surroundingCode": "     */\n    public void forwardOnly() throws Exception {\n        System.out.println(\"Now you can input data for your \" + this.problemA.getShortname() +\n                \" problem and you will get output for \" + this.problemB.getShortname() + \" problem.\");\n        this.problemA.readInput();"
       }
     }
   ],
@@ -90,5 +90,98 @@
     "module": "java_thesis.main",
     "inspectionName": "SystemOutErr"
   },
-  "hash": "-470643937141790007"
+  "hash": "345908115313215071"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/reductions/Reduction.java",
+      "language": "JAVA",
+      "line": 131,
+      "offset": 8,
+      "length": 10,
+      "code": {
+        "startLine": 129,
+        "length": 10,
+        "offset": 66,
+        "surroundingCode": "     */\n    public void backwardOnly() throws Exception {\n        System.out.println(\"Input data for your \" + this.problemB.getShortname() + \" problem:\");\n        this.problemB.readInput();\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "-6997316807208098633"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/reductions/Reduction.java",
+      "language": "JAVA",
+      "line": 134,
+      "offset": 8,
+      "length": 10,
+      "code": {
+        "startLine": 132,
+        "length": 10,
+        "offset": 44,
+        "surroundingCode": "        this.problemB.readInput();\n\n        System.out.println(\"Input solution for your \" + this.problemB.getShortname() + \" problem:\");\n        this.problemB.readSolution();\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "1901478753926063149"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/reductions/Reduction.java",
+      "language": "JAVA",
+      "line": 72,
+      "offset": 16,
+      "length": 10,
+      "code": {
+        "startLine": 70,
+        "length": 10,
+        "offset": 87,
+        "surroundingCode": "            case FORWARD_ONLY -> {\n                this.forwardOnly();\n                System.out.println(this.problemB);\n            }\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "1951859881337838903"
 }]}
