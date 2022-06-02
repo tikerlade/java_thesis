@@ -1,96 +1,34 @@
 {"version":"3","listProblem":[{
   "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
+  "category": "Assignment issues",
+  "type": "Assignment can be replaced with operator assignment",
   "tags": [
     "JAVA"
   ],
   "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "comment": "<code>angle = angle - (distance / 1500 * angle)</code> could be simplified to 'angle -= (distance / 1500 * angle)'",
+  "detailsInfo": "Reports assignment operations which can be replaced by operator-assignment.\n\nCode using operator assignment is shorter and may be clearer.\n\n**Example:**\n\n      x = x + 3;\n      x = x / 3;\n\nAfter the quick fix is applied:\n\n      x += 3;\n      x /= 3;\n\n\nUse the **Ignore conditional operators** option to ignore `&&`\nand `||`. Replacing conditional operators with operator\nassignment would change the evaluation from lazy to eager, which may change the semantics of the expression.\n\n\nUse the **Ignore obscure operators** option to ignore `^` and `%`, which are less known.",
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/Graph.java",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphEdgeCurve.java",
       "language": "JAVA",
-      "line": 69,
-      "offset": 8,
-      "length": 10,
-      "code": {
-        "startLine": 67,
-        "length": 10,
-        "offset": 69,
-        "surroundingCode": "    public void readMeta() {\n        // Read metainformation\n        System.out.println(\"Graph nodes are 0-based indexed.\\n\" +\n                \"On next line print space separated two numbers: <Number of nodes in graph> and <Number of edges you will input>\");\n        this.vertexCount = scanner.nextInt();"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "3364467078328259998"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
-      "language": "JAVA",
-      "line": 79,
-      "offset": 8,
-      "length": 10,
-      "code": {
-        "startLine": 77,
-        "length": 10,
-        "offset": 118,
-        "surroundingCode": "    public ProgramMode readProgramMode() {\n        // Let's understand in which mode user want to run program\n        System.out.println(\"\\nBefore you input data for problem please choose mode in which you will run program:\");\n\n        for (int i = 0; i < ProgramMode.numModes; i++) {"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "-804007862499475279"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
-      "language": "JAVA",
-      "line": 83,
+      "line": 143,
       "offset": 12,
-      "length": 10,
+      "length": 41,
       "code": {
-        "startLine": 81,
-        "length": 10,
-        "offset": 158,
-        "surroundingCode": "        for (int i = 0; i < ProgramMode.numModes; i++) {\n            String formattedEntry = String.format(\"%d. %s\", i, ProgramMode.values()[i]);\n            System.out.println(formattedEntry);\n        }\n"
+        "startLine": 141,
+        "length": 41,
+        "offset": 145,
+        "surroundingCode": "            //TODO: remove \"magic number\" 1500 and provide a distance function for the \n            //decreasing angle with distance\n            angle = angle - (distance / 1500 * angle);\n\n            midpoint = UtilitiesPoint2D.rotate(midpoint,"
       }
     }
   ],
   "attributes": {
     "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
+    "inspectionName": "ReplaceAssignmentWithOperatorAssignment"
   },
-  "hash": "-6439837101327879781"
+  "hash": "-8965507301301934599"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -104,255 +42,7 @@
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
-      "language": "JAVA",
-      "line": 89,
-      "offset": 12,
-      "length": 10,
-      "code": {
-        "startLine": 87,
-        "length": 10,
-        "offset": 90,
-        "surroundingCode": "        // Wrong input\n        if (mode < 0 || mode > ProgramMode.numModes) {\n            System.out.println(\"Wrong mode number\");\n        }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "5041562942602812531"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
-      "language": "JAVA",
-      "line": 41,
-      "offset": 12,
-      "length": 10,
-      "code": {
-        "startLine": 39,
-        "length": 10,
-        "offset": 85,
-        "surroundingCode": "        while (userContinue.equals(\"Y\")) {\n            // Intro messages\n            System.out.println(\"Hello, this program will complete reduction of your problem to other NPC problem with your data.\");\n            System.out.println(\"Please select, which one of the following reductions you would like to complete:\");\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "7184408466671331867"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
-      "language": "JAVA",
-      "line": 42,
-      "offset": 12,
-      "length": 10,
-      "code": {
-        "startLine": 40,
-        "length": 10,
-        "offset": 174,
-        "surroundingCode": "            // Intro messages\n            System.out.println(\"Hello, this program will complete reduction of your problem to other NPC problem with your data.\");\n            System.out.println(\"Please select, which one of the following reductions you would like to complete:\");\n\n            // Print all reductions we have"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "4982122679970894557"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
-      "language": "JAVA",
-      "line": 47,
-      "offset": 16,
-      "length": 10,
-      "code": {
-        "startLine": 45,
-        "length": 10,
-        "offset": 131,
-        "surroundingCode": "            for (int i = 0; i < reductions.size(); i++) {\n                Reduction reduction = reductions.get(i);\n                System.out.println(i + \". \" + reduction.toString());\n            }\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "3103953102152045121"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/Solver.java",
-      "language": "JAVA",
-      "line": 65,
-      "offset": 12,
-      "length": 10,
-      "code": {
-        "startLine": 63,
-        "length": 10,
-        "offset": 55,
-        "surroundingCode": "\n            // Does user want to continue\n            System.out.print(\"Do you want to continue (Y/N): \");\n            userContinue = scanner.next();\n        }"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "-8862529458816755905"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/IndependentSet.java",
-      "language": "JAVA",
-      "line": 52,
-      "offset": 8,
-      "length": 10,
-      "code": {
-        "startLine": 50,
-        "length": 10,
-        "offset": 103,
-        "surroundingCode": "    public void readInput() {\n        // Get information about size of cover we'll try to find\n        System.out.print(\"Number of nodes required in independent set: \");\n        this.independentSetSize = scanner.nextInt();\n"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "546347016270228144"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/IndependentSet.java",
-      "language": "JAVA",
-      "line": 63,
-      "offset": 12,
-      "length": 10,
-      "code": {
-        "startLine": 61,
-        "length": 10,
-        "offset": 87,
-        "surroundingCode": "        // TODO consider Exceptions\n        if (independentSetSize <= 0) {\n            System.out.println(\"Independent set size cannot be less then 1!\");\n        } else if (independentSetSize > this.graph.getVertexCount()) {\n            String answer = String.format(\"No solution can be found. Independent set size is greater then number of nodes (%d > %d).\","
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "-5788404771148057030"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/IndependentSet.java",
-      "language": "JAVA",
-      "line": 67,
-      "offset": 12,
-      "length": 10,
-      "code": {
-        "startLine": 65,
-        "length": 10,
-        "offset": 217,
-        "surroundingCode": "            String answer = String.format(\"No solution can be found. Independent set size is greater then number of nodes (%d > %d).\",\n                    independentSetSize, this.graph.getVertexCount());\n            System.out.println(answer);\n        } else {\n            independentSet = this.graph.getIndependentSet();"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "SystemOutErr"
-  },
-  "hash": "-262666978932354248"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Use of 'System.out' or 'System.err'",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "High",
-  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
-  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/IndependentSet.java",
+      "path": "src/main/java/ru/spbstu/icst/problems/VertexCover.java",
       "language": "JAVA",
       "line": 84,
       "offset": 12,
@@ -361,7 +51,7 @@
         "startLine": 82,
         "length": 10,
         "offset": 75,
-        "surroundingCode": "    public void printSolution() {\n        if (this.isSolved) {\n            System.out.println(\"Vertices which constructs independent set in your graph:\");\n            System.out.println(this.graph.makeSetPrintable(this.independentSet));\n        } else {"
+        "surroundingCode": "    public void printSolution() {\n        if (this.isSolved) {\n            System.out.println(\"Vertices which constructs vertex cover in your graph:\");\n            System.out.println(this.graph.makeSetPrintable(this.vertexCover));\n        } else {"
       }
     }
   ],
@@ -369,7 +59,7 @@
     "module": "java_thesis.main",
     "inspectionName": "SystemOutErr"
   },
-  "hash": "5938066803337963710"
+  "hash": "-9139894401908893225"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -383,7 +73,7 @@
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/IndependentSet.java",
+      "path": "src/main/java/ru/spbstu/icst/problems/VertexCover.java",
       "language": "JAVA",
       "line": 85,
       "offset": 12,
@@ -391,8 +81,8 @@
       "code": {
         "startLine": 83,
         "length": 10,
-        "offset": 133,
-        "surroundingCode": "        if (this.isSolved) {\n            System.out.println(\"Vertices which constructs independent set in your graph:\");\n            System.out.println(this.graph.makeSetPrintable(this.independentSet));\n        } else {\n            System.out.printf(\"No solution found for %s problem.\", this.getShortname());"
+        "offset": 130,
+        "surroundingCode": "        if (this.isSolved) {\n            System.out.println(\"Vertices which constructs vertex cover in your graph:\");\n            System.out.println(this.graph.makeSetPrintable(this.vertexCover));\n        } else {\n            System.out.printf(\"No solution found for %s problem.\", this.getShortname());"
       }
     }
   ],
@@ -400,7 +90,7 @@
     "module": "java_thesis.main",
     "inspectionName": "SystemOutErr"
   },
-  "hash": "-5925096152799351500"
+  "hash": "-5410227232987571810"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -414,7 +104,7 @@
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/IndependentSet.java",
+      "path": "src/main/java/ru/spbstu/icst/problems/VertexCover.java",
       "language": "JAVA",
       "line": 87,
       "offset": 12,
@@ -422,8 +112,8 @@
       "code": {
         "startLine": 85,
         "length": 10,
-        "offset": 111,
-        "surroundingCode": "            System.out.println(this.graph.makeSetPrintable(this.independentSet));\n        } else {\n            System.out.printf(\"No solution found for %s problem.\", this.getShortname());\n        }\n    }"
+        "offset": 108,
+        "surroundingCode": "            System.out.println(this.graph.makeSetPrintable(this.vertexCover));\n        } else {\n            System.out.printf(\"No solution found for %s problem.\", this.getShortname());\n        }\n    }"
       }
     }
   ],
@@ -431,7 +121,7 @@
     "module": "java_thesis.main",
     "inspectionName": "SystemOutErr"
   },
-  "hash": "-2506035467247276775"
+  "hash": "5321103686172598925"
 },{
   "tool": "Code Inspection",
   "category": "Code maturity",
@@ -445,16 +135,16 @@
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/controllers/IsToVcScreenController.java",
+      "path": "src/main/java/ru/spbstu/icst/problems/VertexCover.java",
       "language": "JAVA",
-      "line": 91,
+      "line": 55,
       "offset": 12,
       "length": 10,
       "code": {
-        "startLine": 89,
+        "startLine": 53,
         "length": 10,
-        "offset": 80,
-        "surroundingCode": "            outputGraphView.init();\n        } catch (Exception e) {\n            System.out.println(e.getMessage());\n        }\n    }"
+        "offset": 77,
+        "surroundingCode": "        // TODO consider Exceptions\n        if (coverSize < 0) {\n            System.out.println(\"Cover size cannot be less then 0!\");\n        } else if (coverSize > this.graph.getVertexCount()) {\n            String answer = String.format(\"No solution can be found. Cover size is greater then number of nodes (%d > %d).\","
       }
     }
   ],
@@ -462,5 +152,67 @@
     "module": "java_thesis.main",
     "inspectionName": "SystemOutErr"
   },
-  "hash": "3303160896042766834"
+  "hash": "6804107168117794708"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/problems/VertexCover.java",
+      "language": "JAVA",
+      "line": 59,
+      "offset": 12,
+      "length": 10,
+      "code": {
+        "startLine": 57,
+        "length": 10,
+        "offset": 198,
+        "surroundingCode": "            String answer = String.format(\"No solution can be found. Cover size is greater then number of nodes (%d > %d).\",\n                    coverSize, this.graph.getVertexCount());\n            System.out.println(answer);\n        } else {\n            vertexCover = this.graph.getVertexCover();"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "-3836977298634831200"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/problems/VertexCover.java",
+      "language": "JAVA",
+      "line": 44,
+      "offset": 8,
+      "length": 10,
+      "code": {
+        "startLine": 42,
+        "length": 10,
+        "offset": 103,
+        "surroundingCode": "    public void readInput() {\n        // Get information about size of cover we'll try to find\n        System.out.print(\"Number of nodes required in vertex cover: \");\n        this.coverSize = scanner.nextInt();\n"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "1136905972110429555"
 }]}
