@@ -1,5 +1,8 @@
 package ru.spbstu.icst.problems;
 
+import ru.spbstu.icst.exceptions.InputException;
+import ru.spbstu.icst.exceptions.SolutionNotFoundException;
+
 public abstract class Problem {
     public String shortname;
     public String fullname;
@@ -12,7 +15,7 @@ public abstract class Problem {
 
     public abstract void readInput() throws Exception;
 
-    public abstract void solve();
+    public abstract void solve() throws InputException, SolutionNotFoundException;
 
     public abstract void printSolution();
 

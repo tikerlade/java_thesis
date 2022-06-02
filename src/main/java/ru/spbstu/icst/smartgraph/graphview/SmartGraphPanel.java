@@ -1329,4 +1329,14 @@ public class SmartGraphPanel<V, E> extends Pane {
         this.vertexCounter = 0;
         this.edgeCounter = 0;
     }
+
+    public void resetSelectedVertices() {
+        HashSet<Vertex<V>> copyVertices = new HashSet<Vertex<V>>(this.selectedVertices);
+
+        for (Vertex<V> vertex : copyVertices) {
+            this.colorVertex(vertex);
+        }
+
+        this.update();
+    }
 }

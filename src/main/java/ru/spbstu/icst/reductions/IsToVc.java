@@ -2,7 +2,10 @@ package ru.spbstu.icst.reductions;
 
 import ru.spbstu.icst.controllers.Controller;
 import ru.spbstu.icst.controllers.IsToVcScreenController;
-import ru.spbstu.icst.problems.*;
+import ru.spbstu.icst.exceptions.SolutionNotFoundException;
+import ru.spbstu.icst.problems.IndependentSet;
+import ru.spbstu.icst.problems.Problem;
+import ru.spbstu.icst.problems.VertexCover;
 
 import java.util.HashSet;
 
@@ -29,26 +32,31 @@ public class IsToVc extends Reduction {
         this.problemB = vertexCover;
     }
 
-    public void backward() {
+    public void backward() throws SolutionNotFoundException {
         // Cast problems to required type
         IndependentSet independentSet = (IndependentSet) this.problemA;
         VertexCover vertexCover = (VertexCover) this.getProblemB();
 
         // TODO check that solution exists
 
-        // Initialize independent set which contains all nodes of graph
-        independentSet.independentSet = new HashSet<>();
-        for (int nodeNum = 0; nodeNum < vertexCover.getGraph().getVertexCount(); nodeNum++) {
-            independentSet.independentSet.add(nodeNum);
-        }
+        if (vertexCover.getIsSolved()) {
+            // Initialize independent set which contains all nodes of graph
+            independentSet.independentSet = new HashSet<>();
+            for (int nodeNum = 0; nodeNum < vertexCover.getGraph().getVertexCount(); nodeNum++) {
+                independentSet.independentSet.add(nodeNum);
+            }
 
-        // Remove nodes which exists in vertex cover of problemB
-        for (Object nodeNum : vertexCover.vertexCover) {
-            independentSet.independentSet.remove(nodeNum);
-        }
+            // Remove nodes which exists in vertex cover of problemB
+            for (Object nodeNum : vertexCover.vertexCover) {
+                independentSet.independentSet.remove(nodeNum);
+            }
 
-        // Reassign new version of problem
-        this.problemA = independentSet;
+            // Reassign new version of problem
+            this.problemA = independentSet;
+        } else {
+            // TODO FORMAT MESSAGE STRING FOR CLARITY
+            throw new SolutionNotFoundException("Vertex cover doesn't exist");
+        }
     }
 
     @Override

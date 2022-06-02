@@ -10,6 +10,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import ru.spbstu.icst.exceptions.InputException;
+import ru.spbstu.icst.exceptions.SolutionNotFoundException;
 import ru.spbstu.icst.reductions.CnfTo3CnfReduction;
 import ru.spbstu.icst.reductions.Reduction;
 
@@ -74,7 +76,7 @@ public class CnfScreenController extends Controller implements Initializable {
         }
     }
 
-    protected void makeForwardSolveBackwardStep() {
+    protected void makeForwardSolveBackwardStep() throws SolutionNotFoundException, InputException {
         // Make forward steps while we can
         if (this.clauseIterator.hasNext()) {
             this.makeForwardSolveStep();
@@ -156,7 +158,7 @@ public class CnfScreenController extends Controller implements Initializable {
         }
     }
 
-    protected void makeForwardSolveStep() {
+    protected void makeForwardSolveStep() throws InputException, SolutionNotFoundException {
         if (!this.clauseIterator.hasNext()) {
             // Run solve function
             this.reduction.solveProblemB();
@@ -220,7 +222,7 @@ public class CnfScreenController extends Controller implements Initializable {
     }
 
     @Override
-    protected void solveProblemB() {
+    protected void solveProblemB() throws InputException, SolutionNotFoundException {
         this.reduction.solveProblemB();
 
     }

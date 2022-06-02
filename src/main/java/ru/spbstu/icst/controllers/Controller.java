@@ -12,6 +12,8 @@ import javafx.scene.layout.Priority;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.spbstu.icst.Main;
+import ru.spbstu.icst.exceptions.InputException;
+import ru.spbstu.icst.exceptions.SolutionNotFoundException;
 import ru.spbstu.icst.reductions.Reduction;
 
 import java.io.IOException;
@@ -233,7 +235,7 @@ public abstract class Controller implements Initializable {
 
 
     protected abstract void runForwardSteps();
-    protected abstract void solveProblemB();
+    protected abstract void solveProblemB() throws InputException, SolutionNotFoundException;
     protected abstract void runBackwardSteps();
 
     protected abstract void readInput() throws Exception;
@@ -274,9 +276,9 @@ public abstract class Controller implements Initializable {
 
     abstract void makeForwardStep();
 
-    abstract void makeForwardSolveStep();
+    abstract void makeForwardSolveStep() throws InputException, SolutionNotFoundException;
 
-    abstract void makeForwardSolveBackwardStep();
+    abstract void makeForwardSolveBackwardStep() throws SolutionNotFoundException, InputException;
 
     abstract void makeBackwardStep() throws Exception;
 

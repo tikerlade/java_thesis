@@ -49,7 +49,7 @@
 
 <VBox alignment="CENTER" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
+    <MenuBar>
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
@@ -93,7 +93,7 @@
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </VBox.margin>
          <children>
-            <Label fx:id="stepInformation" prefHeight="24.0" prefWidth="1258.0" text="This is a IS -&gt; VC problem reduction. Input your formula and then press step button until problem will finally be reduced." textFill="#37962a">
+            <Label fx:id="stepInformation" prefHeight="24.0" prefWidth="1258.0" textFill="#37962a">
                <opaqueInsets>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </opaqueInsets>
@@ -101,7 +101,7 @@
                   <Font size="21.0" />
                </font>
             </Label>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Forward" wrappingWidth="882.1366806030273">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Вход (и решение) задачи о независимом множестве (IS)" wrappingWidth="882.1366806030273">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -118,12 +118,12 @@
                   </BorderPane>
                   <VBox prefHeight="275.0" prefWidth="409.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label prefHeight="18.0" prefWidth="412.0" text="Input size of desired independent set:">
+                        <Label prefHeight="18.0" prefWidth="412.0" text="Необходимый размер независимого множества:">
                            <VBox.margin>
                               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="independentSetSizeInput" prefHeight="26.0" prefWidth="0.0" promptText="Size of Independent Set ...">
+                        <TextField fx:id="independentSetSizeInput" prefHeight="26.0" prefWidth="0.0" promptText="Необходимый размер независимого множества ...">
                            <VBox.margin>
                               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                            </VBox.margin>
@@ -135,7 +135,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Backward" wrappingWidth="882.1366806030273">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Вход (и решение) задачи о вершинном покрытии (VC)" wrappingWidth="882.1366806030273">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -152,12 +152,12 @@
                   </BorderPane>
                   <VBox prefHeight="275.0" prefWidth="409.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label prefHeight="18.0" prefWidth="412.0" text="Size of Vertex Cover in reduced problem:">
+                        <Label prefHeight="18.0" prefWidth="412.0" text="Необходимый размер вершинного покрытия:">
                            <VBox.margin>
                               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="vertexCoverSizeInput" disable="true" prefHeight="26.0" prefWidth="0.0" promptText="Size of Vertex Cover ...">
+                        <TextField fx:id="vertexCoverSizeInput" disable="true" prefHeight="26.0" prefWidth="0.0" promptText="Необходимый размер вершинного покрытия ...">
                            <VBox.margin>
                               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                            </VBox.margin>
@@ -173,18 +173,23 @@
       </VBox>
       <HBox prefHeight="46.0" prefWidth="900.0">
          <children>
-            <Button fx:id="backButton" alignment="TOP_CENTER" cancelButton="true" minWidth="100.0" mnemonicParsing="false" onAction="#backFromReduction" prefHeight="26.0" prefWidth="172.0" text="Back">
+            <Button fx:id="backButton" alignment="TOP_CENTER" cancelButton="true" minWidth="100.0" mnemonicParsing="false" onAction="#backFromReduction" prefHeight="26.0" prefWidth="172.0" text="Назад">
                <HBox.margin>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </HBox.margin>
             </Button>
             <Region prefHeight="42.0" prefWidth="601.0" HBox.hgrow="ALWAYS" />
-            <Button fx:id="resetButton" alignment="TOP_CENTER" minWidth="100.0" mnemonicParsing="false" onAction="#resetEnvironment" prefHeight="26.0" prefWidth="172.0" text="Reset">
+            <Button fx:id="resetWithoutGraphButton" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#onResetWithoutGraphButtonPressed" prefHeight="26.0" prefWidth="250.0" text="Сброс решения (без графа)">
                <HBox.margin>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="stepButton" alignment="TOP_CENTER" minWidth="100.0" mnemonicParsing="false" onAction="#makeStep" prefHeight="26.0" prefWidth="172.0" text="Step">
+            <Button fx:id="resetButton" alignment="TOP_CENTER" minWidth="100.0" mnemonicParsing="false" onAction="#resetEnvironment" prefHeight="26.0" prefWidth="172.0" text="Сброс (всего)">
+               <HBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="stepButton" alignment="TOP_CENTER" minWidth="100.0" mnemonicParsing="false" onAction="#makeStep" prefHeight="26.0" prefWidth="172.0" text="Сделать шаг">
                <HBox.margin>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </HBox.margin>

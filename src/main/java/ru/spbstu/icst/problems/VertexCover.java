@@ -2,6 +2,7 @@ package ru.spbstu.icst.problems;
 
 import org.jgrapht.graph.DefaultEdge;
 import ru.spbstu.icst.exceptions.InputException;
+import ru.spbstu.icst.exceptions.SolutionNotFoundException;
 
 import java.util.HashSet;
 import java.util.Scanner;
@@ -48,10 +49,10 @@ public class VertexCover extends Problem {
     }
 
     @Override
-    public void solve() {
+    public void solve() throws SolutionNotFoundException {
         // TODO consider Exceptions
-        if (coverSize <= 0) {
-            System.out.println("Cover size cannot be less then 1!");
+        if (coverSize < 0) {
+            System.out.println("Cover size cannot be less then 0!");
         } else if (coverSize > this.graph.getVertexCount()) {
             String answer = String.format("No solution can be found. Cover size is greater then number of nodes (%d > %d).",
                     coverSize, this.graph.getVertexCount());
@@ -72,6 +73,7 @@ public class VertexCover extends Problem {
                 }
             } else {
                 vertexCover = new HashSet<>();
+                throw new SolutionNotFoundException(String.format("No vertex cover of size %d found", this.coverSize));
             }
         }
     }
@@ -114,6 +116,7 @@ public class VertexCover extends Problem {
             throw new InputException("Selected vertices don't create vertex cover of given size.");
         }
         this.vertexCover = vertexCoverCandidate;
+        this.isSolved = true;
     }
 
     @Override
@@ -148,5 +151,9 @@ public class VertexCover extends Problem {
         }
 
         return stringBuilder.toString();
+    }
+
+    public boolean getIsSolved() {
+        return this.isSolved;
     }
 }

@@ -22,6 +22,7 @@ Project was built using following technologies and their versions:
 |---------------|----------|
 | IntelliJ IDEA | 2021.3.1 |
 | JDK           | 17.0.2   |
+| Gradle        | 7.4.2    |
 | JavaFX        | 17.0.1   |
 | ortools       | 9.0.9048 |
 | jgrapht       | 1.5.1    |

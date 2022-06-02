@@ -1,6 +1,8 @@
 package ru.spbstu.icst.reductions;
 
 import ru.spbstu.icst.controllers.Controller;
+import ru.spbstu.icst.exceptions.InputException;
+import ru.spbstu.icst.exceptions.SolutionNotFoundException;
 import ru.spbstu.icst.problems.Problem;
 
 /**
@@ -147,7 +149,7 @@ public abstract class Reduction {
      * In backward method we have solution for problemB,
      * and we want to convert it into solution for problemA.
      */
-    public void backward() {}
+    public void backward() throws SolutionNotFoundException {}
 
     /**
      * Here we will firstly convert input data of problemA into input data for problemB.
@@ -181,7 +183,7 @@ public abstract class Reduction {
 
     public abstract void resetProblems();
 
-    public void solveProblemB() {
+    public void solveProblemB() throws InputException, SolutionNotFoundException {
         this.problemB.solve();
     }
 

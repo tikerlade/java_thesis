@@ -4,13 +4,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import ru.spbstu.icst.Main;
 import ru.spbstu.icst.exceptions.InputException;
+import ru.spbstu.icst.exceptions.SolutionNotFoundException;
 import ru.spbstu.icst.problems.IndependentSet;
 import ru.spbstu.icst.problems.VertexCover;
 import ru.spbstu.icst.reductions.IsToVc;
@@ -38,6 +41,9 @@ public class IsToVcScreenController extends Controller implements Initializable 
 
     @FXML
     private Label stepInformation;
+
+    @FXML
+    private Button resetWithoutGraphButton;
 
     private SmartGraphPanel<String, String> inputGraphView, outputGraphView;
 
@@ -77,6 +83,9 @@ public class IsToVcScreenController extends Controller implements Initializable 
 
             this.graphInputPane.setCenter(this.inputGraphView);
             this.graphOutputPane.setCenter(this.outputGraphView);
+
+            Tooltip tooltip = new Tooltip("ЛКМ - ЛЕва");
+            Tooltip.install(inputGraphView, tooltip);
 
             // Present screen
             this.stage = new Stage();
@@ -205,7 +214,7 @@ public class IsToVcScreenController extends Controller implements Initializable 
 
 
     @Override
-    void makeForwardSolveStep() {
+    void makeForwardSolveStep() throws InputException, SolutionNotFoundException {
         if (reduced) {
             // Run solve function
             this.reduction.solveProblemB();
@@ -213,6 +222,8 @@ public class IsToVcScreenController extends Controller implements Initializable 
             // Present results
             VertexCover vertexCoverProblem = (VertexCover) this.reduction.getProblemB();
             HashSet<Integer> vertexCover = (HashSet<Integer>) vertexCoverProblem.vertexCover;
+
+            // TODO check that solution exists
             HashSet<String> vertexCoverLabels = vertexCover.stream().map(Object::toString).collect(Collectors.toCollection(HashSet::new));
 
             // Find vertices to color by matching them from one graph to another
@@ -231,7 +242,7 @@ public class IsToVcScreenController extends Controller implements Initializable 
     }
 
     @Override
-    void makeForwardSolveBackwardStep() {
+    void makeForwardSolveBackwardStep() throws SolutionNotFoundException, InputException {
         if (!reduced) {
             this.makeForwardSolveStep();
 
@@ -346,8 +357,24 @@ public class IsToVcScreenController extends Controller implements Initializable 
         graphOutputPane.setDisable(true);
         stepButton.setDisable(false);
 
-        // Add information about next step required
-        this.stepInformation.setText("Input graph and desired size of Independant Set:");
+    }
+
+    @FXML
+    public void onResetWithoutGraphButtonPressed() {
+        // Remove all selected nodes from both graphs (Panel)
+        this.inputGraphView.resetSelectedVertices();
+
+        this.vertexCoverSizeInput.clear();
+        this.outputGraph.clearGraph();
+        this.outputGraphView.resetCounters();
+        this.outputGraphView.resetSelectedVertices();
+
+        this.solvedB = false;
+        this.reduced = false;
+
+        this.stepButton.setDisable(false);
+        graphInputPane.setDisable(false);
+        this.independentSetSizeInput.setDisable(false);
     }
 
 }
