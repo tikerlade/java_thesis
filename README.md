@@ -1,22 +1,15 @@
-[![Java CI](https://github.com/tikerlade/java_thesis/actions/workflows/test_build.yml/badge.svg)](https://github.com/tikerlade/java_thesis/actions/workflows/test_build.yml)
-[![Qodana](https://github.com/tikerlade/java_thesis/actions/workflows/qodana_scan.yml/badge.svg)](https://github.com/tikerlade/java_thesis/actions/workflows/qodana_scan.yml)
+# Программа визуализации некоторых сведений задач поиска
+Данна программа преднозначена для произведения следущих сведений задач поиска:
+1. сведение задачи о выполнимости (`SAT`) к задаче о 3-выполнимости (`3-SAT`),
+2. сведение задачи о 3-выполнимости (`3-SAT`) к задаче о независимом множестве (`IS`),
+3. сведение задачи о независимом множестве (`IS`) к задаче о вершинном покрытии (`VC`).
 
-# Reductions of search problems (Java)
-The goal of this project is to complete reductions of search problems in Java.
+## Запуск
+Чтобы запустить проект локально необходимо иметь установленный `JDK` версии `17.0.2`.
+Для запуска программы необходимо выполнить команду `./gradlew run` в корне проекта.
 
-## How to run
-This is a gradle project. To run it in GUI form use `./gradlew run`.
-
-## Plan of supported reductions
-* SAT → 3-SAT
-* IS → VC (vertex cover problem)
-* IS → Clique
-
-## Problems definitions
-TBD
-
-## Technologies
-Project was built using following technologies and their versions:
+## Технологии
+В прцессе написания проекта были использованы различные технологии. В таблице ниже приведен полный список использованных технологий.
 
 | Technology    | Version  |
 |---------------|----------|
