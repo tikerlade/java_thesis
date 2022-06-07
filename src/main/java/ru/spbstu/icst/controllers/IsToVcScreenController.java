@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -83,9 +82,6 @@ public class IsToVcScreenController extends Controller implements Initializable 
 
             this.graphInputPane.setCenter(this.inputGraphView);
             this.graphOutputPane.setCenter(this.outputGraphView);
-
-            Tooltip tooltip = new Tooltip("ЛКМ - ЛЕва");
-            Tooltip.install(inputGraphView, tooltip);
 
             // Present screen
             this.stage = new Stage();
