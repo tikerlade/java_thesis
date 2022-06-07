@@ -47,7 +47,7 @@ public class StartScreenController extends Controller implements Initializable {
 
 //            String screenLocation = getClass().getResource(selectedReduction.getScreenFilename()).getPath();
             controller.runStage(this.stage, selectedReduction.getScreenFilename());
-            this.stage.hide();
+//            this.stage.hide();
         } catch(Exception e) {
             e.printStackTrace();
         }

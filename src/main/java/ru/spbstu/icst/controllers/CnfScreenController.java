@@ -288,7 +288,10 @@ public class CnfScreenController extends Controller implements Initializable {
     void onLoadInputMenuIteamSelected() {
         try {
             String userInput = this.readUserDataGui();
-            this.formulaInput.setText(userInput);
+
+            if (!userInput.isEmpty()) {
+                this.formulaInput.setText(userInput);
+            }
         } catch (IOException e) {
             this.createExceptionAlert(e);
         }
@@ -298,7 +301,10 @@ public class CnfScreenController extends Controller implements Initializable {
     void onLoadSolutionMenuIteamSelected() {
         try {
             String userSolution = this.readUserDataGui();
-            this.solutionForConvertedFormula.setText(userSolution);
+
+            if (!userSolution.isEmpty()) {
+                this.solutionForConvertedFormula.setText(userSolution);
+            }
         } catch (IOException e) {
             this.createExceptionAlert(e);
         }

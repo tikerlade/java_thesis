@@ -47,48 +47,24 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem fx:id="loadInputMenuIteam" disable="true" mnemonicParsing="false" onAction="#onLoadInputMenuIteamSelected" text="Load input" />
+                  <MenuItem fx:id="loadSolutionMenuItem" disable="true" mnemonicParsing="false" onAction="#onLoadSolutionMenuIteamSelected" text="Load solution" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="saveInputMenuIteam" disable="true" mnemonicParsing="false" onAction="#onSaveMenuIteamSelected" text="Save input" />
+                  <MenuItem fx:id="saveReducedInputMenuItem" disable="true" mnemonicParsing="false" onAction="#onSaveReducedInputMenuIteamSelected" text="Save reduced input" />
+                  <MenuItem fx:id="saveReducedSolutionMenuItem" disable="true" mnemonicParsing="false" onAction="#onSaveReducedSolutionMenuItemSelected" text="Save solution for reduced problem" />
+                  <MenuItem fx:id="saveInitialSolutionMenuItem" disable="true" mnemonicParsing="false" onAction="#onSaveInitialSolutionMenuItemSelected" text="Save solution for initial problem" />
+               </items>
+            </Menu>
       </menus>
     </MenuBar>
-      <VBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+      <VBox nodeOrientation="LEFT_TO_RIGHT" VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </VBox.margin>
@@ -108,7 +84,7 @@
             </Text>
             <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
-                  <BorderPane fx:id="graphInputPane" prefHeight="259.0" prefWidth="851.0" style="-fx-border-color: #A9A9A9; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
+                  <BorderPane fx:id="graphInputPane" prefHeight="200.0" prefWidth="750.0" style="-fx-border-color: #A9A9A9; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
@@ -123,7 +99,7 @@
                               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="independentSetSizeInput" prefHeight="26.0" prefWidth="0.0" promptText="Необходимый размер независимого множества ...">
+                        <TextField fx:id="independentSetSizeInput" promptText="Необходимый размер независимого множества ...">
                            <VBox.margin>
                               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                            </VBox.margin>
@@ -142,7 +118,7 @@
             </Text>
             <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <children>
-                  <BorderPane fx:id="graphOutputPane" prefHeight="259.0" prefWidth="851.0" style="-fx-border-color: #A9A9A9; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
+                  <BorderPane fx:id="graphOutputPane" prefHeight="200.0" prefWidth="750.0" style="-fx-border-color: #A9A9A9; -fx-border-radius: 5;" HBox.hgrow="ALWAYS">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
@@ -157,7 +133,7 @@
                               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="vertexCoverSizeInput" disable="true" prefHeight="26.0" prefWidth="0.0" promptText="Необходимый размер вершинного покрытия ...">
+                        <TextField fx:id="vertexCoverSizeInput" disable="true" promptText="Необходимый размер вершинного покрытия ...">
                            <VBox.margin>
                               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                            </VBox.margin>

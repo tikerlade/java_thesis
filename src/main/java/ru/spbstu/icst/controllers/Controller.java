@@ -55,7 +55,7 @@ public abstract class Controller implements Initializable {
 
             // Set parameteres for our new stage
             Scene newScene = new Scene(fxmlLoader.load(fxmlStream));
-            newScene.getStylesheets().add(getClass().getResource("../styles/application_styles.css").toExternalForm());
+//            newScene.getStylesheets().add(getClass().getResource("../styles/application_styles.css").toExternalForm());
 
             // Inherit style
             if (currentStage != null) {
@@ -64,11 +64,13 @@ public abstract class Controller implements Initializable {
             }
 
             this.stage = new Stage();
+            this.stage = currentStage;
             stage.setScene(newScene);
-            stage.setMaximized(true);
-            stage.getIcons().add(new Image(iconStream));
-            this.onDarkThemeMenuItemSelected(null);
-            stage.show();
+//            stage.setMinHeight();
+//            stage.setMinWidth(newScene.getWidth());
+//            stage.setMaximized(true);
+//            stage.getIcons().add(new Image(iconStream));
+//            stage.show();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -247,7 +249,7 @@ public abstract class Controller implements Initializable {
         // Load class which will control UI
         StartScreenController controller = new StartScreenController();
         controller.runStage(this.stage, "controllers/StartScreen.fxml");
-        this.stage.hide();
+//        this.stage.hide();
     }
 
     abstract Stage getStage();

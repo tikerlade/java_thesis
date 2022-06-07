@@ -7,8 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import ru.spbstu.icst.Main;
 import ru.spbstu.icst.exceptions.InputException;
@@ -24,7 +24,7 @@ import ru.spbstu.icst.smartgraph.graphview.SmartCircularSortedPlacementStrategy;
 import ru.spbstu.icst.smartgraph.graphview.SmartGraphPanel;
 import ru.spbstu.icst.smartgraph.graphview.SmartPlacementStrategy;
 
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.ResourceBundle;
@@ -85,9 +85,10 @@ public class IsToVcScreenController extends Controller implements Initializable 
 
             // Present screen
             this.stage = new Stage();
+            this.stage = currentStage;
             stage.setScene(newScene);
-            stage.getIcons().add(new Image(iconStream));
-            stage.setMaximized(true);
+//            stage.getIcons().add(new Image(iconStream));
+            stage.setResizable(false);
             stage.show();
 
             inputGraphView.init();
@@ -373,4 +374,67 @@ public class IsToVcScreenController extends Controller implements Initializable 
         this.independentSetSizeInput.setDisable(false);
     }
 
+    @FXML
+    public void onLoadInputMenuIteamSelected() {
+        File userFile = this.selectUserFile();
+        try {
+            this.inputGraphView = deserializeData(userFile.getPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void onSaveMenuIteamSelected() {
+        File userFile = selectUserFile();
+        try {
+            this.serializeData(userFile.getPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private File selectUserFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose File");
+        return fileChooser.showOpenDialog(stage);
+    }
+
+
+    public void serializeData(String filename) throws IOException {
+        FileOutputStream fout = new FileOutputStream(filename);
+        ObjectOutputStream oos = new ObjectOutputStream(fout);
+        oos.writeObject(inputGraphView);
+        oos.close();
+    }
+
+    public static SmartGraphPanel deserializeData(String filename) throws IOException, ClassNotFoundException {
+        FileInputStream fin = new FileInputStream(filename);
+        ObjectInputStream ois = new ObjectInputStream(fin);
+        SmartGraphPanel<String, String> graphPanel= (SmartGraphPanel<String, String>) ois.readObject();
+        ois.close();
+        return graphPanel;
+    }
+
+    @FXML
+    public void onLoadSolutionMenuIteamSelected() {
+
+    }
+
+    @FXML
+    public void onSaveReducedInputMenuIteamSelected() {
+
+    }
+
+    @FXML
+    public void onSaveReducedSolutionMenuItemSelected() {
+
+    }
+
+    @FXML
+    public void onSaveInitialSolutionMenuItemSelected() {
+
+    }
 }

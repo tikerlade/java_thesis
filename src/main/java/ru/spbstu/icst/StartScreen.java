@@ -24,7 +24,7 @@ public class StartScreen extends Application {
 
         // Load resources for initializing start screen
         InputStream iconStream = Main.class.getResourceAsStream(appIconLocation);
-        String sceneStylesString = Main.class.getResource(stylesLocation).toExternalForm();
+//        String sceneStylesString = Main.class.getResource(stylesLocation).toExternalForm();
         InputStream fxmlStream = Main.class.getResourceAsStream(screenLocation);
 
         // Check that resources loaded
@@ -37,12 +37,14 @@ public class StartScreen extends Application {
         // Initialize start screen
         Scene scene = new Scene(fxmlLoader.load(fxmlStream));
         // TODO remove stylesheets and start using BootstrapFX
-        scene.getStylesheets().add(sceneStylesString);
+//        scene.getStylesheets().add(sceneStylesString);
 
         // Finaly show start screen
         stage.setScene(scene);
-        stage.setMaximized(true);
+//        stage.setMaximized(true);
         stage.getIcons().add(new Image(iconStream));
+        stage.setMinWidth(800);
+        stage.setMinHeight(600);
         stage.show();
     }
 

@@ -5,6 +5,7 @@ import com.google.ortools.sat.CpModel;
 import com.google.ortools.sat.CpSolver;
 import com.google.ortools.sat.CpSolverStatus;
 import com.google.ortools.sat.IntVar;
+import ru.spbstu.icst.exceptions.InputException;
 
 import java.util.*;
 
@@ -33,6 +34,12 @@ public class CnfFormula extends Problem {
         this.inputFormula = formulaString;
     }
 
+    public void clearProblem() {
+        this.inputFormula = "";
+        this.clauses = new ArrayList<>();
+        this.allLiterals = new ArrayList<>();
+        this.satisfyingSet = new ArrayList<>();
+    }
 
     // --------------------------------------------------------------------------------------------------
 
@@ -225,8 +232,13 @@ public class CnfFormula extends Problem {
 
             // When AND reached -> try to parse literal
             else {
-                this.addNewClause(new Clause(buffer.toString()));
-                buffer.setLength(0);
+                try {
+                    this.addNewClause(new Clause(buffer.toString()));
+                    buffer.setLength(0);
+                } catch (InputException exception) {
+                    this.clearProblem();
+                    throw exception;
+                }
             }
         }
 
