@@ -13,12 +13,6 @@
       ]
     },
     {
-      "name": "Gradle: org.openjfx:javafx-swing:linux:17.0.1",
-      "roots": [
-        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.openjfx/javafx-swing/17.0.1/51ae6d8af4d609b80807408fb0fdbb78a7fe6d43/javafx-swing-17.0.1-linux.jar!/"
-      ]
-    },
-    {
       "name": "Gradle: org.openjfx:javafx-fxml:linux:17.0.1",
       "roots": [
         "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.openjfx/javafx-fxml/17.0.1/32d1ade3f5da43d582ee5e449d4ab4fa16de4c02/javafx-fxml-17.0.1-linux.jar!/"
@@ -34,6 +28,12 @@
       "name": "Gradle: org.openjfx:javafx-controls:linux:17.0.1",
       "roots": [
         "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.openjfx/javafx-controls/17.0.1/7384d18f885a75ef7c5c6e66c9fdf879aea0040c/javafx-controls-17.0.1-linux.jar!/"
+      ]
+    },
+    {
+      "name": "Gradle: org.openjfx:javafx-swing:linux:17.0.1",
+      "roots": [
+        "jar://$PROJECT_DIR$/../cache/gradle/caches/modules-2/files-2.1/org.openjfx/javafx-swing/17.0.1/51ae6d8af4d609b80807408fb0fdbb78a7fe6d43/javafx-swing-17.0.1-linux.jar!/"
       ]
     },
     {

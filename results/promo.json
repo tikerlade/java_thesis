@@ -1,63 +1,249 @@
 {"version":"3","listProblem":[{
   "tool": "Code Inspection",
   "category": "Code maturity",
-  "type": "Commented out code",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "Moderate",
-  "comment": "Commented out code (11 lines)",
-  "detailsInfo": "Reports comments that contain Java code.\n\nUsually, code that is commented out gets outdated very quickly and becomes misleading.\nAs most projects use some kind of version control system,\nit is better to delete commented out code completely and use the VCS history instead.\n\nNew in 2020.3",
-  "sources": [
-    {
-      "type": "class",
-      "path": "src/main/java/ru/spbstu/icst/controllers/CnfScreenController.java",
-      "language": "JAVA",
-      "line": 179,
-      "offset": 0,
-      "length": 2,
-      "code": {
-        "startLine": 177,
-        "length": 2,
-        "offset": 7,
-        "surroundingCode": "    }\n\n//    @Override\n//    public void forwardOnly() throws Exception {\n//        super.forwardOnly();"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "CommentedOutCode"
-  },
-  "hash": "4439398595711006373"
-},{
-  "tool": "Code Inspection",
-  "category": "Code style issues",
-  "type": "Unnecessary semicolon",
+  "type": "Use of 'System.out' or 'System.err'",
   "tags": [
     "JAVA"
   ],
   "severity": "High",
-  "comment": "Unnecessary semicolon <code>;</code>",
-  "detailsInfo": "Reports any unnecessary semicolons, including semicolons that are used between class members, inside block statements, or after class definitions.\n\nEven though these semicolons are valid in Java, they are redundant and may be removed.\n\nExample:\n\n\n      class C {\n        ;\n        void m() throws Exception {\n            try (AutoCloseable r1 = createAutoCloseable();) {\n              ;\n            }\n        }\n        ;\n      }\n\nAfter the quick-fix is applied:\n\n\n      class C {\n        void m() throws Exception {\n          try (AutoCloseable r1 = createAutoCloseable()) {\n          }\n        }\n      }\n",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
   "sources": [
     {
-      "type": "class",
-      "path": "src/main/java/ru/spbstu/icst/problems/Problem.java",
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphProperties.java",
       "language": "JAVA",
-      "line": 26,
-      "offset": 5,
-      "length": 1,
+      "line": 255,
+      "offset": 8,
+      "length": 10,
       "code": {
-        "startLine": 24,
-        "length": 1,
-        "offset": 64,
-        "surroundingCode": "    public String getStringSolution() {\n        return \"\";\n    };\n}"
+        "startLine": 253,
+        "length": 10,
+        "offset": 118,
+        "surroundingCode": "    public static void main(String[] args) {\n        SmartGraphProperties props = new SmartGraphProperties();\n        System.out.println(\"Prop vertex radius: \" + props.getVertexRadius());\n        System.out.println(\"Prop vertex use label: \" + props.getUseVertexLabel());\n    }"
       }
     }
   ],
   "attributes": {
     "module": "java_thesis.main",
-    "inspectionName": "UnnecessarySemicolon"
+    "inspectionName": "SystemOutErr"
   },
-  "hash": "4046838775601627307"
+  "hash": "-4471670924205800683"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphProperties.java",
+      "language": "JAVA",
+      "line": 256,
+      "offset": 8,
+      "length": 10,
+      "code": {
+        "startLine": 254,
+        "length": 10,
+        "offset": 151,
+        "surroundingCode": "        SmartGraphProperties props = new SmartGraphProperties();\n        System.out.println(\"Prop vertex radius: \" + props.getVertexRadius());\n        System.out.println(\"Prop vertex use label: \" + props.getUseVertexLabel());\n    }\n}"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "-6785965688785854786"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.err</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphProperties.java",
+      "language": "JAVA",
+      "line": 247,
+      "offset": 12,
+      "length": 10,
+      "code": {
+        "startLine": 245,
+        "length": 10,
+        "offset": 95,
+        "surroundingCode": "            return Boolean.valueOf(p);\n        } catch (NumberFormatException e) {\n            System.err.printf(\"Error in reading property %s: %s\", propertyName, e.getMessage());\n            return defaultValue;\n        }        "
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "7598967356968620901"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.err</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/SmartGraphProperties.java",
+      "language": "JAVA",
+      "line": 236,
+      "offset": 12,
+      "length": 10,
+      "code": {
+        "startLine": 234,
+        "length": 10,
+        "offset": 94,
+        "surroundingCode": "            return Double.valueOf(p);\n        } catch (NumberFormatException e) {\n            System.err.printf(\"Error in reading property %s: %s\", propertyName, e.getMessage());\n            return defaultValue;\n        }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "2866311768061983925"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/problems/Clique.java",
+      "language": "JAVA",
+      "line": 51,
+      "offset": 12,
+      "length": 10,
+      "code": {
+        "startLine": 49,
+        "length": 10,
+        "offset": 75,
+        "surroundingCode": "    public void printSolution() {\n        if (this.isSolved) {\n            System.out.println(\"Vertices which constructs Clique in your graph:\");\n            System.out.println(this.graph.makeSetPrintable(this.clique));\n        } else {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "-6284997404767267979"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/problems/Clique.java",
+      "language": "JAVA",
+      "line": 52,
+      "offset": 12,
+      "length": 10,
+      "code": {
+        "startLine": 50,
+        "length": 10,
+        "offset": 124,
+        "surroundingCode": "        if (this.isSolved) {\n            System.out.println(\"Vertices which constructs Clique in your graph:\");\n            System.out.println(this.graph.makeSetPrintable(this.clique));\n        } else {\n            System.out.printf(\"No solution found for %s problem.\", this.getShortname());"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "-1554717915938564605"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/problems/Clique.java",
+      "language": "JAVA",
+      "line": 54,
+      "offset": 12,
+      "length": 10,
+      "code": {
+        "startLine": 52,
+        "length": 10,
+        "offset": 103,
+        "surroundingCode": "            System.out.println(this.graph.makeSetPrintable(this.clique));\n        } else {\n            System.out.printf(\"No solution found for %s problem.\", this.getShortname());\n        }\n    }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "-1515616733521973319"
+},{
+  "tool": "Code Inspection",
+  "category": "Code maturity",
+  "type": "Use of 'System.out' or 'System.err'",
+  "tags": [
+    "JAVA"
+  ],
+  "severity": "High",
+  "comment": "Uses of <code>System.out</code> should probably be replaced with more robust logging",
+  "detailsInfo": "Reports usages of `System.out` or `System.err`.\n\nSuch statements are often used for temporary debugging and should be either removed from the production code, or replaced by a more robust\nlogging facility.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/problems/Clique.java",
+      "language": "JAVA",
+      "line": 30,
+      "offset": 8,
+      "length": 10,
+      "code": {
+        "startLine": 28,
+        "length": 10,
+        "offset": 52,
+        "surroundingCode": "    @Override\n    public void readInput() {\n        System.out.print(\"Number of required vertices in Clique: \");\n        this.cliqueSize = scanner.nextInt();\n        this.graph.readGraph();"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "SystemOutErr"
+  },
+  "hash": "-8307548660862440649"
 }]}
