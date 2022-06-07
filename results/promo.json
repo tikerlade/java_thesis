@@ -1,63 +1,32 @@
 {"version":"3","listProblem":[{
   "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Commented out code",
+  "category": "Assignment issues",
+  "type": "Assignment to static field from instance context",
   "tags": [
     "JAVA"
   ],
-  "severity": "Moderate",
-  "comment": "Commented out code (7 lines)",
-  "detailsInfo": "Reports comments that contain Java code.\n\nUsually, code that is commented out gets outdated very quickly and becomes misleading.\nAs most projects use some kind of version control system,\nit is better to delete commented out code completely and use the VCS history instead.\n\nNew in 2020.3",
+  "severity": "High",
+  "comment": "Assignment to static field <code>nodeCounter</code> from instance context",
+  "detailsInfo": "Reports assignment to, or modification of `static` fields from within an instance method.\n\nAlthough legal, such assignments are tricky to do\nsafely and are often a result of marking fields `static` inadvertently.\n\n**Example:**\n\n\n      class Counter {\n        private static int count = 0;\n\n        void increment() {\n          // Warning: updating a static field\n          // from an instance method\n          count++;\n        }\n      }\n",
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
+      "path": "src/main/java/ru/spbstu/icst/problems/Node.java",
       "language": "JAVA",
-      "line": 163,
-      "offset": 0,
-      "length": 2,
+      "line": 10,
+      "offset": 21,
+      "length": 11,
       "code": {
-        "startLine": 161,
-        "length": 2,
-        "offset": 66,
-        "surroundingCode": "\n        // Match variables from temp with variables from formula\n//        for (Literal trueLiteral : tempLiterals) {\n//            for (Literal otherLiteral : allLiterals) {\n//                if (trueLiteral.isStringReprEquals(otherLiteral)) {"
+        "startLine": 8,
+        "length": 11,
+        "offset": 42,
+        "surroundingCode": "\n    public Node() {\n        this.index = nodeCounter++;\n    }\n"
       }
     }
   ],
   "attributes": {
     "module": "java_thesis.main",
-    "inspectionName": "CommentedOutCode"
+    "inspectionName": "AssignmentToStaticFieldFromInstanceMethod"
   },
-  "hash": "-4235908609396198012"
-},{
-  "tool": "Code Inspection",
-  "category": "Code maturity",
-  "type": "Commented out code",
-  "tags": [
-    "JAVA"
-  ],
-  "severity": "Moderate",
-  "comment": "Commented out code (2 lines)",
-  "detailsInfo": "Reports comments that contain Java code.\n\nUsually, code that is commented out gets outdated very quickly and becomes misleading.\nAs most projects use some kind of version control system,\nit is better to delete commented out code completely and use the VCS history instead.\n\nNew in 2020.3",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/smartgraph/graphview/UtilitiesPoint2D.java",
-      "language": "JAVA",
-      "line": 99,
-      "offset": 8,
-      "length": 2,
-      "code": {
-        "startLine": 97,
-        "length": 2,
-        "offset": 88,
-        "surroundingCode": "        //the attractive strenght grows logarithmically with distance \n        \n        //return force * Math.log(distance / scale) * (1.0 / (1.0 * numVertices));\n        //return force * Math.log(distance / numVertices) * (1 / scale);\n        "
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "CommentedOutCode"
-  },
-  "hash": "-1656235895106472915"
+  "hash": "-6497596177660593119"
 }]}
