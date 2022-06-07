@@ -55,6 +55,10 @@
           "type": "Library"
         },
         {
+          "name": "Gradle: org.openjfx:javafx-swing:linux:17.0.1",
+          "type": "Library"
+        },
+        {
           "name": "Gradle: org.openjfx:javafx-fxml:linux:17.0.1",
           "type": "Library"
         },
@@ -64,10 +68,6 @@
         },
         {
           "name": "Gradle: org.openjfx:javafx-controls:linux:17.0.1",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: org.openjfx:javafx-swing:linux:17.0.1",
           "type": "Library"
         },
         {
@@ -177,6 +177,10 @@
           "type": "Library"
         },
         {
+          "name": "Gradle: org.openjfx:javafx-swing:linux:17.0.1",
+          "type": "Library"
+        },
+        {
           "name": "Gradle: org.openjfx:javafx-fxml:linux:17.0.1",
           "type": "Library"
         },
@@ -186,10 +190,6 @@
         },
         {
           "name": "Gradle: org.openjfx:javafx-controls:linux:17.0.1",
-          "type": "Library"
-        },
-        {
-          "name": "Gradle: org.openjfx:javafx-swing:linux:17.0.1",
           "type": "Library"
         },
         {

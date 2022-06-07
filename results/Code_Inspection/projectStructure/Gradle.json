@@ -18,6 +18,14 @@
       "version": "9.0.9048"
     },
     {
+      "ideaName": "Gradle: org.openjfx:javafx-swing:linux:17.0.1",
+      "gradleName": "org.openjfx:javafx-swing:linux:17.0.1",
+      "unresolved": false,
+      "groupId": "org.openjfx",
+      "artifactId": "javafx-swing",
+      "version": "17.0.1"
+    },
+    {
       "ideaName": "Gradle: org.openjfx:javafx-fxml:linux:17.0.1",
       "gradleName": "org.openjfx:javafx-fxml:linux:17.0.1",
       "unresolved": false,
@@ -39,14 +47,6 @@
       "unresolved": false,
       "groupId": "org.openjfx",
       "artifactId": "javafx-controls",
-      "version": "17.0.1"
-    },
-    {
-      "ideaName": "Gradle: org.openjfx:javafx-swing:linux:17.0.1",
-      "gradleName": "org.openjfx:javafx-swing:linux:17.0.1",
-      "unresolved": false,
-      "groupId": "org.openjfx",
-      "artifactId": "javafx-swing",
       "version": "17.0.1"
     },
     {

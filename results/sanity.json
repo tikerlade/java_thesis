@@ -7,6 +7,166 @@
     "Sanity"
   ],
   "severity": "Critical",
+  "comment": "Enhanced 'switch' blocks are not supported at language level '11'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/controllers/CnfScreenController.java",
+      "language": "JAVA",
+      "line": 116,
+      "offset": 12,
+      "length": 4,
+      "code": {
+        "startLine": 114,
+        "length": 4,
+        "offset": 105,
+        "surroundingCode": "        // Enable solution field if required\n        switch (reduction.getReductionMode()) {\n            case FORWARD_SOLVE -> {\n                this.solutionForConvertedFormula.setDisable(false);\n            }"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "-441369267450155137"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Incompatible types. Found: 'null', required: 'java.util.List<java.lang.String>'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
+      "language": "JAVA",
+      "line": 280,
+      "offset": 8,
+      "length": 4,
+      "code": {
+        "startLine": 278,
+        "length": 4,
+        "offset": 79,
+        "surroundingCode": "    public String toString() {\n        // Represent clauses as Strings\n        List<String> clausesAsString = clauses.stream().map(Clause::toString).toList();\n\n        // Join string representations of clauses with & sign"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "1916832254613371177"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve method 'toList' in 'Stream'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
+      "language": "JAVA",
+      "line": 280,
+      "offset": 78,
+      "length": 6,
+      "code": {
+        "startLine": 278,
+        "length": 6,
+        "offset": 149,
+        "surroundingCode": "    public String toString() {\n        // Represent clauses as Strings\n        List<String> clausesAsString = clauses.stream().map(Clause::toString).toList();\n\n        // Join string representations of clauses with & sign"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "-723602813755323010"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve constructor 'HashSet(?)'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
+      "language": "JAVA",
+      "line": 139,
+      "offset": 43,
+      "length": 7,
+      "code": {
+        "startLine": 137,
+        "length": 7,
+        "offset": 113,
+        "surroundingCode": "\n        // Go through literals and try to assign true value for them\n        HashSet<String> trueLiterals = new HashSet<>(tempLiterals.stream().map(Literal::toString).toList());\n        for (Literal literal : allLiterals) {\n            if (trueLiterals.contains(literal.toString())) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "-8712431900206742903"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
+  "comment": "Cannot resolve constructor 'HashSet(?)'",
+  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
+  "sources": [
+    {
+      "type": "method",
+      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
+      "language": "JAVA",
+      "line": 139,
+      "offset": 52,
+      "length": 1,
+      "code": {
+        "startLine": 137,
+        "length": 1,
+        "offset": 122,
+        "surroundingCode": "\n        // Go through literals and try to assign true value for them\n        HashSet<String> trueLiterals = new HashSet<>(tempLiterals.stream().map(Literal::toString).toList());\n        for (Literal literal : allLiterals) {\n            if (trueLiterals.contains(literal.toString())) {"
+      }
+    }
+  ],
+  "attributes": {
+    "module": "java_thesis.main",
+    "inspectionName": "JavaAnnotator"
+  },
+  "hash": "1488246319791305632"
+},{
+  "tool": "Code Inspection",
+  "category": "General",
+  "type": "Java annotator",
+  "tags": [
+    "JAVA",
+    "Sanity"
+  ],
+  "severity": "Critical",
   "comment": "Incompatible types. Found: 'null', required: 'java.util.List<java.lang.String>'",
   "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
   "sources": [
@@ -167,149 +327,21 @@
     "Sanity"
   ],
   "severity": "Critical",
-  "comment": "Incompatible types. Found: 'null', required: 'java.util.List<java.lang.String>'",
-  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
-      "language": "JAVA",
-      "line": 280,
-      "offset": 8,
-      "length": 4,
-      "code": {
-        "startLine": 278,
-        "length": 4,
-        "offset": 79,
-        "surroundingCode": "    public String toString() {\n        // Represent clauses as Strings\n        List<String> clausesAsString = clauses.stream().map(Clause::toString).toList();\n\n        // Join string representations of clauses with & sign"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "JavaAnnotator"
-  },
-  "hash": "1916832254613371177"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java annotator",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Cannot resolve method 'toList' in 'Stream'",
-  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
-      "language": "JAVA",
-      "line": 280,
-      "offset": 78,
-      "length": 6,
-      "code": {
-        "startLine": 278,
-        "length": 6,
-        "offset": 149,
-        "surroundingCode": "    public String toString() {\n        // Represent clauses as Strings\n        List<String> clausesAsString = clauses.stream().map(Clause::toString).toList();\n\n        // Join string representations of clauses with & sign"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "JavaAnnotator"
-  },
-  "hash": "-723602813755323010"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java annotator",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Cannot resolve constructor 'HashSet(?)'",
-  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
-      "language": "JAVA",
-      "line": 139,
-      "offset": 43,
-      "length": 7,
-      "code": {
-        "startLine": 137,
-        "length": 7,
-        "offset": 113,
-        "surroundingCode": "\n        // Go through literals and try to assign true value for them\n        HashSet<String> trueLiterals = new HashSet<>(tempLiterals.stream().map(Literal::toString).toList());\n        for (Literal literal : allLiterals) {\n            if (trueLiterals.contains(literal.toString())) {"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "JavaAnnotator"
-  },
-  "hash": "-8712431900206742903"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java annotator",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Cannot resolve constructor 'HashSet(?)'",
-  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/problems/CnfFormula.java",
-      "language": "JAVA",
-      "line": 139,
-      "offset": 52,
-      "length": 1,
-      "code": {
-        "startLine": 137,
-        "length": 1,
-        "offset": 122,
-        "surroundingCode": "\n        // Go through literals and try to assign true value for them\n        HashSet<String> trueLiterals = new HashSet<>(tempLiterals.stream().map(Literal::toString).toList());\n        for (Literal literal : allLiterals) {\n            if (trueLiterals.contains(literal.toString())) {"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "JavaAnnotator"
-  },
-  "hash": "1488246319791305632"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java annotator",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
   "comment": "Enhanced 'switch' blocks are not supported at language level '11'",
   "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
   "sources": [
     {
       "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/controllers/CnfScreenController.java",
+      "path": "src/main/java/ru/spbstu/icst/controllers/Controller.java",
       "language": "JAVA",
-      "line": 116,
-      "offset": 12,
+      "line": 267,
+      "offset": 16,
       "length": 4,
       "code": {
-        "startLine": 114,
+        "startLine": 265,
         "length": 4,
-        "offset": 105,
-        "surroundingCode": "        // Enable solution field if required\n        switch (reduction.getReductionMode()) {\n            case FORWARD_SOLVE -> {\n                this.solutionForConvertedFormula.setDisable(false);\n            }"
+        "offset": 79,
+        "surroundingCode": "\n            switch (this.getReduction().getReductionMode()) {\n                case FORWARD_ONLY -> makeForwardStep();\n                case FORWARD_SOLVE -> makeForwardSolveStep();\n                case FORWARD_SOLVE_BACKWARD -> makeForwardSolveBackwardStep();"
       }
     }
   ],
@@ -317,7 +349,7 @@
     "module": "java_thesis.main",
     "inspectionName": "JavaAnnotator"
   },
-  "hash": "-441369267450155137"
+  "hash": "8299785448556389571"
 },{
   "tool": "Code Inspection",
   "category": "General",
@@ -350,36 +382,4 @@
     "inspectionName": "JavaAnnotator"
   },
   "hash": "-19793106855581694"
-},{
-  "tool": "Code Inspection",
-  "category": "General",
-  "type": "Java annotator",
-  "tags": [
-    "JAVA",
-    "Sanity"
-  ],
-  "severity": "Critical",
-  "comment": "Enhanced 'switch' blocks are not supported at language level '11'",
-  "detailsInfo": "Allows viewing the problems reported by the Java annotator: compilation problems, unresolved by IDEA references, and so on.",
-  "sources": [
-    {
-      "type": "method",
-      "path": "src/main/java/ru/spbstu/icst/controllers/Controller.java",
-      "language": "JAVA",
-      "line": 267,
-      "offset": 16,
-      "length": 4,
-      "code": {
-        "startLine": 265,
-        "length": 4,
-        "offset": 79,
-        "surroundingCode": "\n            switch (this.getReduction().getReductionMode()) {\n                case FORWARD_ONLY -> makeForwardStep();\n                case FORWARD_SOLVE -> makeForwardSolveStep();\n                case FORWARD_SOLVE_BACKWARD -> makeForwardSolveBackwardStep();"
-      }
-    }
-  ],
-  "attributes": {
-    "module": "java_thesis.main",
-    "inspectionName": "JavaAnnotator"
-  },
-  "hash": "8299785448556389571"
 }]}
